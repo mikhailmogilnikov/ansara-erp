@@ -25,15 +25,15 @@ export const Button = ({
 }: Props) => {
   return (
     <NativeButton
+      className={`${shadow && 'shadow-base'} font-medium relative ${className}`}
       fullWidth={streched}
       size={size}
-      className={`${shadow && 'shadow-base'} font-medium relative ${className}`}
       {...restProps}
     >
       {icon}
       {children}
       {external && (
-        <PiArrowUpRightBold size={16} className='absolute top-2 right-2' />
+        <PiArrowUpRightBold className='absolute top-2 right-2' size={16} />
       )}
     </NativeButton>
   );

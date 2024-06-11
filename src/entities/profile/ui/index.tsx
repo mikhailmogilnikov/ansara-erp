@@ -5,11 +5,11 @@ import { PiUserBold } from 'react-icons/pi';
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-import { UserModal } from './user-modal';
+import { ProfileModal } from './profile-modal';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 
-export const User = () => {
+export const Profile = () => {
   const [isOpened, setIsOpened] = useState(false);
 
   const closeModal = () => {
@@ -25,7 +25,7 @@ export const User = () => {
       />
 
       <AnimatePresence>
-        {isOpened && <UserModal onClose={closeModal} />}
+        {isOpened && <ProfileModal onClose={closeModal} />}
       </AnimatePresence>
     </Flex>
   );

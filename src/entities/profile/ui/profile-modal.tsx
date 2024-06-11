@@ -3,16 +3,17 @@ import { m } from 'framer-motion';
 import { PiUserBold } from 'react-icons/pi';
 import { Divider } from '@nextui-org/divider';
 
+import { ChangeTheme } from './change-theme';
+
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { Button } from '@/src/shared/ui/(buttons)/button';
-import { ChangeTheme } from '@/src/features/change-theme';
 
 type Props = {
   onClose: VoidFunction;
 };
 
-export const UserModal = ({ onClose }: Props) => {
+export const ProfileModal = ({ onClose }: Props) => {
   return (
     <>
       <m.aside

@@ -1,6 +1,6 @@
 import { NavPoints } from '../config/nav-points';
 
-import { User } from '@/src/entities/user';
+import { Profile } from '@/src/entities/profile';
 import { AnsaraLogo } from '@/src/shared/assets/ansara-logo';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { RouteTabs } from '@/src/shared/ui/route-tabs';
@@ -14,7 +14,7 @@ export const Navigation = () => {
         </div>
       </Flex>
       <RouteTabs items={NavPoints} />
-      <User />
+      <Profile />
     </nav>
   );
 };
