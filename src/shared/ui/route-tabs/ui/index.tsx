@@ -2,7 +2,7 @@
 
 import { Tabs as NativeTabs, Tab } from '@nextui-org/tabs';
 import { usePathname, useRouter } from 'next/navigation';
-import { Key, useEffect } from 'react';
+import { Key, useEffect, useState } from 'react';
 
 type Props = {
   items: { id: number; name: string; href: string }[];
@@ -11,6 +11,7 @@ type Props = {
 export const RouteTabs = ({ items }: Props) => {
   const pathname = usePathname() as string;
   const router = useRouter();
+  const [selectedKey, setSelectedKey] = useState(pathname);
 
   useEffect(() => {
     items.forEach(({ href }) => {
@@ -19,6 +20,8 @@ export const RouteTabs = ({ items }: Props) => {
   }, []);
 
   const handleChange = (value: Key) => {
+    console.log(value, pathname);
+    setSelectedKey(value as string);
     router.replace(value as string);
   };
 
@@ -33,7 +36,7 @@ export const RouteTabs = ({ items }: Props) => {
       }}
       color='primary'
       radius='lg'
-      selectedKey={pathname}
+      selectedKey={selectedKey}
       size='lg'
       variant='underlined'
       onSelectionChange={handleChange}

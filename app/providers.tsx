@@ -12,8 +12,7 @@ export interface ProvidersProps {
   themeProps?: ThemeProviderProps;
 }
 
-const loadFeatures = () =>
-  import('@/src/shared/model/dom-max').then((res) => res.domMax);
+const loadFeatures = () => import('@/src/shared/model/dom-max').then((res) => res.domMax);
 
 export function Providers({ children, themeProps }: ProvidersProps) {
   const router = useRouter();
