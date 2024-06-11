@@ -1,4 +1,4 @@
-import '@/src/app/globals.css';
+import './globals.css';
 
 import { Metadata, Viewport } from 'next';
 import clsx from 'clsx';
@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang='en'>
+    <html suppressHydrationWarning lang='ru'>
       <head>
         <meta content='#000000' name='theme-color' />
         <meta content='telephone=no' name='format-detection' />

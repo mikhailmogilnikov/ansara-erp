@@ -87,7 +87,7 @@ module.exports = {
             },
             primary: {
               DEFAULT: '#5796EC',
-              foreground: '#000000',
+              foreground: '#ffffff',
             },
             secondary: {
               DEFAULT: 'white',
