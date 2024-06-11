@@ -58,12 +58,12 @@ module.exports = {
               foreground: '#000000',
             },
             primary: {
-              DEFAULT: '#000000',
+              DEFAULT: '#5796EC',
               foreground: '#ffffff',
             },
             secondary: {
               DEFAULT: 'black',
-              foreground: '#000000',
+              foreground: '#ffffff',
             },
             danger: {
               DEFAULT: '#ED2939',
@@ -86,7 +86,7 @@ module.exports = {
               foreground: '#ffffff',
             },
             primary: {
-              DEFAULT: '#ffffff',
+              DEFAULT: '#5796EC',
               foreground: '#000000',
             },
             secondary: {

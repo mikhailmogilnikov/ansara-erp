@@ -1,7 +1,11 @@
+import { ProjectsFilters } from "@/src/entities/projects-filters";
+import { ProjectsTable } from "@/src/widgets/projects-table";
+
 export const HomePage = () => {
   return (
-    <section className='flex flex-col items-center justify-center gap-4 py-8 md:py-10'>
-      home
-    </section>
+    <>
+      <ProjectsFilters />
+      <ProjectsTable />
+    </>
   );
 };
