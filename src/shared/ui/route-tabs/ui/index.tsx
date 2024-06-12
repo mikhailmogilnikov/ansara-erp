@@ -20,7 +20,6 @@ export const RouteTabs = ({ items }: Props) => {
   }, []);
 
   const handleChange = (value: Key) => {
-    console.log(value, pathname);
     setSelectedKey(value as string);
     router.replace(value as string);
   };
