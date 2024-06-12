@@ -1,6 +1,6 @@
+import { users } from '@/src/entities/user';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { CreationBar } from '@/src/widgets/creation-bar';
-import { users } from '@/src/widgets/user-list/config/users';
 
 export const UserTasksPage = ({ id }: { id: number }) => {
   const user = users.find((user) => user.id == id);

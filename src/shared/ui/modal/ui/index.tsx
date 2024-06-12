@@ -1,16 +1,37 @@
 'use client';
 
 import { RemoveScroll } from 'react-remove-scroll';
+import { AnimatePresence, m } from 'framer-motion';
 
 import { useModalStore } from '../lib/store/modal-store';
 
 export const Modal = () => {
-  const { modal } = useModalStore();
+  const { modal, setModal } = useModalStore();
 
-  return modal ? (
-    <RemoveScroll className='fixed inset-0'>
-      <div className='fixed w-full h-dvh bg-opacity-70 bg-black z-10' />
-      <div className='absolute right-0  h-dvh w-[50vw] bg-default p-4 z-20' />
-    </RemoveScroll>
-  ) : null;
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  return (
+    <AnimatePresence>
+      {modal ? (
+        <RemoveScroll className='fixed inset-0 z-10'>
+          <m.button
+            animate={{ opacity: 1 }}
+            className='fixed w-full h-dvh bg-opacity-70 bg-black z-10'
+            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
+            onClick={closeModal}
+          />
+          <m.div
+            animate={{ x: 0 }}
+            className='absolute right-0 h-dvh w-[95vw] lg:w-[50vw] bg-default p-4 z-20'
+            exit={{ x: '100%' }}
+            initial={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 30, stiffness: 260 }}
+          />
+        </RemoveScroll>
+      ) : null}
+    </AnimatePresence>
+  );
 };

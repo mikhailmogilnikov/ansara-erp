@@ -52,7 +52,7 @@ module.exports = {
             background: '#f5f5f7',
             foreground: '#11181C',
             divider: 'rgba(17, 17, 17, 0.1)',
-            focus: '#11181C',
+            focus: 'transparent',
             default: {
               DEFAULT: '#ffffff',
               foreground: '#000000',
@@ -79,7 +79,7 @@ module.exports = {
           colors: {
             background: '#000000',
             foreground: '#ECEDEE',
-            focus: '#ECEDEE',
+            focus: 'transparent',
             divider: 'rgba(255, 255, 255, 0.1)',
             default: {
               DEFAULT: 'rgb(39, 39, 42)',
