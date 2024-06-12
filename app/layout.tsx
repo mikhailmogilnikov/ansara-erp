@@ -1,4 +1,4 @@
-import '@/src/app/globals.css';
+import './globals.css';
 
 import { Metadata, Viewport } from 'next';
 import clsx from 'clsx';
@@ -29,7 +29,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning lang='en'>
+    <html suppressHydrationWarning lang='ru'>
       <head>
         <meta content='#000000' name='theme-color' />
         <meta content='telephone=no' name='format-detection' />
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className='relative flex flex-col h-dvh'>
             <Navigation />
-            <main className='w-full h-full bg-background dark:bg-default-50 overflow-y-scroll'>
+            <main className='w-full h-full bg-background dark:bg-default-50'>
               {children}
             </main>
           </div>
