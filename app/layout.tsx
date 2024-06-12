@@ -8,6 +8,7 @@ import { Providers } from './providers';
 import { siteConfig } from '@/src/shared/config/site';
 import { fontSans } from '@/src/shared/config/fonts';
 import { Navigation } from '@/src/widgets/navigation';
+import { Modal } from '@/src/shared/ui/modal';
 
 export const metadata: Metadata = {
   title: {
@@ -38,9 +39,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className='relative flex flex-col h-dvh'>
             <Navigation />
-            <main className='w-full h-full bg-background dark:bg-default-50'>
-              {children}
-            </main>
+            <main className='w-full h-full bg-background dark:bg-default-50'>{children}</main>
+            <Modal />
           </div>
         </Providers>
       </body>
