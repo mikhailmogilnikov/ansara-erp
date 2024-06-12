@@ -18,7 +18,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   const router = useRouter();
 
   return (
-    <LazyMotion strict features={loadFeatures}>
+    <LazyMotion features={loadFeatures}>
       <NextUIProvider navigate={router.push}>
         <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
       </NextUIProvider>

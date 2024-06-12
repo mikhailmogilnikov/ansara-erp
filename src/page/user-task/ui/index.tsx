@@ -4,10 +4,11 @@ import { users } from '@/src/widgets/user-list/config/users';
 
 export const UserTasksPage = ({ id }: { id: number }) => {
   const user = users.find((user) => user.id == id);
+
   return (
     <>
       <div className='py-3 px-4'>
-        <Text size={20} className='font-nolmal'>
+        <Text className='font-nolmal' size={20}>
           {user?.name}
         </Text>
       </div>

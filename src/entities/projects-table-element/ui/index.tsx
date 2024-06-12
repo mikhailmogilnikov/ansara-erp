@@ -1,5 +1,10 @@
 import { clsx } from 'clsx';
 
+import { StageProgress } from './stage-progress';
+import { TimeProgress } from './time-progress';
+import { PaymentProgress } from './payment-progress';
+import { Accounting } from './accounting';
+
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
 
@@ -13,32 +18,21 @@ export const TableElement = ({ isEven }: Props) => {
   });
 
   return (
-    <Flex className={containerClassName}>
-      <Flex col className='!w-40 flex-shrink-0' gap={2}>
-        <Text className='line-clamp-1 font-medium' size={15}>
-          Семён Рубин Авто
-        </Text>
-        <div className='w-6 h-2 bg-success rounded-full' />
-      </Flex>
+    <Flex className={containerClassName} gap={8}>
+      <StageProgress />
+      <Accounting />
 
-      <Text className='w-full' size={15}>
-        Аккаунтинг
+      <Text className='w-full line-clamp-2 font-medium' size={15}>
+        Пример задачи. Тест. Этот текст здесь должен отображаться максимум в 2 строчки
       </Text>
-      <Text className='w-full' size={15}>
-        Следующая задача
+
+      <TimeProgress />
+
+      <Text className='w-full line-clamp-2 font-medium' size={15}>
+        Пример отображаемого статуса в ЛК. Текст должен показываться максимум в 2 строчки
       </Text>
-      <Text className='w-72 flex-shrink-0' size={15}>
-        Временные рамки
-      </Text>
-      <Text className='w-full' size={15}>
-        Отображаемый статус
-      </Text>
-      <Text className='w-28 flex-shrink-0' size={15}>
-        Оплачено
-      </Text>
-      <Text className='' size={15}>
-        Осталось
-      </Text>
+
+      <PaymentProgress />
     </Flex>
   );
 };
