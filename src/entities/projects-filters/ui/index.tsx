@@ -1,16 +1,17 @@
 import { Divider } from '@nextui-org/divider';
-import { PiPlusBold } from 'react-icons/pi';
+import { ReactNode } from 'react';
 
 import { Button } from '@/src/shared/ui/(buttons)/button';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 
-export const ProjectsFilters = () => {
+type Props = {
+  addProjectButton: ReactNode;
+};
+
+export const ProjectsFilters = ({ addProjectButton }: Props) => {
   return (
     <Flex className='py-4 items-center px-4 overflow-x-scroll scrollbar-hide' tag='aside'>
-      <Button className='text-[14px] shadow-base' radius='full' size='sm'>
-        <PiPlusBold />
-        Добавить проект
-      </Button>
+      {addProjectButton}
 
       <Divider className='w-[2px] h-6 rounded-sm' orientation='vertical' />
 
