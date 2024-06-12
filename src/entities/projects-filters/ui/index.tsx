@@ -15,14 +15,7 @@ export const ProjectsFilters = ({ addProjectButton }: Props) => {
 
       <Divider className='w-[2px] h-6 rounded-sm' orientation='vertical' />
 
-      <Flex className='!w-fit' gap={2}>
-        <Button className='text-[14px]' color='primary' radius='full' size='sm'>
-          Активные
-        </Button>
-        <Button className='text-[14px]' radius='full' size='sm'>
-          Завершённые
-        </Button>
-      </Flex>
+     
 
       <Divider className='w-[2px] h-6 rounded-sm' orientation='vertical' />
 
