@@ -1,6 +1,8 @@
 import { Reorder } from 'framer-motion';
 import { useState } from 'react';
 
+import { EditTaskForm } from './edit-task-form';
+
 import { ITask, Task } from '@/src/entities/task';
 
 interface IDraggbleTask extends ITask {
@@ -19,7 +21,7 @@ export const DraggbleTasks = ({ tasks }: { tasks: ITask[] }) => {
     <Reorder.Group axis='y' values={draggbleTasks} onReorder={setDraggbleTasks}>
       {draggbleTasks.map((item) => (
         <Reorder.Item key={item.id} value={item}>
-          <Task {...item} key={item.id} />
+          <Task {...item} key={item.id} modalContent={<EditTaskForm {...item} />} />
         </Reorder.Item>
       ))}
     </Reorder.Group>

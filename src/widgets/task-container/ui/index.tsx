@@ -25,7 +25,7 @@ export const TaskContainer = ({
         <div>
           <Text size={20}>{isToday ? 'Сегодня' : formatDate(givenDate)}</Text>
         </div>
-        <Text className='text-blue-600' size={20}>
+        <Text className='text-primary' size={20}>
           {formatTime(time)}
         </Text>
       </Flex>
