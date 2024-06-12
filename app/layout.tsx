@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className='relative flex flex-col h-dvh'>
             <Navigation />
-            <main className='w-full h-full bg-background dark:bg-default-50 overflow-y-scroll'>
+            <main className='w-full h-full bg-background dark:bg-default-50'>
               {children}
             </main>
           </div>

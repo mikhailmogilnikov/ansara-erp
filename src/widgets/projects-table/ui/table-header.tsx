@@ -4,7 +4,7 @@ import { Text } from '@/src/shared/ui/(layout)/text';
 export const TableHeader = () => {
   return (
     <Flex className='absolute !w-[calc(100%-32px)] min-w-[1000px] top-0 left-4 h-12 bg-primary-100/80 backdrop-blur-lg rounded-2xl items-center pb-[2px] px-4'>
-      <Text className='text-primary-700 font-semibold w-32 flex-shrink-0' size={15}>
+      <Text className='text-primary-700 font-semibold w-40 flex-shrink-0' size={15}>
         Заказчик
       </Text>
       <Text className='text-primary-700 font-semibold w-full' size={15}>
