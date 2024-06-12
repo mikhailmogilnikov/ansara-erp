@@ -3,15 +3,22 @@ import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
 interface ModalStateI {
-  modal: boolean;
-  setModal: (value: boolean) => void;
+  modal: React.ReactNode | null;
+  modalProps: any;
+  setModalProps: (value: any) => void;
+  setModal: (value: React.ReactNode | null) => void;
 }
 
 export const useModalStore = create<ModalStateI>()(
   devtools(
     immer((set) => ({
       modal: false,
-      setModal: (value: boolean) =>
+      modalProps: [],
+      setModalProps: (value) =>
+        set((state) => {
+          state.modalProps = value;
+        }),
+      setModal: (value) =>
         set((state) => {
           state.modal = value;
         }),
@@ -20,8 +27,13 @@ export const useModalStore = create<ModalStateI>()(
 );
 
 export const useModal = () => {
-  const modal = useModalStore((state) => state.modal);
-  const setModal = useModalStore((state) => state.setModal);
+  const state = useModalStore((state) => state);
 
-  return { modal, setModal };
+  return state;
+};
+
+export const useModalField = <K extends keyof ModalStateI>(field: K): ModalStateI[K] => {
+  const state = useModalStore((state) => state[field]);
+
+  return state;
 };

@@ -21,11 +21,11 @@ export const TaskContainer = ({
 
   return (
     <>
-      <Flex className='mt-20 justify-between'>
+      <Flex className='mt-20 justify-between pb-4 border-b-1 border-divider'>
         <div>
           <Text size={20}>{isToday ? 'Сегодня' : formatDate(givenDate)}</Text>
         </div>
-        <Text className='text-blue-600' size={20}>
+        <Text className='text-primary' size={20}>
           {formatTime(time)}
         </Text>
       </Flex>

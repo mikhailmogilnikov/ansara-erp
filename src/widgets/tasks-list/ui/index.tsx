@@ -1,4 +1,5 @@
 import { DraggbleTasks } from './draggble-tasks';
+import { EditTaskForm } from './edit-task-form';
 
 import { ITask, Task } from '@/src/entities/task';
 
@@ -8,7 +9,7 @@ export const TasksList = ({ tasks, isDraggble }: { tasks: ITask[]; isDraggble?: 
   ) : (
     <>
       {tasks.map((task) => (
-        <Task {...task} key={task.id} />
+        <Task {...task} key={task.id} modalContent={<EditTaskForm {...task} />} />
       ))}
     </>
   );
