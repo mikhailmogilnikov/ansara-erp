@@ -15,12 +15,12 @@ export const User = ({ name, id, tasksQuantity, time }: IUser) => {
 
   return (
     <button
-      className='font-semibold text-left p-5 rounded-2xl bg-white hover:bg-zinc-200 transition-colors'
+      className='font-semibold text-left p-5 rounded-2xl bg-default hover:bg-default/50 transition-colors'
       onClick={handleNavigate}
     >
       <Text size={40}>{name}</Text>
       <Text className='font-normal mt-5'>Общее количество задач - {tasksQuantity}</Text>
-      <Text className='font-normal text-blue-600'>Общее затраченое время - {formatTime(time)}</Text>
+      <Text className='font-normal text-primary'>Общее затраченое время - {formatTime(time)}</Text>
     </button>
   );
 };
