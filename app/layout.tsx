@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta content='#000000' name='theme-color' />
         <meta content='telephone=no' name='format-detection' />
       </head>
-      <body className={clsx('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+      <body className={clsx('min-h-screen bg-black font-sans antialiased', fontSans.variable)}>
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className='relative flex flex-col h-dvh'>
             <Navigation />
