@@ -1,6 +1,8 @@
 import { Divider } from '@nextui-org/divider';
 import { ReactNode } from 'react';
 
+import { ProjectsState } from './projects-state';
+
 import { Button } from '@/src/shared/ui/(buttons)/button';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 
@@ -15,7 +17,7 @@ export const ProjectsFilters = ({ addProjectButton }: Props) => {
 
       <Divider className='w-[2px] h-6 rounded-sm' orientation='vertical' />
 
-     
+      <ProjectsState />
 
       <Divider className='w-[2px] h-6 rounded-sm' orientation='vertical' />
 
