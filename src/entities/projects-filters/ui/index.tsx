@@ -3,10 +3,10 @@ import { ReactNode } from 'react';
 
 import { TaskStateFilters } from '../config/filters';
 
-import { LocalFilter } from './projects-state';
-
 import { Button } from '@/src/shared/ui/(buttons)/button';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
+import { LocalOptions } from '@/src/shared/ui/local-options';
+
 
 type Props = {
   addProjectButton: ReactNode;
@@ -19,7 +19,7 @@ export const ProjectsFilters = ({ addProjectButton }: Props) => {
 
       <Divider className='w-[2px] h-6 rounded-sm' orientation='vertical' />
 
-      <LocalFilter key='state' variants={TaskStateFilters} />
+      <LocalOptions storageKey='state' variants={TaskStateFilters} />
 
       <Divider className='w-[2px] h-6 rounded-sm' orientation='vertical' />
 
