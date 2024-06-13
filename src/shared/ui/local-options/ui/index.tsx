@@ -1,11 +1,12 @@
 'use client';
 
 import { Button } from '@nextui-org/button';
-import { useLocalStorage } from 'react-use';
 import { useEffect } from 'react';
 
+import { useFilters } from '../model/filters-store';
+
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { TFilter, TLocalOptions } from '@/src/shared/model/default.type';
+import { TFilter } from '@/src/shared/model/default.type';
 
 type Props = {
   variants: TFilter[];
@@ -13,17 +14,17 @@ type Props = {
 };
 
 export const LocalOptionsComponent = ({ variants, storageKey }: Props) => {
-  const [filtersParams, setFiltersParams] = useLocalStorage<TLocalOptions>('filters-params', {});
+  const { filters, setFilters } = useFilters();
 
   useEffect(() => {
-    if (filtersParams && !filtersParams[storageKey]) {
-      setFiltersParams({ [storageKey]: variants[0].id });
+    if (filters && !filters[storageKey]) {
+      setFilters({ [storageKey]: variants[0].id });
     }
   }, []);
 
   const handleClick = (e: any) => {
-    if (filtersParams) {
-      setFiltersParams({ ...filtersParams, [storageKey]: e.target.id });
+    if (filters) {
+      setFilters({ ...filters, [storageKey]: e.target.id });
     }
   };
 
@@ -33,7 +34,7 @@ export const LocalOptionsComponent = ({ variants, storageKey }: Props) => {
         <Button
           key={id}
           className='text-[14px] font-medium'
-          color={filtersParams?.[storageKey] === id ? 'primary' : 'default'}
+          color={filters?.[storageKey] === id ? 'primary' : 'default'}
           id={id}
           radius='full'
           size='sm'
