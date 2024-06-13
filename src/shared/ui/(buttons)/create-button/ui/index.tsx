@@ -1,5 +1,4 @@
 import { Button } from '@nextui-org/button';
-import { PiPlusCircle } from 'react-icons/pi';
 
 interface ICreateButton {
   onPress: () => void;
@@ -7,8 +6,9 @@ interface ICreateButton {
 
 export const CreateButton = ({ onPress }: ICreateButton) => {
   return (
-    <Button isIconOnly onPress={onPress}>
-      <PiPlusCircle size={24} />
+    <Button className='flex-shrink-0' onPress={onPress}>
+      {/* <PiPlusCircle size={24} /> */}
+      Создать задачу
     </Button>
   );
 };

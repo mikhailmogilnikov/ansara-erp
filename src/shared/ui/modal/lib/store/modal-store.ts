@@ -4,8 +4,6 @@ import { immer } from 'zustand/middleware/immer';
 
 interface ModalStateI {
   modal: React.ReactNode | null;
-  modalProps: any;
-  setModalProps: (value: any) => void;
   setModal: (value: React.ReactNode | null) => void;
 }
 
@@ -13,11 +11,6 @@ export const useModalStore = create<ModalStateI>()(
   devtools(
     immer((set) => ({
       modal: false,
-      modalProps: [],
-      setModalProps: (value) =>
-        set((state) => {
-          state.modalProps = value;
-        }),
       setModal: (value) =>
         set((state) => {
           state.modal = value;
@@ -26,8 +19,4 @@ export const useModalStore = create<ModalStateI>()(
   ),
 );
 
-export const useModal = () => {
-  const state = useModalStore((state) => state);
-
-  return state;
-};
+export const useModal = () => useModalStore((state) => state);
