@@ -25,7 +25,7 @@ export const Modal = () => {
           />
           <m.div
             animate={{ x: 0 }}
-            className='absolute right-0 h-dvh w-[95vw] lg:w-[50vw] bg-default p-4 z-20'
+            className='absolute right-0 h-dvh w-dvw lg:w-[50vw] bg-background dark:bg-default-50 z-20'
             exit={{ x: '100%' }}
             initial={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 260 }}

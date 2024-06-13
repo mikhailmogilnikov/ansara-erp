@@ -9,7 +9,7 @@ import { ELocalStorageKeys } from '../../model/public.enum';
 
 type Props = PropsWithChildren;
 
-export const FilterProvider = ({ children }: Props) => {
+export const FiltersProvider = ({ children }: Props) => {
   const [filtersParams] = useLocalStorage<TLocalOptions>(ELocalStorageKeys.FILTERS_PARAMS, {});
   const { setFilters } = useFilters();
 
@@ -19,5 +19,5 @@ export const FilterProvider = ({ children }: Props) => {
     }
   }, []);
 
-  return children;
+  return <>{children}</>;
 };
