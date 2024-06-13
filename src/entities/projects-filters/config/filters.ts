@@ -1,6 +1,7 @@
-export type Filter = { id: string; name: string };
+import { TFilter } from "@/src/shared/model/default.type";
 
-export const TaskStateFilters: Filter[] = [
+
+export const TaskStateFilters: TFilter[] = [
   {
     id: 'active',
     name: 'Активные',
