@@ -1,8 +1,8 @@
 'use client';
 
 import { ITask } from '@/src/entities/task';
-import { Text } from '@/src/shared/ui/(layout)/text';
+import { ModalWrapper } from '@/src/shared/ui/modal';
 
 export const EditTaskForm = ({ body }: ITask) => {
-  return <Text>{body}</Text>;
+  return <ModalWrapper title='Редактировать задачу'>{body}</ModalWrapper>;
 };

@@ -35,10 +35,10 @@ export const CreationBar = () => {
       />
       <Flex className='items-center justify-between'>
         <Select
-          aria-label='Выберету проект'
+          aria-label='Выберете проект'
           className='w-full'
-          classNames={{ innerWrapper: 'py-0' }}
-          placeholder='Выберету проект'
+          classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
+          placeholder='Выберите проект'
           onChange={(e) => setProject(e.target.value)}
         >
           {tasksProjects.map((project) => (
