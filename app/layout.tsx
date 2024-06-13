@@ -9,6 +9,7 @@ import { siteConfig } from '@/src/shared/config/site';
 import { fontSans } from '@/src/shared/config/fonts';
 import { Navigation } from '@/src/widgets/navigation';
 import { Modal } from '@/src/shared/ui/modal';
+import { Notifications } from '@/src/shared/ui/notification';
 
 export const metadata: Metadata = {
   title: {
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main className='w-full h-full bg-background dark:bg-default-50 overflow-y-scroll'>
               {children}
             </main>
+            <Notifications />
             <Modal />
           </div>
         </Providers>
