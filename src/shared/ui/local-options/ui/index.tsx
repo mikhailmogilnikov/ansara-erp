@@ -8,19 +8,19 @@ import { useFilters } from '../model/filters-store';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { TFilter } from '@/src/shared/model/default.type';
 
-type Props = {
+export type LocalOptionsProps = {
   variants: TFilter[];
   storageKey: string;
 };
 
-export const LocalOptionsComponent = ({ variants, storageKey }: Props) => {
+export const LocalOptions = ({ variants, storageKey }: LocalOptionsProps) => {
   const { filters, setFilters } = useFilters();
 
   useEffect(() => {
     if (filters && !filters[storageKey]) {
-      setFilters({ [storageKey]: variants[0].id });
+      setFilters({ ...filters, [storageKey]: variants[0].id });
     }
-  }, []);
+  }, [filters]);
 
   const handleClick = (e: any) => {
     if (filters) {

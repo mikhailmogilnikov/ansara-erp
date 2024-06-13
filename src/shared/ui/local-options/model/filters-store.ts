@@ -3,6 +3,7 @@ import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
 import { TLocalOptions } from '@/src/shared/model/default.type';
+import { ELocalStorageKeys } from '@/src/shared/model/public.enum';
 
 interface FiltersStateI {
   filters: TLocalOptions | null;
@@ -17,6 +18,7 @@ export const useFiltersStore = create<FiltersStateI>()(
         set((state) => {
           state.filters = value;
           localStorage.setItem('filters-params', JSON.stringify(value || {}));
+
         }),
     })),
   ),

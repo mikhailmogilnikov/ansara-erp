@@ -2,9 +2,16 @@ import { Skeleton } from '@nextui-org/skeleton';
 
 import { Flex } from '../../(layout)/flex';
 
-export const LocalOptionsSkeleton = () => (
+import { LocalOptionsProps } from '.';
+
+type Props = Pick<LocalOptionsProps, 'variants'>;
+
+export const LocalOptionsSkeleton = ({ variants }: Props) => (
   <Flex className='!w-fit' gap={2}>
-    <Skeleton className='w-20 h-8 rounded-full' />
-    <Skeleton className='w-28 h-8 rounded-full' />
+    {variants.map(({ id, name }) => (
+      <Skeleton key={id} className='w-min px-2 h-8 rounded-full'>
+        {name}
+      </Skeleton>
+    ))}
   </Flex>
 );

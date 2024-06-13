@@ -1,5 +1,4 @@
-import { TFilter } from "@/src/shared/model/default.type";
-
+import { TFilter } from '@/src/shared/model/default.type';
 
 export const TaskStateFilters: TFilter[] = [
   {
@@ -9,5 +8,24 @@ export const TaskStateFilters: TFilter[] = [
   {
     id: 'archived',
     name: 'Завершённые',
+  },
+];
+
+export const TaskNamesFilters: TFilter[] = [
+  {
+    id: 'all',
+    name: 'Все',
+  },
+  {
+    id: 'Арина',
+    name: 'Арина',
+  },
+  {
+    id: 'Алексей',
+    name: 'Алексей',
+  },
+  {
+    id: 'Родион',
+    name: 'Родион',
   },
 ];
