@@ -4,9 +4,10 @@ import { StageProgress } from './stage-progress';
 import { TimeProgress } from './time-progress';
 import { PaymentProgress } from './payment-progress';
 import { Accounting } from './accounting';
+import { TableTasks } from './tasks';
+import { TableStatus } from './status';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { Text } from '@/src/shared/ui/(layout)/text';
 
 type Props = {
   isEven: boolean;
@@ -21,17 +22,9 @@ export const TableElement = ({ isEven }: Props) => {
     <Flex className={containerClassName} gap={8}>
       <StageProgress />
       <Accounting />
-
-      <Text className='w-full line-clamp-2 font-medium min-w-40' size={15}>
-        Пример задачи. Тест. Этот текст здесь должен отображаться максимум в 2 строчки
-      </Text>
-
+      <TableTasks />
       <TimeProgress />
-
-      <Text className='w-full line-clamp-2 font-medium min-w-40' size={15}>
-        Пример отображаемого статуса в ЛК. Текст должен показываться максимум в 2 строчки
-      </Text>
-
+      <TableStatus />
       <PaymentProgress />
     </Flex>
   );
