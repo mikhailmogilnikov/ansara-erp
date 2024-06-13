@@ -1,12 +1,11 @@
 import { Divider } from '@nextui-org/divider';
 import { ReactNode } from 'react';
 
-import { TaskStateFilters } from '../config/filters';
+import { TaskNamesFilters, TaskStateFilters } from '../config/filters';
 
-import { Button } from '@/src/shared/ui/(buttons)/button';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { LocalOptions } from '@/src/shared/ui/local-options';
-
+import { EStorageKeys } from '@/src/shared/ui/local-options/model/options.enum';
 
 type Props = {
   addProjectButton: ReactNode;
@@ -19,24 +18,11 @@ export const ProjectsFilters = ({ addProjectButton }: Props) => {
 
       <Divider className='w-[2px] h-6 rounded-sm' orientation='vertical' />
 
-      <LocalOptions storageKey='state' variants={TaskStateFilters} />
+      <LocalOptions storageKey={EStorageKeys.PROJECTS_STATE} variants={TaskStateFilters} />
 
       <Divider className='w-[2px] h-6 rounded-sm' orientation='vertical' />
 
-      <Flex className='!w-fit' gap={2}>
-        <Button className='text-[14px]' color='primary' radius='full' size='sm'>
-          Все
-        </Button>
-        <Button className='text-[14px]' radius='full' size='sm'>
-          Арина
-        </Button>
-        <Button className='text-[14px]' radius='full' size='sm'>
-          Алексей
-        </Button>
-        <Button className='text-[14px]' radius='full' size='sm'>
-          Родион
-        </Button>
-      </Flex>
+      <LocalOptions storageKey={EStorageKeys.PROJECTS_USER} variants={TaskNamesFilters} />
     </Flex>
   );
 };

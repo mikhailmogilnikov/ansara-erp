@@ -5,8 +5,6 @@ import { useEffect } from 'react';
 
 import { useFilters } from '../model/filters-store';
 
-import { LocalOptionsSkeleton } from './skeleton';
-
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { TFilter } from '@/src/shared/model/default.type';
 
@@ -20,19 +18,15 @@ export const LocalOptions = ({ variants, storageKey }: LocalOptionsProps) => {
 
   useEffect(() => {
     if (filters && !filters[storageKey]) {
-      setFilters({ [storageKey]: variants[0].id });
+      setFilters({ ...filters, [storageKey]: variants[0].id });
     }
-  }, []);
+  }, [filters]);
 
   const handleClick = (e: any) => {
     if (filters) {
       setFilters({ ...filters, [storageKey]: e.target.id });
     }
   };
-
-  if (!filters) {
-    return <LocalOptionsSkeleton variants={variants} />;
-  }
 
   return (
     <Flex className='!w-fit' gap={2}>
