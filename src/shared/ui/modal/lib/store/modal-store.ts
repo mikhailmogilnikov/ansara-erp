@@ -31,9 +31,3 @@ export const useModal = () => {
 
   return state;
 };
-
-export const useModalField = <K extends keyof ModalStateI>(field: K): ModalStateI[K] => {
-  const state = useModalStore((state) => state[field]);
-
-  return state;
-};
