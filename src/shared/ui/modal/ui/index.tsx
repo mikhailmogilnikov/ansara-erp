@@ -29,7 +29,9 @@ export const Modal = () => {
             exit={{ x: '100%' }}
             initial={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 260 }}
-          />
+          >
+            {modal}
+          </m.div>
         </RemoveScroll>
       ) : null}
     </AnimatePresence>
