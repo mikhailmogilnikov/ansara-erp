@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const TableElement = ({ isEven }: Props) => {
-  const containerClassName = clsx('p-4 rounded-2xl min-w-[1000px] w-full', {
+  const containerClassName = clsx('p-4 rounded-2xl min-w-[1264px] w-full', {
     'bg-default': isEven,
   });
 
@@ -22,13 +22,13 @@ export const TableElement = ({ isEven }: Props) => {
       <StageProgress />
       <Accounting />
 
-      <Text className='w-full line-clamp-2 font-medium' size={15}>
+      <Text className='w-full line-clamp-2 font-medium min-w-40' size={15}>
         Пример задачи. Тест. Этот текст здесь должен отображаться максимум в 2 строчки
       </Text>
 
       <TimeProgress />
 
-      <Text className='w-full line-clamp-2 font-medium' size={15}>
+      <Text className='w-full line-clamp-2 font-medium min-w-40' size={15}>
         Пример отображаемого статуса в ЛК. Текст должен показываться максимум в 2 строчки
       </Text>
 

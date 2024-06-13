@@ -7,23 +7,20 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { ThemeProviderProps } from 'next-themes/dist/types';
 import { LazyMotion } from 'framer-motion';
 
-import { FilterProvider } from '@/src/shared/lib/providers/filters-provider';
+import { FiltersProvider } from '@/src/shared/lib/providers/filters-provider';
 
-export interface ProvidersProps {
-  children: React.ReactNode;
-  themeProps?: ThemeProviderProps;
-}
+type Props = React.PropsWithChildren<{ themeProps?: ThemeProviderProps }>;
 
 const loadFeatures = () => import('@/src/shared/model/dom-max').then((res) => res.domMax);
 
-export function Providers({ children, themeProps }: ProvidersProps) {
+export function Providers({ children, themeProps }: Props) {
   const router = useRouter();
 
   return (
     <LazyMotion features={loadFeatures}>
       <NextUIProvider navigate={router.push}>
         <NextThemesProvider {...themeProps}>
-          <FilterProvider> {children}</FilterProvider>
+          <FiltersProvider>{children}</FiltersProvider>
         </NextThemesProvider>
       </NextUIProvider>
     </LazyMotion>

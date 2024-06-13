@@ -6,6 +6,7 @@ type Props = {
   className?: string;
   opacity?: number;
   size?: number;
+  weight?: number;
 };
 
 export const Text = ({
@@ -14,11 +15,12 @@ export const Text = ({
   className = 'md:text-lg font-medium',
   opacity = 1,
   size,
+  weight = 500,
 }: Props) => {
   const Tag = tag;
 
   return (
-    <Tag className={className} style={{ opacity, fontSize: size }}>
+    <Tag className={className} style={{ opacity, fontSize: size, fontWeight: weight }}>
       {children}
     </Tag>
   );
