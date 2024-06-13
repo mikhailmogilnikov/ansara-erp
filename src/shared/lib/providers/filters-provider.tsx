@@ -19,5 +19,5 @@ export const FilterProvider = ({ children }: Props) => {
     }
   }, []);
 
-  return children;
+  return <>{children}</>;
 };

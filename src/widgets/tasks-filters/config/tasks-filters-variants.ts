@@ -1,10 +1,12 @@
-export const tasksFiltersVariants = [
+import { TFilter } from '@/src/shared/model/default.type';
+
+export const TasksFiltersVariants: TFilter[] = [
   {
-    id: 1,
-    name: 'projects',
+    id: 'projects',
+    name: 'Проекты',
   },
   {
-    id: 2,
-    name: 'tasks',
+    id: 'users',
+    name: 'Пользователи',
   },
 ];

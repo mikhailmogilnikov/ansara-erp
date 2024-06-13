@@ -9,12 +9,11 @@ interface TaskI extends ITask {
   modalContent: React.ReactNode;
 }
 
-export const Task = ({ modalContent, body, id, startTime, endTime }: TaskI) => {
-  const { setModal, setModalProps } = useModal();
+export const Task = ({ modalContent, body, id, startTime, endTime, projectId }: TaskI) => {
+  const { setModal } = useModal();
 
   const editTask = () => {
     setModal(modalContent);
-    setModalProps({ body, id, startTime, endTime });
   };
 
   return (

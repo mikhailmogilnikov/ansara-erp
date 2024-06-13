@@ -3,4 +3,5 @@ export interface ITask {
   startTime: null | number;
   endTime: null | number;
   body: string;
+  projectId: number;
 }
