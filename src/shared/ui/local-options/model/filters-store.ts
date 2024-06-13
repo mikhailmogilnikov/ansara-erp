@@ -5,18 +5,18 @@ import { immer } from 'zustand/middleware/immer';
 import { TLocalOptions } from '@/src/shared/model/default.type';
 
 interface FiltersStateI {
-  filtersOptions: TLocalOptions | null;
-  setFiltersOptions: (filters: TLocalOptions) => void;
+  filters: TLocalOptions | null;
+  setFilters: (filters: TLocalOptions) => void;
 }
 
 export const useFiltersStore = create<FiltersStateI>()(
   devtools(
     immer((set) => ({
-      filtersOptions: null,
-      setFiltersOptions: (value) =>
+      filters: null,
+      setFilters: (value) =>
         set((state) => {
-          state.filtersOptions = value;
-          localStorage.setItem('filters-params', JSON.stringify(value || ''));
+          state.filters = value;
+          localStorage.setItem('filters-params', JSON.stringify(value || {}));
         }),
     })),
   ),
