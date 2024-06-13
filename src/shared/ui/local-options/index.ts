@@ -1,1 +1,1 @@
-export { LocalOptions } from './ui/importer';
+export { LocalOptions } from './ui';

@@ -5,15 +5,17 @@ import { useEffect } from 'react';
 
 import { useFilters } from '../model/filters-store';
 
+import { LocalOptionsSkeleton } from './skeleton';
+
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { TFilter } from '@/src/shared/model/default.type';
 
-type Props = {
+export type LocalOptionsProps = {
   variants: TFilter[];
   storageKey: string;
 };
 
-export const LocalOptionsComponent = ({ variants, storageKey }: Props) => {
+export const LocalOptions = ({ variants, storageKey }: LocalOptionsProps) => {
   const { filters, setFilters } = useFilters();
 
   useEffect(() => {
@@ -27,6 +29,10 @@ export const LocalOptionsComponent = ({ variants, storageKey }: Props) => {
       setFilters({ ...filters, [storageKey]: e.target.id });
     }
   };
+
+  if (!filters) {
+    return <LocalOptionsSkeleton variants={variants} />;
+  }
 
   return (
     <Flex className='!w-fit' gap={2}>
