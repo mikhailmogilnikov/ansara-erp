@@ -7,6 +7,8 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { ThemeProviderProps } from 'next-themes/dist/types';
 import { LazyMotion } from 'framer-motion';
 
+import { FilterProvider } from '@/src/shared/lib/providers/filters-provider';
+
 export interface ProvidersProps {
   children: React.ReactNode;
   themeProps?: ThemeProviderProps;
@@ -20,7 +22,9 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <LazyMotion features={loadFeatures}>
       <NextUIProvider navigate={router.push}>
-        <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+        <NextThemesProvider {...themeProps}>
+          <FilterProvider> {children}</FilterProvider>
+        </NextThemesProvider>
       </NextUIProvider>
     </LazyMotion>
   );
