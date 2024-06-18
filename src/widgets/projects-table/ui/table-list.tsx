@@ -3,9 +3,11 @@
 import { Reorder } from 'framer-motion';
 import { useState } from 'react';
 
+import { TableElement } from './table-element';
+
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { TableElement } from '@/src/entities/projects-table-element';
+
 
 type Props = {
   user?: string;

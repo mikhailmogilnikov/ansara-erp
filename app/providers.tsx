@@ -18,7 +18,7 @@ export function Providers({ children, themeProps }: Props) {
 
   return (
     <LazyMotion features={loadFeatures}>
-      <NextUIProvider navigate={router.push}>
+      <NextUIProvider locale="ru-RU" navigate={router.push}>
         <NextThemesProvider {...themeProps}>
           <FiltersProvider>{children}</FiltersProvider>
         </NextThemesProvider>

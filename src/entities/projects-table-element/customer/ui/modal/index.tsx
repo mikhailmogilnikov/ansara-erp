@@ -1,4 +1,4 @@
-import { NotesProjectInfo } from './user-info';
+import { NotesProjectInfo } from './project-info';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
 

@@ -1,4 +1,4 @@
-import { ProjectAccountingModal } from './modals/accounting';
+import { ProjectAccountingModal } from './modal';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';

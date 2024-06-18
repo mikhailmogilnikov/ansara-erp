@@ -11,11 +11,11 @@ import { DatePicker } from '@nextui-org/date-picker';
 import { ITask } from '@/src/entities/task';
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { formatTime, getHours, getMins, getTimeStamp } from '@/src/shared/lib/format-time';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { DeleteTaskButton } from '@/src/features/tasks-delete-task';
 import { SaveTaskButton } from '@/src/features/tasks-save-task';
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
+import { formatTime, getHours, getMins, getTimeStamp } from '@/src/shared/lib/utils/format-time';
 
 interface EmptyTask extends Omit<ITask, 'projectId' | 'id'> {
   projectId: number | null;

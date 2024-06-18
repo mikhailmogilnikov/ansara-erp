@@ -5,7 +5,7 @@ import { ITask } from '../model/task.type';
 import { useModal } from '@/src/shared/ui/modal';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
-import { formatTime, getDuration } from '@/src/shared/lib/format-time';
+import { formatTime, getDuration } from '@/src/shared/lib/utils/format-time';
 
 interface TaskI extends ITask {
   modalContent: React.ReactNode;

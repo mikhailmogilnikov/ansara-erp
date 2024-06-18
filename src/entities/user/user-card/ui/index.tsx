@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { IUser } from '../model/user.type';
 
 import { Text } from '@/src/shared/ui/(layout)/text';
-import { formatTime } from '@/src/shared/lib/format-time';
+import { formatTime } from '@/src/shared/lib/utils/format-time';
 
 export const User = ({ name, id, tasksQuantity, time }: IUser) => {
   const router = useRouter();

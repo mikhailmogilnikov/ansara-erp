@@ -1,9 +1,9 @@
-import { ProjectTasksEditorModal } from './modals/tasks-editor';
+import { ProjectTasksEditorModal } from './modal';
 
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { useModal } from '@/src/shared/ui/modal';
 
-export const TableTasks = () => {
+export const Tasks = () => {
   const { setModal } = useModal();
 
   const handleClick = () => {

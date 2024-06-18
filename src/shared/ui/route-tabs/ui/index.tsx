@@ -31,7 +31,7 @@ export const RouteTabs = ({ items }: Props) => {
         base: '-ml-4 w-[calc(100%+32px)] justify-center h-6',
         tabList: 'px-4 rounded-none',
         cursor: 'rounded-t-[14px] h-1 bg-white text-white',
-        tabContent: 'font-medium group-data-[selected=true]:text-white mb-4',
+        tabContent: 'font-medium group-data-[selected=true]:text-white mb-5',
       }}
       color='primary'
       radius='lg'

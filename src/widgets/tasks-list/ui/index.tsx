@@ -5,8 +5,8 @@ import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { ITask, Task } from '@/src/entities/task';
 import { AddFinishedTask } from '@/src/features/tasks-add-finished-task';
 import { Text } from '@/src/shared/ui/(layout)/text';
-import { formatDate } from '@/src/shared/lib/format-date';
-import { formatTime } from '@/src/shared/lib/format-time';
+import { formatDate } from '@/src/shared/lib/utils/format-date';
+import { formatTime } from '@/src/shared/lib/utils/format-time';
 
 interface Props {
   tasks: ITask[];
