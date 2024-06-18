@@ -1,7 +1,7 @@
 import { Reorder } from 'framer-motion';
 import { useState } from 'react';
 
-import { EditTaskForm } from './edit-task-form';
+import { EditTaskForm } from './task-form';
 
 import { ITask, Task } from '@/src/entities/task';
 

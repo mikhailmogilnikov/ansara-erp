@@ -1,4 +1,4 @@
-export const tasksProjects = [
+export const TasksProjectsListConst = [
   {
     id: 1,
     name: 'Project 1',

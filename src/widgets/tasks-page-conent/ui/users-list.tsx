@@ -1,4 +1,4 @@
-import { User, users } from '@/src/entities/user';
+import { User, users } from '@/src/entities/user/user-card';
 
 export const UsersList = () => {
   return (

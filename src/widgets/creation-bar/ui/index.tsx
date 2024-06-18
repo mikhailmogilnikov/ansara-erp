@@ -6,13 +6,13 @@ import { useState } from 'react';
 import { Select, SelectItem } from '@nextui-org/select';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { CreateButton } from '@/src/shared/ui/(buttons)/create-button';
-import { tasksProjects } from '@/src/entities/tasks-project';
+import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
+import { CreateTask } from '@/src/features/tasks-create-task';
 
 export const CreationBar = () => {
   const [task, setTask] = useState('');
   const router = useRouter();
-  const [project, setProject] = useState(tasksProjects[0]?.id || '');
+  const [project, setProject] = useState('');
 
   const handleAddTask = () => {
     if (task.length > 3 && project) {
@@ -41,11 +41,11 @@ export const CreationBar = () => {
           placeholder='Выберите проект'
           onChange={(e) => setProject(e.target.value)}
         >
-          {tasksProjects.map((project) => (
+          {TasksProjectsListConst.map((project) => (
             <SelectItem key={project.id}>{project.name}</SelectItem>
           ))}
         </Select>
-        <CreateButton onPress={handleAddTask} />
+        <CreateTask onPress={handleAddTask} />
       </Flex>
     </Flex>
   );
