@@ -1,6 +1,7 @@
-import { formatDate } from '@/src/shared/lib/format-date';
-import { formatTime } from '@/src/shared/lib/format-time';
-import { getDateWithoutTime } from '@/src/shared/lib/get-date-without-time';
+
+import { formatDate } from '@/src/shared/lib/utils/format-date';
+import { formatTime } from '@/src/shared/lib/utils/format-time';
+import { getDateWithoutTime } from '@/src/shared/lib/utils/get-date-without-time';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
 

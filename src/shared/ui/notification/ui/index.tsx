@@ -4,7 +4,8 @@ import { AnimatePresence, LayoutGroup } from 'framer-motion';
 
 import { useNotification } from '../model/notification-store';
 
-import { NotificationMassge } from './notification-message';
+import { NotificationMessage } from './notification-message';
+
 
 export const Notifications = () => {
   const { notifications } = useNotification();
@@ -14,7 +15,7 @@ export const Notifications = () => {
       <LayoutGroup>
         <AnimatePresence>
           {notifications.map((note) => (
-            <NotificationMassge key={note.id} {...note} />
+            <NotificationMessage key={note.id} {...note} />
           ))}
         </AnimatePresence>
       </LayoutGroup>

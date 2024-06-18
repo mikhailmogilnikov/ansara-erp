@@ -1,12 +1,12 @@
 import { Progress } from '@nextui-org/progress';
 
-import { ProjectNotesModal } from './modals/project-notes';
+import { ProjectNotesModal } from './modal';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { useModal } from '@/src/shared/ui/modal';
 
-export const StageProgress = () => {
+export const Customer = () => {
   const { setModal } = useModal();
 
   const handleClick = () => {

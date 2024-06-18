@@ -3,7 +3,6 @@ import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
 import { TLocalOptions } from '@/src/shared/model/default.type';
-import { ELocalStorageKeys } from '@/src/shared/model/public.enum';
 
 interface FiltersStateI {
   filters: TLocalOptions | null;

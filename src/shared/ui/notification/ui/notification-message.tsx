@@ -6,7 +6,7 @@ import { Button } from '../../(buttons)/button';
 import { useNotification } from '../model/notification-store';
 import { NotificationIcons } from '../config/icons';
 
-export const NotificationMassge = ({ text, type, duration = 3000, id }: INotification) => {
+export const NotificationMessage = ({ text, type, duration = 3000, id }: INotification) => {
   const { closeNotificationById } = useNotification();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -36,7 +36,7 @@ export const NotificationMassge = ({ text, type, duration = 3000, id }: INotific
       initial={{ opacity: 0, y: 40, filter: 'blur(24px)' }}
     >
       <Button
-        className='w-96 mb-2 !data-[hover=true]:opacity-100'
+        className='w-96 mb-2 data-[hover=true]:opacity-100'
         color={type}
         variant='shadow'
         onPress={close}

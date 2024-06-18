@@ -9,12 +9,14 @@
     "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
   },
   "dependencies": {
+    "@nextui-org/autocomplete": "^2.1.2",
     "@nextui-org/avatar": "^2.0.29",
     "@nextui-org/button": "2.0.33",
     "@nextui-org/divider": "^2.0.28",
     "@nextui-org/dropdown": "^2.1.25",
     "@nextui-org/input": "^2.2.1",
     "@nextui-org/link": "2.0.31",
+    "@nextui-org/modal": "^2.0.36",
     "@nextui-org/progress": "^2.0.30",
     "@nextui-org/select": "^2.2.1",
     "@nextui-org/skeleton": "^2.0.28",
@@ -24,6 +26,7 @@
     "@nextui-org/theme": "2.2.5",
     "@react-aria/ssr": "3.9.4",
     "@react-aria/visually-hidden": "3.8.12",
+    "@react-input/mask": "^1.2.5",
     "@types/node": "20.5.7",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",

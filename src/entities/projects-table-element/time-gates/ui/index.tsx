@@ -3,7 +3,7 @@ import { Progress } from '@nextui-org/progress';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
 
-export const TimeProgress = () => {
+export const TimeGates = () => {
   return (
     <Flex col className='!w-64 flex-shrink-0' gap={1}>
       <Flex className='justify-between' gap={2}>
