@@ -6,7 +6,7 @@ import { Button } from '../../(buttons)/button';
 import { useNotification } from '../model/notification-store';
 import { NotificationIcons } from '../config/icons';
 
-export const NotificationMessage = ({ text, type, duration = 3000, id }: INotification) => {
+export const NotificationMassage = ({ text, type, duration = 3000, id }: INotification) => {
   const { closeNotificationById } = useNotification();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
