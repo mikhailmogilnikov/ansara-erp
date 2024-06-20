@@ -1,15 +1,16 @@
 import { Select, SelectItem } from '@nextui-org/select';
 
-type TVariant = {
+export type TSelectVariant = {
   id: Key;
   title: string;
 };
 
 type Props = {
   multiple?: boolean;
-  variants: TVariant[];
+  variants: TSelectVariant[];
   selectedVariants: any;
   onSelectionChange: (keys: any) => void;
+  placeholder?: string;
 };
 
 export const SelectInput = ({
@@ -17,6 +18,7 @@ export const SelectInput = ({
   selectedVariants,
   multiple = false,
   onSelectionChange,
+  placeholder,
 }: Props) => {
   return (
     <Select
@@ -24,6 +26,7 @@ export const SelectInput = ({
       className='max-w-xs'
       classNames={{ trigger: '!bg-default' }}
       items={variants}
+      placeholder={placeholder || 'Выберите из списка'}
       selectedKeys={selectedVariants}
       selectionMode={multiple ? 'multiple' : 'single'}
       onSelectionChange={onSelectionChange}

@@ -1,7 +1,9 @@
 import { PiListChecksBold, PiPhoneBold, PiUserCircleBold, PiUserGearBold } from 'react-icons/pi';
 import { TbPassword, TbUserScan } from 'react-icons/tb';
 
-export const NotesUserVariants = [
+import { NoteVariant } from '../model/note-variant.type';
+
+export const NotesUserVariants: NoteVariant[] = [
   {
     id: 'name',
     icon: PiUserCircleBold,
@@ -32,8 +34,8 @@ export const NotesUserVariants = [
     title: 'Аккаунтер',
     type: 'select',
     variants: [
-      { id: 'arina', name: 'Арина' },
-      { id: 'alexey', name: 'Алексей' },
+      { id: 'arina', title: 'Арина' },
+      { id: 'alexey', title: 'Алексей' },
     ],
   },
   {
@@ -42,8 +44,8 @@ export const NotesUserVariants = [
     title: 'Этапы',
     type: 'select',
     variants: [
-      { id: 'arina', name: '1' },
-      { id: 'alexey', name: '2' },
+      { id: 'arina', title: '1' },
+      { id: 'alexey', title: '2' },
     ],
   },
-] as const;
+];
