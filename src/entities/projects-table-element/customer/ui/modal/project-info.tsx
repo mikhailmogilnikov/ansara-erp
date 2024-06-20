@@ -1,14 +1,14 @@
 import { useImmer } from 'use-immer';
-import { ChangeEventHandler, useState } from 'react';
+import { useState } from 'react';
 import { Textarea } from '@nextui-org/input';
 
 import { NotesUserVariants } from '../../config/notes-user';
 
 import { NotesActions } from './actions';
 import { NotesControls } from './controls';
+import { PropertiesInput } from './properties-input';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { Text } from '@/src/shared/ui/(layout)/text';
 import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
 
 export const NotesProjectInfo = () => {
@@ -24,12 +24,18 @@ export const NotesProjectInfo = () => {
 
   const [user, updateUser] = useImmer(userInfo);
 
-  const handleUpdate: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { id, value } = e.currentTarget;
+  const handleUpdate = (id: string, type: string) => (e: any) => {
+    if (type === 'select') {
+      updateUser((draft) => {
+        draft[id as 'name'] = e;
+      });
+    } else {
+      const { value } = e.currentTarget;
 
-    updateUser((draft) => {
-      draft[id as 'name'] = value;
-    });
+      updateUser((draft) => {
+        draft[id as 'name'] = value;
+      });
+    }
   };
 
   const [value, setValue] = useState<Set<string>>(new Set([]));
@@ -41,20 +47,16 @@ export const NotesProjectInfo = () => {
   return (
     <Flex col gap={8} tag='section'>
       <div className='w-full grid sm:grid-cols-2 gap-2'>
-        {NotesUserVariants.map(({ id, title, icon: Icon }) => (
-          <Flex key={id} className='items-center flex-shrink-0' gap={3}>
-            <Icon className='flex-shrink-0' opacity={0.5} size={22} />
-            <Text className='w-24 flex-shrink-0' opacity={0.5}>
-              {title}
-            </Text>
-            <input
-              className='bg-transparent outline-none'
-              id={id}
-              placeholder='Введите значение'
-              value={user[id]}
-              onChange={handleUpdate}
-            />
-          </Flex>
+        {NotesUserVariants.map(({ id, title, icon, type, variants }) => (
+          <PropertiesInput
+            key={id}
+            icon={icon}
+            title={title}
+            type={type}
+            value={user[id as 'name']}
+            variants={variants}
+            onChange={handleUpdate(id, type)}
+          />
         ))}
       </div>
 
@@ -72,7 +74,7 @@ export const NotesProjectInfo = () => {
         placeholder='Начните ввод заметок...'
         size='lg'
         value={user.description}
-        onChange={handleUpdate}
+        onChange={handleUpdate('description', 'text')}
       />
       <NotesActions />
       <NotesControls />
