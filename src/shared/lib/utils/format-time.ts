@@ -24,24 +24,13 @@ export const getMins = (time: number | null) => {
   } else return 0;
 };
 
-export const getTimeStamp = (time: number | null, newTime: { hour: number; minute: number }) => {
-  const newTimeStamp = time ? new Date(time) : new Date();
-
-  newTimeStamp.setUTCHours(newTime.hour);
-  newTimeStamp.setUTCMinutes(newTime.minute);
-  newTimeStamp.setUTCSeconds(0);
-  newTimeStamp.setUTCMilliseconds(0);
-
-  return newTimeStamp.getTime();
-};
-
 const padZero = (num: number) => (num < 10 ? `0${num}` : num);
 
 export const getDuration = (start: number, end: number) => {
-  const startHours = padZero(new Date(start).getUTCHours());
-  const startMins = padZero(new Date(start).getUTCMinutes());
-  const endHours = padZero(new Date(end).getUTCHours());
-  const endMins = padZero(new Date(end).getUTCMinutes());
+  const startHours = padZero(new Date(start).getHours());
+  const startMins = padZero(new Date(start).getMinutes());
+  const endHours = padZero(new Date(end).getHours());
+  const endMins = padZero(new Date(end).getMinutes());
 
   return `${startHours}:${startMins} - ${endHours}:${endMins}`;
 };

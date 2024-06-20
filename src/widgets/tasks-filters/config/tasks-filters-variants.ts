@@ -9,4 +9,8 @@ export const TasksFiltersVariants: TFilter[] = [
     id: 'users',
     name: 'Пользователи',
   },
+  {
+    id: 'allTasks',
+    name: 'Все задачи',
+  },
 ];

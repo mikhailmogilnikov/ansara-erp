@@ -1,1 +1,1 @@
-export { CreateTask } from './ui';
+export { CreationBar } from './ui';

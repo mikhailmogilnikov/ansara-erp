@@ -1,47 +1,69 @@
+'use client';
+
 import { DraggbleTasks } from './draggble-tasks';
-import { TaskForm } from './task-form';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { ITask, Task } from '@/src/entities/task';
+import { Task } from '@/src/entities/task';
 import { AddFinishedTask } from '@/src/features/tasks-add-finished-task';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { formatDate } from '@/src/shared/lib/utils/format-date';
 import { formatTime } from '@/src/shared/lib/utils/format-time';
+import { EditTask } from '@/src/features/tasks-edit-task';
+import { getPassedTasks } from '@/src/shared/lib/utils/get-passed-tasks';
+import { ITask } from '@/src/shared/model/task.type';
 
 interface Props {
   tasks: ITask[];
-  date?: string;
-  time?: number;
+  showUser?: boolean;
 }
 
-export const TasksList = ({ tasks, date, time }: Props) => {
-  const currentDate = new Date().toISOString().slice(0, 10);
-  const isToday = date === currentDate;
+export const TasksList = ({ tasks, showUser }: Props) => {
+  const currentTasks = tasks.filter((task) => !task.endTime);
+  const passedTasks = getPassedTasks(tasks);
 
-  return date && time ? (
+  if (!passedTasks.length) {
+    passedTasks.push({
+      date: new Date().toISOString().slice(0, 10),
+      tasks: [],
+      time: 0,
+    });
+  }
+  const currentDate = new Date().toISOString().slice(0, 10);
+
+  return (
     <>
-      <Flex className='mt-20 justify-between pb-4 border-b-1 border-divider'>
-        <Flex className='items-center'>
-          {isToday ? (
-            <>
-              <Text size={20}>Сегодня</Text>
-              <AddFinishedTask modalContent={<TaskForm />} />
-            </>
-          ) : (
-            <Text size={20}>{formatDate(new Date(date))}</Text>
-          )}
-        </Flex>
-        <Text className='text-primary text-nowrap' size={20}>
-          {formatTime(time)}
-        </Text>
-      </Flex>
-      <div>
-        {tasks.map((task) => (
-          <Task {...task} key={task.id} modalContent={<TaskForm task={task} />} />
-        ))}
-      </div>
+      <DraggbleTasks showUser={showUser} tasks={currentTasks} />
+      {passedTasks.map((day) => (
+        <>
+          <Flex className='mt-20 justify-between pb-4 border-b-1 border-divider'>
+            <Flex className='items-center'>
+              {day.date === currentDate ? (
+                <>
+                  <Text size={20}>Сегодня</Text>
+                  <AddFinishedTask />
+                </>
+              ) : (
+                <Text size={20}>{formatDate(new Date(day.date))}</Text>
+              )}
+            </Flex>
+            <Text className='text-primary text-nowrap' size={20}>
+              {day.time ? formatTime(day.time) : ''}
+            </Text>
+          </Flex>
+          <div>
+            {day.tasks.map((task) => (
+              <EditTask key={task.id} task={task}>
+                <Task {...task} showUser={showUser} />
+              </EditTask>
+            ))}
+            {!day.tasks.length && (
+              <Text className='mt-3' tag='h1'>
+                Нет задач на сегодня
+              </Text>
+            )}
+          </div>
+        </>
+      ))}
     </>
-  ) : (
-    <DraggbleTasks tasks={tasks} />
   );
 };

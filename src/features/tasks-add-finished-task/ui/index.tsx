@@ -1,11 +1,15 @@
+'use client';
+
 import { PiPlusCircle } from 'react-icons/pi';
+
+import { AddFinishedTaskForm } from './add-finished-task';
 
 import { useModal } from '@/src/shared/ui/modal';
 
-export const AddFinishedTask = ({ modalContent }: { modalContent: React.ReactNode }) => {
+export const AddFinishedTask = () => {
   const { setModal } = useModal();
   const handleAdd = () => {
-    setModal(modalContent);
+    setModal(<AddFinishedTaskForm />);
   };
 
   return (
