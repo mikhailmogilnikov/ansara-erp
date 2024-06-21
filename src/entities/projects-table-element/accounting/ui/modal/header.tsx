@@ -9,7 +9,7 @@ export const AccountingHeader = () => {
   return (
     <Flex col>
       <InfoBadge icon={PiUserCircleBold} title='Заказчик'>
-        Банки
+        Семён РубинАвто
       </InfoBadge>
       <InfoBadge icon={PiPhoneBold} title='Телефон'>
         +7 (932) 050-54-97

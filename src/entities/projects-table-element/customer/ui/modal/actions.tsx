@@ -10,7 +10,7 @@ export const NotesActions = () => {
     <Flex col>
       <Flex col gap={0}>
         <Text opacity={0.5} size={16}>
-          Ср, 3 апреля 9:45
+          Ср, 3 апреля, 9:45
         </Text>
         <Text size={16}>Заказчик отправил материалы</Text>
         <Button shadow className='mt-2 w-fit' size='md'>
@@ -23,7 +23,7 @@ export const NotesActions = () => {
 
       <Flex col gap={0}>
         <Text opacity={0.5} size={16}>
-          Вт, 2 апреля 10:45
+          Вт, 2 апреля, 10:45
         </Text>
         <Text size={16}>Заказчик отправил материалы</Text>
         <Button shadow className='mt-2 w-fit text-primary' size='md'>
