@@ -1,8 +1,8 @@
-import { allTasksFiltersI } from '../../model/all-tasks-filters.type';
-
 import { parseDate } from './parseDate';
 
-export const formatDateFilters = (currentFilters: allTasksFiltersI) => {
+import { AllTasksFiltersI } from '@/src/features/tasks-filter-all-tasks';
+
+export const formatDateFilters = (currentFilters: AllTasksFiltersI) => {
   return currentFilters.dateDuration.map((date) => {
     const dutation = date.split(' - ');
 

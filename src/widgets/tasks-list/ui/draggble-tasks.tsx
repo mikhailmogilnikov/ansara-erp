@@ -12,7 +12,7 @@ interface IDraggbleTask extends ITask {
   order: number;
 }
 
-export const DraggbleTasks = ({ tasks, showUser }: { tasks: ITask[]; showUser?: boolean }) => {
+export const DraggbleTasks = ({ tasks, showUsers }: { tasks: ITask[]; showUsers?: boolean }) => {
   const [draggbleTasks, setDraggbleTasks] = useState(
     tasks.map((task, index) => ({
       ...task,
@@ -40,7 +40,7 @@ export const DraggbleTasks = ({ tasks, showUser }: { tasks: ITask[]; showUser?: 
           onDragStart={handleDragStart}
         >
           <EditTask isDragging={isDragging} task={task}>
-            <Task {...task} showUser={showUser} />
+            <Task {...task} showUsers={showUsers} />
           </EditTask>
         </Reorder.Item>
       ))}

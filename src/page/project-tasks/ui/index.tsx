@@ -1,5 +1,5 @@
 import { BackButton } from '@/src/features/back-button';
-import { CreationBar } from '@/src/features/tasks-create-task';
+import { TasksCreateTask } from '@/src/features/tasks-create-task';
 import { TasksListConst } from '@/src/shared/config/tasks-list-const';
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
@@ -23,8 +23,8 @@ export const ProjectTasksPage = ({ id }: Props) => {
             {project?.name}
           </Text>
         </Flex>
-        <CreationBar />
-        <TasksList showUser tasks={tasks} />
+        <TasksCreateTask showUsers />
+        <TasksList showUsers tasks={tasks} />
       </div>
     </Flex>
   );

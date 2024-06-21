@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { allTasksFiltersI } from '../../model/all-tasks-filters.type';
 import { dateFiltersI } from '../../model/date-filters.type';
 import { formatDateFilters } from '../../lib/utils/format-date-filters';
 import { filterTasksByDate } from '../../lib/utils/filter-tasks-by-date';
@@ -9,7 +8,7 @@ import { getTasksWithDate } from '../../lib/utils/get-tasks-with-date';
 import { ItasksWithDate } from '../../model/tasks-with-date.type';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { FilterAllTasks } from '@/src/features/tasks-filter-all-tasks';
+import { AllTasksFiltersI, FilterAllTasks } from '@/src/features/tasks-filter-all-tasks';
 import { EStorageKeys } from '@/src/shared/ui/local-options/model/options.enum';
 import { useFilters } from '@/src/shared/ui/local-options/model/filters-store';
 import { TasksListConst } from '@/src/shared/config/tasks-list-const';
@@ -21,7 +20,7 @@ import { EditTask } from '@/src/features/tasks-edit-task';
 import { ITask } from '@/src/shared/model/task.type';
 
 export const AllTasksList = () => {
-  const [projectFilters, setProjectFilters] = useState<number[]>();
+  const [projectFilters, setProjectFilters] = useState<number>();
   const [usersFilters, setUsersFilters] = useState<number[]>();
   const [dateFilters, setDateFilters] = useState<dateFiltersI[]>();
   const [sumTime, setSumTime] = useState(0);
@@ -31,10 +30,10 @@ export const AllTasksList = () => {
 
   useEffect(() => {
     if (filters && filters[EStorageKeys.ALL_TASKS_STATE]) {
-      const currentFilters = JSON.parse(filters[EStorageKeys.ALL_TASKS_STATE]) as allTasksFiltersI;
+      const currentFilters = JSON.parse(filters[EStorageKeys.ALL_TASKS_STATE]) as AllTasksFiltersI;
 
       if (currentFilters) {
-        setProjectFilters(currentFilters.projects.map((projectId) => Number(projectId)));
+        setProjectFilters(Number(currentFilters.projectId));
         setUsersFilters(currentFilters.users.map((userId) => Number(userId)));
         setDateFilters(formatDateFilters(currentFilters));
       }
@@ -44,8 +43,8 @@ export const AllTasksList = () => {
   useEffect(() => {
     let filteredTasks: ITask[] = TasksListConst;
 
-    if (projectFilters?.length) {
-      filteredTasks = filteredTasks.filter((task) => projectFilters.includes(task.projectId));
+    if (projectFilters) {
+      filteredTasks = filteredTasks.filter((task) => task.projectId === projectFilters);
     }
     if (usersFilters?.length) {
       filteredTasks = filteredTasks.filter((task) => usersFilters.includes(task.userId));

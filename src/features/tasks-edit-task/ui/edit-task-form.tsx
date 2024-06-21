@@ -13,7 +13,6 @@ import { PiPenBold, PiTrashBold } from 'react-icons/pi';
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
-import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
 import { formatTime, getHours, getMins } from '@/src/shared/lib/utils/format-time';
 import { getDateWithoutTime } from '@/src/shared/lib/utils/get-date-without-time';
 import { formatTaskDate, formatTaskTime } from '@/src/shared/lib/utils/format-tasks-data';
@@ -21,7 +20,11 @@ import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 import { ITask } from '@/src/shared/model/task.type';
 
-export const EditTaskForm = (task: ITask) => {
+interface Props {
+  task: ITask;
+}
+
+export const EditTaskForm = ({ task }: Props) => {
   const [newTask, setNewTask] = useImmer(task);
 
   const handleEdit = (e: FormEvent) => {
@@ -47,12 +50,6 @@ export const EditTaskForm = (task: ITask) => {
     });
   };
 
-  const changeProject = (projectId: number) => {
-    setNewTask((state) => {
-      state.projectId = projectId;
-    });
-  };
-
   const changeUser = (userId: number) => {
     setNewTask((state) => {
       state.userId = userId;
@@ -72,25 +69,14 @@ export const EditTaskForm = (task: ITask) => {
 
   return (
     <ModalWrapper title='Редактировать задачу'>
-      <form action='submit' className='flex flex-col gap-3' onSubmit={handleEdit}>
+      <form action='submit' className='flex flex-col gap-4' onSubmit={handleEdit}>
         <Input
           classNames={{ inputWrapper: '!bg-default' }}
           placeholder='Введите задачу'
           value={newTask.body}
           onChange={changeBody}
         />
-        <Select
-          aria-label='Выберете проект'
-          className='w-full'
-          classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
-          defaultSelectedKeys={[String(task.projectId)]}
-          placeholder='Выберите проект'
-          onChange={(e) => changeProject(Number(e.target.value))}
-        >
-          {TasksProjectsListConst.map((project) => (
-            <SelectItem key={project.id}>{project.name}</SelectItem>
-          ))}
-        </Select>
+
         <Select
           aria-label='Выберете исполнителя'
           className='w-full'
