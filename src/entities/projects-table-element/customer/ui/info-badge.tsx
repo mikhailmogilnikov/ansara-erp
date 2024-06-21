@@ -13,7 +13,7 @@ export const InfoBadge = ({ icon: Icon, children, title }: InfoBadgeProps) => {
   return (
     <Flex className='items-center flex-shrink-0' gap={3}>
       <Icon className='flex-shrink-0' opacity={0.5} size={22} />
-      <Text className='w-24 flex-shrink-0' opacity={0.5}>
+      <Text className='w-20 flex-shrink-0' opacity={0.5}>
         {title}
       </Text>
       {children}

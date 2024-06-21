@@ -44,8 +44,8 @@ export const NotesUserVariants: NoteVariant[] = [
     title: 'Этапы',
     type: 'select',
     variants: [
-      { id: 'arina', title: '1' },
-      { id: 'alexey', title: '2' },
+      { id: '1', title: '1' },
+      { id: '2', title: '2' },
     ],
   },
 ];

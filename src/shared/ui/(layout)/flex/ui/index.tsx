@@ -2,16 +2,7 @@ import { ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
-  tag?:
-    | 'div'
-    | 'section'
-    | 'menu'
-    | 'aside'
-    | 'header'
-    | 'footer'
-    | 'span'
-    | 'article'
-    | 'main';
+  tag?: 'div' | 'section' | 'menu' | 'aside' | 'header' | 'footer' | 'span' | 'article' | 'main';
   className?: string;
   direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
   gap?: number;
@@ -19,6 +10,7 @@ type Props = {
   editable?: boolean;
   wrap?: boolean;
   col?: boolean;
+  center?: boolean;
 };
 
 export const Flex = ({
@@ -31,16 +23,15 @@ export const Flex = ({
   editable = false,
   wrap = false,
   col = false,
+  center = false,
 }: Props) => {
   const Tag = tag;
 
   return (
     <Tag
-      className={`flex text-foreground ${className} ${wrap && 'flex-wrap'}`}
+      className={`flex text-foreground ${className} ${wrap && 'flex-wrap'} ${center && 'items-center'}`}
       style={
-        !editable
-          ? { flexDirection: col ? 'column' : direction, gap: gap * 4, width }
-          : undefined
+        !editable ? { flexDirection: col ? 'column' : direction, gap: gap * 4, width } : undefined
       }
     >
       {children}
