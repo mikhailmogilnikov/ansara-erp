@@ -4,7 +4,7 @@ import { TasksListConst } from '@/src/shared/config/tasks-list-const';
 import { TasksList } from '@/src/widgets/tasks-list';
 import { BackButton } from '@/src/features/back-button';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
-import { CreationBar } from '@/src/features/tasks-create-task';
+import { TasksCreateTask } from '@/src/features/tasks-create-task';
 
 export const UserTasksPage = ({ id }: { id: number }) => {
   const user = TasksUsersListConst.find((user) => user.id == id);
@@ -19,7 +19,7 @@ export const UserTasksPage = ({ id }: { id: number }) => {
             {user?.name}
           </Text>
         </Flex>
-        <CreationBar />
+        <TasksCreateTask />
         <TasksList tasks={tasks} />
       </div>
     </Flex>

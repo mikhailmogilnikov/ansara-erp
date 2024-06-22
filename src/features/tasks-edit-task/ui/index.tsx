@@ -13,9 +13,8 @@ export const EditTask = ({ children, task, isDragging }: Props) => {
   const { setModal } = useModal();
 
   const handleEdit = () => {
-    console.log(isDragging);
     if (!isDragging) {
-      setModal(<EditTaskForm {...task} />);
+      setModal(<EditTaskForm task={task} />);
     }
   };
 

@@ -1,29 +1,25 @@
 import { Select, SelectItem } from '@nextui-org/select';
 import { useEffect, useState } from 'react';
 import { Button } from '@nextui-org/button';
+import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 
-import { lastMonthsPairs } from './lib/get-date-filter-data';
+import { lastMonthsPairs } from '../lib/get-date-filter-data';
+import { AllTasksFiltersI } from '../model/all-tasks-filters.type';
 
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
 import { useFilters } from '@/src/shared/ui/local-options/model/filters-store';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 
-interface allTasksFiltersI {
-  projects: string[];
-  users: string[];
-  dateDuration: string[];
-}
-
 const emptyFilters = {
-  projects: [],
+  projectId: null,
   users: [],
   dateDuration: [],
 };
 
 export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
   const { filters, setFilters } = useFilters();
-  const [allTasksFilters, setAllTasksFilters] = useState<allTasksFiltersI | null>(null);
+  const [allTasksFilters, setAllTasksFilters] = useState<AllTasksFiltersI | null>(null);
 
   useEffect(() => {
     if (filters) {
@@ -51,8 +47,8 @@ export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
     setAllTasksFilters(emptyFilters);
   };
 
-  const changeProjects = (value: string[]) => {
-    setAllTasksFilters((prev) => prev && { ...prev, projects: value[0] ? value : [] });
+  const changeProject = (value: string) => {
+    setAllTasksFilters((prev) => prev && { ...prev, projectId: Number(value) });
   };
   const changeUsers = (value: string[]) => {
     setAllTasksFilters((prev) => prev && { ...prev, users: value[0] ? value : [] });
@@ -63,20 +59,23 @@ export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
 
   return (
     <Flex className='w-full'>
-      <Select
+      <Autocomplete
         multiple
         aria-label='Все проекты'
         className='w-full'
-        classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
+        inputProps={{
+          classNames: {
+            inputWrapper: '!bg-default',
+          },
+        }}
         placeholder='Все проекты'
-        selectedKeys={allTasksFilters?.projects}
-        selectionMode='multiple'
-        onChange={(e) => changeProjects(e.target.value.split(','))}
+        selectedKey={allTasksFilters?.projectId ? String(allTasksFilters?.projectId) : ''}
+        onSelectionChange={(value) => changeProject(String(value))}
       >
         {TasksProjectsListConst.map((project) => (
-          <SelectItem key={project.id}>{project.name}</SelectItem>
+          <AutocompleteItem key={project.id}>{project.name}</AutocompleteItem>
         ))}
-      </Select>
+      </Autocomplete>
       <Select
         multiple
         aria-label='Все исполнители'

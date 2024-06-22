@@ -8,10 +8,18 @@ import { Flex } from '@/src/shared/ui/(layout)/flex';
 
 interface TaskI extends ITask {
   isLarge?: boolean;
-  showUser?: boolean;
+  showUsers?: boolean;
 }
 
-export const Task = ({ body, startTime, endTime, projectId, isLarge, userId, showUser }: TaskI) => {
+export const Task = ({
+  body,
+  startTime,
+  endTime,
+  projectId,
+  isLarge,
+  userId,
+  showUsers,
+}: TaskI) => {
   return (
     <Flex
       className={`w-full text-start py-5 border-b-1 border-divider cursor-pointer justify-between ${isLarge && 'gap-5'}`}
@@ -19,15 +27,18 @@ export const Task = ({ body, startTime, endTime, projectId, isLarge, userId, sho
       <Flex
         className={isLarge ? 'justify-between' : ''}
         col={!isLarge}
+        gap={0}
         width={isLarge ? '60%' : '100%'}
       >
-        <Text size={16}>{body}</Text>
+        <Text className='leading-3' size={16}>
+          {body}
+        </Text>
         <Text
           className={isLarge ? 'w-full max-w-[200px]' : ''}
           opacity={isLarge ? 1 : 0.5}
           size={16}
         >
-          {showUser
+          {showUsers
             ? TasksUsersListConst.find((user) => userId === user.id)?.name
             : TasksProjectsListConst.find((project) => projectId === project.id)?.name}
         </Text>
