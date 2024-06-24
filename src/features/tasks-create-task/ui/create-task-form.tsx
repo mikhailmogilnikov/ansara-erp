@@ -95,10 +95,10 @@ export const CreateTaskForm = ({
     }
   };
 
-  const changeProject = (value: { currentKey: string }) => {
+  const changeProject = (value: any) => {
     setNewTask((prev) => ({ ...prev, projectId: Number(value.currentKey) }));
   };
-  const changeUser = (value: { currentKey: string }) => {
+  const changeUser = (value: any) => {
     setNewTask((prev) => ({ ...prev, userId: Number(value.currentKey) }));
   };
 

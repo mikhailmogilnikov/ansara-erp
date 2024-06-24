@@ -1,4 +1,4 @@
-import { TTableTask } from '../../model/task.type';
+import { TTableTask } from '../model/task.type';
 
 export const TableTestTasks: TTableTask[] = [
   { id: 0, name: 'Задача 1', isCompleted: true, order: 0 },

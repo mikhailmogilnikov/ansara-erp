@@ -49,7 +49,7 @@ export const EditTaskForm = ({ task }: Props) => {
     });
   };
 
-  const changeUser = (value: { currentKey: string }) => {
+  const changeUser = (value: any) => {
     setNewTask((state) => {
       state.userId = Number(value.currentKey);
     });

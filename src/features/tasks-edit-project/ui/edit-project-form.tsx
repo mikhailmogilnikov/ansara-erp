@@ -24,7 +24,7 @@ export const EditProjectForm = ({ name, usersIds }: ITasksProject) => {
       addNotification({ text: 'Проект успешно отредактирован', type: 'success' });
     }
   };
-  const changeUser = (value: { currentKey: string }) => {
+  const changeUser = (value: any) => {
     setUsers(!!value.currentKey ? value.currentKey.split(',').map(Number) : []);
   };
 

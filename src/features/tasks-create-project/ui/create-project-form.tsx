@@ -23,7 +23,7 @@ export const CreateProjectForm = () => {
       addNotification({ text: 'Проект успешно создан', type: 'success' });
     }
   };
-  const changeUser = (value: { currentKey: string }) => {
+  const changeUser = (value: any) => {
     setUsers(!!value.currentKey ? value.currentKey.split(',').map(Number) : []);
   };
 
