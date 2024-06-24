@@ -2,7 +2,7 @@ import { Checkbox } from '@nextui-org/checkbox';
 import { useState } from 'react';
 import { PiTrashBold } from 'react-icons/pi';
 
-import { TTableTask } from '../model/task.type';
+import { TTableTask } from '../../model/task.type';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
@@ -31,7 +31,7 @@ export const TableTask = ({ item }: Props) => {
         onChange={(e) => setValue(e.target.value)}
       />
 
-      <Text className='flex-shrink-0'>Пн, 1 апреля</Text>
+      <Text opacity={0.5} className='flex-shrink-0'>Пн, 1 апреля</Text>
       <ButtonWithConfirm
         isIconOnly
         actionFn={() => {}}

@@ -2,7 +2,7 @@
 
 import { PiPlusBold } from 'react-icons/pi';
 
-import { AddProjectModal } from './add-project-modal';
+import { AddProjectModal } from './modal';
 
 import { Button } from '@/src/shared/ui/(buttons)/button';
 import { useModal } from '@/src/shared/ui/modal';
@@ -15,7 +15,7 @@ export const AddProject = () => {
   };
 
   return (
-    <Button className='text-[14px] shadow-base flex-shrink-0' radius='full' size='sm' onPress={handleClick}>
+    <Button className='text-[14px] flex-shrink-0' radius='full' size='sm' onPress={handleClick}>
       <PiPlusBold />
       Добавить проект
     </Button>

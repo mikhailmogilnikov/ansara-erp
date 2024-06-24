@@ -13,7 +13,7 @@ export const NotesActions = () => {
           Ср, 3 апреля, 9:45
         </Text>
         <Text size={16}>Заказчик отправил материалы</Text>
-        <Button shadow className='mt-2 w-fit' size='md'>
+        <Button className='mt-2 w-fit' size='md'>
           <PiDownloadBold size={18} />
           Загрузить
         </Button>
@@ -26,7 +26,7 @@ export const NotesActions = () => {
           Вт, 2 апреля, 10:45
         </Text>
         <Text size={16}>Заказчик отправил материалы</Text>
-        <Button shadow className='mt-2 w-fit text-primary' size='md'>
+        <Button className='mt-2 w-fit text-primary' size='md'>
           <PiLinkSimpleBold size={18} />
           Открыть ссылку
         </Button>

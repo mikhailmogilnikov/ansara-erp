@@ -14,7 +14,7 @@ export const AccountingHeader = () => {
       <InfoBadge icon={PiPhoneBold} title='Телефон'>
         +7 (932) 050-54-97
       </InfoBadge>
-      <Button shadow className='mt-4'>
+      <Button className='mt-4'>
         <PiPlusCircleBold size={20} />
         Добавить результат аккаунтинга
       </Button>

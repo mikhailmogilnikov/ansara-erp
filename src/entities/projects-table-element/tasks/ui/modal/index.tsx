@@ -14,7 +14,7 @@ export const ProjectTasksEditorModal = () => {
         Семён РубинАвто
       </InfoBadge>
       <TableTasksList />
-      <Button shadow className='w-fit'>
+      <Button className='w-fit'>
         <PiPlusCircleBold size={20} />
         Добавить задачу
       </Button>

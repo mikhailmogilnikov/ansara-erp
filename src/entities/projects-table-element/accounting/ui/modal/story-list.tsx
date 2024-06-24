@@ -33,7 +33,7 @@ export const AccountingStoryList = () => {
         <ButtonWithConfirm
           isIconOnly
           actionFn={() => {}}
-          className='absolute top-0 right-0 text-danger shadow-base'
+          className='absolute top-0 right-0 text-danger'
           confirmColor='danger'
           description='Вы действительно хотите удалить результат аккаунтинга? Это действие необратимо.'
           icon={<PiTrashBold size={20} />}
@@ -67,7 +67,7 @@ export const AccountingStoryList = () => {
         <ButtonWithConfirm
           isIconOnly
           actionFn={() => {}}
-          className='absolute top-0 right-0 text-danger shadow-base'
+          className='absolute top-0 right-0 text-danger'
           confirmColor='danger'
           description='Вы действительно хотите удалить результат аккаунтинга? Это действие необратимо.'
           icon={<PiTrashBold size={20} />}

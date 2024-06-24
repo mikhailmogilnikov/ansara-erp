@@ -2,8 +2,8 @@ import { Divider } from '@nextui-org/divider';
 import { Reorder } from 'framer-motion';
 import { useState } from 'react';
 
-import { TableTestTasks } from '../config/test-tasks';
-import { TTableTask } from '../model/task.type';
+import { TTableTask } from '../../model/task.type';
+import { TableTestTasks } from '../../config/test-tasks';
 
 import { TableTask } from './task';
 
