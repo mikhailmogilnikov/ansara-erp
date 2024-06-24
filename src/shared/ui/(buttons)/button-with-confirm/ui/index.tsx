@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/button';
+import { Button, ButtonProps } from '@nextui-org/button';
 import { Modal, ModalContent, useDisclosure } from '@nextui-org/modal';
 import { ReactNode } from 'react';
 
@@ -15,7 +15,7 @@ type Props = {
   confirmTitle?: string;
   confirmColor?: 'danger';
   actionFn: () => void | Promise<void>;
-};
+} & ButtonProps;
 
 export const ButtonWithConfirm = ({
   icon,
@@ -26,15 +26,17 @@ export const ButtonWithConfirm = ({
   confirmTitle,
   confirmColor,
   actionFn,
+  ...buttonProps
 }: Props) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <>
       <Button
+        size='lg'
+        {...buttonProps}
         className={`font-medium ${className}`}
         radius={radius}
-        size='lg'
         startContent={icon}
         onPress={onOpen}
       >

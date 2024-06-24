@@ -14,11 +14,24 @@ type Props = {
 
 export const PropertiesInput = ({ icon, title, type, variants, value, onChange }: Props) => {
   const inputs = {
-    text: <input value={value} onChange={onChange} />,
-    phone: <PhoneInput />,
+    text: (
+      <input
+        className='bg-transparent outline-none'
+        placeholder='Введите значение'
+        value={value}
+        onChange={onChange}
+      />
+    ),
+    phone: <PhoneInput value={value} onChange={onChange} />,
     select: (
       <SelectInput
+        classNames={{
+          innerWrapper: 'p-0',
+          trigger: '!bg-transparent p-0 shadow-none !text-lg min-h-6 h-6',
+          value: 'text-medium',
+        }}
         selectedVariants={value}
+        size='sm'
         variants={variants || []}
         onSelectionChange={onChange}
       />

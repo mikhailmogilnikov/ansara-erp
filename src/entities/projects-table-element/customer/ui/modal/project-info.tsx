@@ -1,5 +1,4 @@
 import { useImmer } from 'use-immer';
-import { useState } from 'react';
 import { Textarea } from '@nextui-org/input';
 
 import { NotesUserVariants } from '../../config/notes-user';
@@ -9,16 +8,15 @@ import { NotesControls } from './controls';
 import { PropertiesInput } from './properties-input';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
 
 export const NotesProjectInfo = () => {
   const userInfo = {
     name: 'Семён РубинАвто',
-    phone: '',
-    accounterId: 'Арина',
+    phone: '+7 (932) 050-54-97',
+    accounterId: ['arina'],
     login: 'client_login',
     password: 'client_password',
-    stages: '2',
+    stages: ['2'],
     description: '',
   };
 
@@ -38,12 +36,6 @@ export const NotesProjectInfo = () => {
     }
   };
 
-  const [value, setValue] = useState<Set<string>>(new Set([]));
-  const variants = [
-    { id: 'matvei', title: 'Матвей' },
-    { id: 'misha', title: 'Михаил' },
-  ];
-
   return (
     <Flex col gap={8} tag='section'>
       <div className='w-full grid sm:grid-cols-2 gap-2'>
@@ -60,22 +52,20 @@ export const NotesProjectInfo = () => {
         ))}
       </div>
 
-      <SelectInput
-        selectedVariants={value}
-        variants={variants}
-        onSelectionChange={(keys) => setValue(keys)}
-      />
-
       <Textarea
-        className='outline-none'
-        classNames={{ inputWrapper: '!bg-default' }}
+        classNames={{
+          inputWrapper: '!bg-transparent p-0 shadow-none min-h-0',
+          input: 'font-medium',
+        }}
         id='description'
-        maxRows={30}
+        maxRows={Infinity}
+        minRows={1}
         placeholder='Начните ввод заметок...'
         size='lg'
         value={user.description}
         onChange={handleUpdate('description', 'text')}
       />
+
       <NotesActions />
       <NotesControls />
     </Flex>

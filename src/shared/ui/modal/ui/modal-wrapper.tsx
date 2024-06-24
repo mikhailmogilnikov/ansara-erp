@@ -16,7 +16,7 @@ export const ModalWrapper = ({ title, children }: Props) => {
   }
 
   return (
-    <Flex col className='p-8' gap={8}>
+    <Flex col className='p-8 overflow-y-scroll h-dvh' gap={8}>
       <Text className='max-sm:text-2xl text-4xl' weight={700}>
         {title}
       </Text>

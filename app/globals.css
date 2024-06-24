@@ -25,6 +25,10 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+svg {
+  flex-shrink: 0;
+}
+
 h1,
 h2,
 h3,

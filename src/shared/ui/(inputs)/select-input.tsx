@@ -1,18 +1,20 @@
-import { Select, SelectItem } from '@nextui-org/select';
+import { Select, SelectItem, SelectProps } from '@nextui-org/select';
 
 export type TSelectVariant = {
   id: Key;
   title: string;
 };
 
-type Props = {
-  multiple?: boolean;
-  variants: TSelectVariant[];
-  selectedVariants: any;
-  onSelectionChange: (keys: any) => void;
-  placeholder?: string;
-  className?: string;
-};
+type Props = Omit<
+  {
+    multiple?: boolean;
+    variants: TSelectVariant[];
+    selectedVariants: any;
+    onSelectionChange: (keys: any) => void;
+    placeholder?: string;
+  } & SelectProps,
+  'children'
+>;
 
 export const SelectInput = ({
   variants,
@@ -20,13 +22,13 @@ export const SelectInput = ({
   multiple = false,
   onSelectionChange,
   placeholder,
-  className,
+  ...restProps
 }: Props) => {
   return (
     <Select
-      aria-label='select'
-      className={`max-w-xs ${className}`}
       classNames={{ trigger: '!bg-default' }}
+      {...restProps}
+      aria-label='select'
       items={variants}
       placeholder={placeholder || 'Выберите из списка'}
       selectedKeys={selectedVariants}
