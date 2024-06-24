@@ -11,6 +11,7 @@ type Props = {
   selectedVariants: any;
   onSelectionChange: (keys: any) => void;
   placeholder?: string;
+  className?: string;
 };
 
 export const SelectInput = ({
@@ -19,11 +20,12 @@ export const SelectInput = ({
   multiple = false,
   onSelectionChange,
   placeholder,
+  className,
 }: Props) => {
   return (
     <Select
       aria-label='select'
-      className='max-w-xs'
+      className={`max-w-xs ${className}`}
       classNames={{ trigger: '!bg-default' }}
       items={variants}
       placeholder={placeholder || 'Выберите из списка'}

@@ -2,23 +2,23 @@ import { Button } from '@nextui-org/button';
 import { PiPlusBold } from 'react-icons/pi';
 import { Input } from '@nextui-org/input';
 import { FormEventHandler, useEffect, useState } from 'react';
-import { Select, SelectItem } from '@nextui-org/select';
-import { TimeInput } from '@nextui-org/date-input';
-import { Time, parseAbsoluteToLocal } from '@internationalized/date';
-import { DatePicker } from '@nextui-org/date-picker';
 import { useParams } from 'next/navigation';
 import { Checkbox } from '@nextui-org/checkbox';
+import { AnimatePresence, m } from 'framer-motion';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
-import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
 import { IEmptyTask } from '@/src/shared/model/task.type';
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
-import { Text } from '@/src/shared/ui/(layout)/text';
-import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { formatTime, getHours, getMins } from '@/src/shared/lib/utils/format-time';
 import { formatTaskDate, formatTaskTime } from '@/src/shared/lib/utils/format-tasks-data';
 import { getDateWithoutTime } from '@/src/shared/lib/utils/get-date-without-time';
+import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
+import { Flex } from '@/src/shared/ui/(layout)/flex';
+import { TimeInputField } from '@/src/shared/ui/(inputs)/time-input';
+import { Text } from '@/src/shared/ui/(layout)/text';
+import { formatTime } from '@/src/shared/lib/utils/format-time';
+import { DatePickerInput } from '@/src/shared/ui/(inputs)/date-picker';
+import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
 
 interface Props {
   handleCreateTask: (newTask: IEmptyTask) => void;
@@ -44,13 +44,14 @@ export const CreateTaskForm = ({
   const { id } = useParams();
   const [newTask, setNewTask] = useState(emptyTask);
   const [isFinished, setIsFinished] = useState(isFinishedTask);
+  const { addNotification } = useNotification();
 
   useEffect(() => {
     if (id) {
       if (showUsers && !showProjects) {
         setNewTask((prev) => ({ ...prev, projectId: Number(id) }));
       } else {
-        setNewTask((prev) => ({ ...prev, projectId: Number(id) }));
+        setNewTask((prev) => ({ ...prev, userId: Number(id) }));
       }
     }
   }, [id]);
@@ -67,12 +68,14 @@ export const CreateTaskForm = ({
     }
   }, [isFinished]);
 
-  const { addNotification } = useNotification();
-
   const handleCreate: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
+    if (newTask.body.length < 3) {
+    }
+
     if (newTask.projectId && newTask.userId) {
-      handleCreateTask(newTask as IEmptyTask);
+      handleCreateTask(newTask);
     }
   };
 
@@ -92,85 +95,74 @@ export const CreateTaskForm = ({
     }
   };
 
+  const changeProject = (value: { currentKey: string }) => {
+    setNewTask((prev) => ({ ...prev, projectId: Number(value.currentKey) }));
+  };
+  const changeUser = (value: { currentKey: string }) => {
+    setNewTask((prev) => ({ ...prev, userId: Number(value.currentKey) }));
+  };
+
   return (
     <ModalWrapper title='Создать задачу'>
-      <form action='submit' className='flex flex-col gap-3' onSubmit={handleCreate}>
+      <form action='submit' className='flex flex-col gap-5' onSubmit={handleCreate}>
         <Input
           classNames={{ inputWrapper: '!bg-default' }}
           placeholder='Введите задачу'
+          size='lg'
           value={newTask?.body}
           onChange={(e) => setNewTask((prev) => ({ ...prev, body: e.target.value }))}
         />
         {showProjects && (
-          <Select
-            aria-label='Выберете проект'
-            className='w-full'
-            classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
+          <SelectInput
+            className='max-w-full'
             placeholder='Выберите проект'
-            onChange={(e) => setNewTask((prev) => ({ ...prev, projectId: Number(e.target.value) }))}
-          >
-            {TasksProjectsListConst.map((project) => (
-              <SelectItem key={project.id}>{project.name}</SelectItem>
-            ))}
-          </Select>
+            selectedVariants={null}
+            variants={TasksProjectsListConst.map((project) => ({
+              id: project.id,
+              title: project.name,
+            }))}
+            onSelectionChange={changeProject}
+          />
         )}
         {showUsers && (
-          <Select
-            aria-label='Выберете исполнителя'
-            className='w-full'
-            classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
+          <SelectInput
+            className='max-w-full'
             placeholder='Выберите исполнителя'
-            onChange={(e) => setNewTask((prev) => ({ ...prev, userId: Number(e.target.value) }))}
-          >
-            {TasksUsersListConst.map((user) => (
-              <SelectItem key={user.id}>{user.name}</SelectItem>
-            ))}
-          </Select>
+            selectedVariants={null}
+            variants={TasksUsersListConst.map((project) => ({
+              id: project.id,
+              title: project.name,
+            }))}
+            onSelectionChange={changeUser}
+          />
         )}
-        <Checkbox onValueChange={(value) => setIsFinished(value)}>Завершенная задача</Checkbox>
-        {isFinished && (
-          <>
-            <Flex className='items-center'>
-              <TimeInput
-                aria-label='Выберете начальное время'
-                className='w-fit'
-                classNames={{ inputWrapper: '!bg-default' }}
-                defaultValue={new Time(getHours(newTask.startTime), getMins(newTask.startTime))}
-                hourCycle={24}
-                labelPlacement='outside'
-                onChange={changeStartTime}
-              />
-              -
-              <TimeInput
-                aria-label='Выберете конечное время'
-                className='w-fit'
-                classNames={{ inputWrapper: '!bg-default' }}
-                defaultValue={new Time(getHours(newTask.endTime), getMins(newTask.endTime))}
-                hourCycle={24}
-                labelPlacement='outside'
-                onChange={changeEndTime}
-              />
-              <Text className='text-primary font-normal' size={16}>
-                {newTask.endTime && newTask.startTime && newTask.endTime > newTask.startTime
-                  ? formatTime(newTask.endTime - newTask.startTime)
-                  : ''}
-              </Text>
-            </Flex>
-            <DatePicker
-              isDisabled
-              aria-label='Выберете дату'
-              className='max-w-[165px]'
-              dateInputClassNames={{ inputWrapper: '!bg-default' }}
-              granularity='day'
-              value={parseAbsoluteToLocal(new Date().toISOString())}
-              onChange={(e) => {
-                changeDate(e.toDate());
-              }}
-            />
-          </>
+        {!isFinishedTask && (
+          <Checkbox onValueChange={(value) => setIsFinished(value)}>Завершенная задача</Checkbox>
         )}
+        <AnimatePresence>
+          {isFinished && (
+            <m.div
+              animate={{ height: 100 }}
+              className='w-full flex flex-col gap-3 overflow-hidden'
+              exit={{ height: !isFinishedTask ? 0 : 100 }}
+              initial={{ height: !isFinishedTask ? 0 : 100 }}
+            >
+              <Flex className='items-center'>
+                <TimeInputField time={newTask.startTime} onChange={changeStartTime} />
+                -
+                <TimeInputField time={newTask.endTime} onChange={changeEndTime} />
+                <Text className='text-primary font-normal' size={16}>
+                  {newTask.endTime && newTask.startTime && newTask.endTime > newTask.startTime
+                    ? formatTime(newTask.endTime - newTask.startTime)
+                    : ''}
+                </Text>
+              </Flex>
+              <DatePickerInput isDisabled={isFinishedTask} onChange={changeDate} />
+            </m.div>
+          )}
+        </AnimatePresence>
 
-        <Button className='font-medium' color='primary' type='submit'>
+        <Button className='font-medium' color='primary' type='submit' variant='shadow'>
           <PiPlusBold />
           Создать
         </Button>

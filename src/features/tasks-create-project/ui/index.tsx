@@ -16,9 +16,8 @@ export const TasksCreateProject = () => {
 
   return (
     <Button
-      className='text-[14px] shadow-base flex-shrink-0 font-medium'
-      radius='full'
-      size='sm'
+      className='text-[14px] flex-shrink-0 font-medium'
+      color='primary'
       onPress={handleCreate}
     >
       <PiPlusBold />

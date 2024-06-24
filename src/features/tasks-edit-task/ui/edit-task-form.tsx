@@ -3,22 +3,21 @@
 import { ChangeEventHandler, FormEvent } from 'react';
 import { Input } from '@nextui-org/input';
 import { useImmer } from 'use-immer';
-import { TimeInput } from '@nextui-org/date-input';
-import { Time, parseAbsoluteToLocal } from '@internationalized/date';
-import { Select, SelectItem } from '@nextui-org/select';
-import { DatePicker } from '@nextui-org/date-picker';
 import { Button } from '@nextui-org/button';
 import { PiPenBold, PiTrashBold } from 'react-icons/pi';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
-import { formatTime, getHours, getMins } from '@/src/shared/lib/utils/format-time';
+import { formatTime } from '@/src/shared/lib/utils/format-time';
 import { getDateWithoutTime } from '@/src/shared/lib/utils/get-date-without-time';
 import { formatTaskDate, formatTaskTime } from '@/src/shared/lib/utils/format-tasks-data';
 import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 import { ITask } from '@/src/shared/model/task.type';
+import { TimeInputField } from '@/src/shared/ui/(inputs)/time-input';
+import { DatePickerInput } from '@/src/shared/ui/(inputs)/date-picker';
+import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
 
 interface Props {
   task: ITask;
@@ -50,9 +49,9 @@ export const EditTaskForm = ({ task }: Props) => {
     });
   };
 
-  const changeUser = (userId: number) => {
+  const changeUser = (value: { currentKey: string }) => {
     setNewTask((state) => {
-      state.userId = userId;
+      state.userId = Number(value.currentKey);
     });
   };
 
@@ -69,50 +68,28 @@ export const EditTaskForm = ({ task }: Props) => {
 
   return (
     <ModalWrapper title='Редактировать задачу'>
-      <form action='submit' className='flex flex-col gap-4' onSubmit={handleEdit}>
+      <form action='submit' className='flex flex-col gap-5' onSubmit={handleEdit}>
         <Input
           classNames={{ inputWrapper: '!bg-default' }}
           placeholder='Введите задачу'
+          size='lg'
           value={newTask.body}
           onChange={changeBody}
         />
-
-        <Select
-          aria-label='Выберете исполнителя'
-          className='w-full'
-          classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
-          defaultSelectedKeys={[String(task.userId)]}
-          placeholder='Выберите исполнителя'
-          onChange={(e) => changeUser(Number(e.target.value))}
-        >
-          {TasksUsersListConst.map((user) => (
-            <SelectItem key={user.id}>{user.name}</SelectItem>
-          ))}
-        </Select>
+        <SelectInput
+          className='max-w-full'
+          placeholder='Выберете исполнителя'
+          selectedVariants={[String(newTask.userId)]}
+          variants={TasksUsersListConst.map((project) => ({
+            id: project.id,
+            title: project.name,
+          }))}
+          onSelectionChange={changeUser}
+        />
         <Flex className='items-center'>
-          <TimeInput
-            aria-label='Выберете начальное время'
-            className='w-fit'
-            classNames={{ inputWrapper: '!bg-default' }}
-            defaultValue={
-              task.startTime ? new Time(getHours(task.startTime), getMins(task.startTime)) : null
-            }
-            hourCycle={24}
-            labelPlacement='outside'
-            onChange={changeStartTime}
-          />
+          <TimeInputField time={newTask.startTime} onChange={changeStartTime} />
           -
-          <TimeInput
-            aria-label='Выберете конечное время'
-            className='w-fit'
-            classNames={{ inputWrapper: '!bg-default' }}
-            defaultValue={
-              task.endTime ? new Time(getHours(task.endTime), getMins(task.endTime)) : null
-            }
-            hourCycle={24}
-            labelPlacement='outside'
-            onChange={changeEndTime}
-          />
+          <TimeInputField time={newTask.endTime} onChange={changeEndTime} />
           <Text className='text-primary font-normal' size={16}>
             {newTask.endTime && newTask.startTime && newTask.endTime > newTask.startTime
               ? formatTime(newTask.endTime - newTask.startTime)
@@ -120,17 +97,9 @@ export const EditTaskForm = ({ task }: Props) => {
           </Text>
         </Flex>
         {task.endTime && (
-          <DatePicker
-            aria-label='Выберете дату'
-            className='max-w-[165px]'
-            dateInputClassNames={{ inputWrapper: '!bg-default' }}
-            granularity='day'
-            value={parseAbsoluteToLocal(
-              newTask.endTime ? new Date(newTask.endTime).toISOString() : new Date().toISOString(),
-            )}
-            onChange={(e) => {
-              changeDate(e.toDate());
-            }}
+          <DatePickerInput
+            date={newTask.endTime ? new Date(newTask.endTime) : null}
+            onChange={changeDate}
           />
         )}
         <Flex className='items-center' gap={3}>

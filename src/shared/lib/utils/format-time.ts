@@ -13,7 +13,7 @@ export const getHours = (time: number | null) => {
     const hours = date.getHours();
 
     return hours;
-  } else return 0;
+  } else return new Date().getHours();
 };
 export const getMins = (time: number | null) => {
   if (time) {
@@ -21,7 +21,7 @@ export const getMins = (time: number | null) => {
     const minutes = date.getMinutes();
 
     return minutes;
-  } else return 0;
+  } else return new Date().getMinutes();
 };
 
 const padZero = (num: number) => (num < 10 ? `0${num}` : num);

@@ -40,7 +40,7 @@ export const CreationButton = ({
     </button>
   ) : (
     <Button
-      className='text-[14px] shadow-base flex-shrink-0 font-medium'
+      className='text-[14px] flex-shrink-0 font-medium'
       radius='full'
       size='sm'
       onPress={handleCreate}

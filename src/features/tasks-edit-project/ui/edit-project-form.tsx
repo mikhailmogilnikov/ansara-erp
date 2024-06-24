@@ -1,16 +1,17 @@
-import { Button } from '@nextui-org/button';
-import { PiPlusBold } from 'react-icons/pi';
-import { Input } from '@nextui-org/input';
 import { FormEventHandler, useState } from 'react';
+import { Input } from '@nextui-org/input';
+import { Button } from '@nextui-org/button';
+import { PiPencilSimpleBold } from 'react-icons/pi';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
-import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
 import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
+import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
+import { ITasksProject } from '@/src/entities/tasks-project';
 
-export const CreateProjectForm = () => {
-  const [taskName, setTaskName] = useState('');
-  const [users, setUsers] = useState<number[]>([]);
+export const EditProjectForm = ({ name, usersIds }: ITasksProject) => {
+  const [taskName, setTaskName] = useState(name);
+  const [users, setUsers] = useState<number[]>(usersIds);
   const { addNotification } = useNotification();
 
   const handleCreate: FormEventHandler<HTMLFormElement> = (e) => {
@@ -20,7 +21,7 @@ export const CreateProjectForm = () => {
     } else if (!users.length) {
       addNotification({ text: 'Добавьте хотя бы одного исполнителя', type: 'danger' });
     } else {
-      addNotification({ text: 'Проект успешно создан', type: 'success' });
+      addNotification({ text: 'Проект успешно отредактирован', type: 'success' });
     }
   };
   const changeUser = (value: { currentKey: string }) => {
@@ -46,8 +47,8 @@ export const CreateProjectForm = () => {
           onSelectionChange={changeUser}
         />
         <Button className='font-medium' color='primary' type='submit'>
-          <PiPlusBold />
-          Создать
+          <PiPencilSimpleBold size={18} />
+          Редактировать
         </Button>
       </form>
     </ModalWrapper>

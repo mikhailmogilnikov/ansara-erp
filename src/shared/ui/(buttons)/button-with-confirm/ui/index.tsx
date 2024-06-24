@@ -8,7 +8,7 @@ import { ConfirmModalContent } from './modal';
 
 type Props = {
   icon?: ReactNode;
-  children: ReactNode;
+  children?: ReactNode;
   radius?: 'full';
   className?: string;
   description: string;
