@@ -17,7 +17,8 @@ export const TimeInputField = ({ time, onChange, className }: Props) => {
       classNames={{ inputWrapper: '!bg-default' }}
       hourCycle={24}
       labelPlacement='outside'
-      value={new Time(getHours(time), getMins(time))}
+      size='lg'
+      value={time ? new Time(getHours(time), getMins(time)) : null}
       onChange={onChange}
     />
   );

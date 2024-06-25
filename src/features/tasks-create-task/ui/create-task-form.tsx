@@ -5,6 +5,7 @@ import { FormEventHandler, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Checkbox } from '@nextui-org/checkbox';
 import { AnimatePresence, m } from 'framer-motion';
+import { DateValue } from '@internationalized/date';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
@@ -87,9 +88,13 @@ export const CreateTaskForm = ({
     setNewTask((prev) => ({ ...prev, endTime: formatTaskTime(e, newTask.endTime) }));
   };
 
-  const changeDate = (date: Date) => {
-    if (getDateWithoutTime(date) <= getDateWithoutTime(new Date())) {
-      const [newStartTime, newEndTime] = formatTaskDate(date, newTask.startTime, newTask.endTime);
+  const changeDate = (date: Date | DateValue) => {
+    if (getDateWithoutTime(date as Date) <= getDateWithoutTime(new Date())) {
+      const [newStartTime, newEndTime] = formatTaskDate(
+        date as Date,
+        newTask.startTime,
+        newTask.endTime,
+      );
 
       setNewTask((prev) => ({ ...prev, endTime: newEndTime, startTime: newStartTime }));
     }
@@ -142,10 +147,10 @@ export const CreateTaskForm = ({
         <AnimatePresence>
           {isFinished && (
             <m.div
-              animate={{ height: 100 }}
-              className='w-full flex flex-col gap-3 overflow-hidden'
-              exit={{ height: !isFinishedTask ? 0 : 100 }}
-              initial={{ height: !isFinishedTask ? 0 : 100 }}
+              animate={{ height: 120 }}
+              className='w-full flex flex-col gap-5 overflow-hidden'
+              exit={{ height: !isFinishedTask ? 0 : 120 }}
+              initial={{ height: !isFinishedTask ? 0 : 120 }}
             >
               <Flex className='items-center'>
                 <TimeInputField time={newTask.startTime} onChange={changeStartTime} />
@@ -157,13 +162,17 @@ export const CreateTaskForm = ({
                     : ''}
                 </Text>
               </Flex>
-              <DatePickerInput isDisabled={isFinishedTask} onChange={changeDate} />
+              <DatePickerInput
+                date={newTask.endTime ? new Date(newTask.endTime) : new Date()}
+                isDisabled={isFinishedTask}
+                onChange={changeDate}
+              />
             </m.div>
           )}
         </AnimatePresence>
 
         <Button className='font-medium' color='primary' type='submit' variant='shadow'>
-          <PiPlusBold />
+          <PiPlusBold size={16} />
           Создать
         </Button>
       </form>

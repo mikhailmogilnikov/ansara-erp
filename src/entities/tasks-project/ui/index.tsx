@@ -32,9 +32,14 @@ export const TasksProject = ({ id, name, editButton, usersIds }: Props) => {
       </button>
       {editButton}
       <ButtonWithConfirm
+        isIconOnly
         actionFn={deleteProject}
-        description='Вы уверены, что хотите удалить проект'
-        icon={<PiTrashBold />}
+        className='text-danger'
+        confirmColor='danger'
+        confirmTitle='Удалить'
+        description='Вы уверены, что хотите удалить проект? Это действие необратимо.'
+        icon={<PiTrashBold size={18} />}
+        size='sm'
       />
     </Flex>
   );

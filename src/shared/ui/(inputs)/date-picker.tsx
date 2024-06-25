@@ -19,9 +19,10 @@ export const DatePickerInput = ({
       dateInputClassNames={{ inputWrapper: '!bg-default' }}
       granularity='day'
       isDisabled={isDisabled}
+      size='lg'
       value={parseAbsoluteToLocal(date ? date.toISOString() : new Date().toISOString())}
       onChange={(e) => {
-        onChange(e.toDate());
+        onChange(e.toDate(Intl.DateTimeFormat().resolvedOptions().timeZone));
       }}
       {...rest}
     />

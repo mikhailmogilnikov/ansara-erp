@@ -27,6 +27,7 @@ export const SelectInput = ({
   return (
     <Select
       classNames={{ trigger: '!bg-default' }}
+      size='lg'
       {...restProps}
       aria-label='select'
       items={variants}

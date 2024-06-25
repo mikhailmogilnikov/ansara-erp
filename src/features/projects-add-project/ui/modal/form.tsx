@@ -1,5 +1,6 @@
 import { Input } from '@nextui-org/input';
 import { useState } from 'react';
+import { DateValue } from '@internationalized/date';
 
 import { PhoneInput } from '@/src/shared/ui/(inputs)/phone-input';
 import { InputLabel } from '@/src/shared/ui/(inputs)/input-label';
@@ -17,7 +18,7 @@ export const AddProjectForm = () => {
   const [accounters, setAccounters] = useState(['1']);
   const [payed, setPayed] = useState(0);
   const [needPay, setNeedPay] = useState(0);
-  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [startDate, setStartDate] = useState<Date | DateValue>(new Date());
 
   return (
     <form autoComplete='off' className='grid grid-cols-2 gap-4 gap-y-6 mt-2'>
@@ -98,7 +99,7 @@ export const AddProjectForm = () => {
       </InputLabel>
 
       <InputLabel title='Дата первой оплаты'>
-        <DatePickerInput date={startDate} size='lg' onChange={setStartDate} />
+        <DatePickerInput date={startDate as Date} size='lg' onChange={setStartDate} />
       </InputLabel>
     </form>
   );
