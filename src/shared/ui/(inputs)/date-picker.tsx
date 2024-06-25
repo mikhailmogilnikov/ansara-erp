@@ -1,21 +1,21 @@
 import { parseAbsoluteToLocal } from '@internationalized/date';
-import { DatePicker } from '@nextui-org/date-picker';
-interface Props {
+import { DatePicker, DatePickerProps } from '@nextui-org/date-picker';
+
+type Props = {
   isDisabled?: boolean;
   date?: Date | null;
-  className?: string;
   onChange: (date: Date) => void;
-}
+} & DatePickerProps;
+
 export const DatePickerInput = ({
   isDisabled = false,
   date = new Date(),
-  className,
   onChange,
+  ...rest
 }: Props) => {
   return (
     <DatePicker
       aria-label='datepicker'
-      className={`max-w-[175px] ${className}`}
       dateInputClassNames={{ inputWrapper: '!bg-default' }}
       granularity='day'
       isDisabled={isDisabled}
@@ -24,6 +24,7 @@ export const DatePickerInput = ({
       onChange={(e) => {
         onChange(e.toDate());
       }}
+      {...rest}
     />
   );
 };

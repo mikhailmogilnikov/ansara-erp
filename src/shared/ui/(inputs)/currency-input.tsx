@@ -28,7 +28,7 @@ export const CurrencyInput = ({
 
   return (
     <InputNumberFormat
-      className='w-full bg-default rounded-[14px] h-12 px-2 outline-none shadow-sm'
+      className='w-full bg-default rounded-[14px] h-12 px-3 outline-none shadow-sm'
       currency='RUB'
       format='currency'
       inputMode='numeric'
