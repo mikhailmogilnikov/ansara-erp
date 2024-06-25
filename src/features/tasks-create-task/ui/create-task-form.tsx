@@ -142,7 +142,12 @@ export const CreateTaskForm = ({
           />
         )}
         {!isFinishedTask && (
-          <Checkbox onValueChange={(value) => setIsFinished(value)}>Завершенная задача</Checkbox>
+          <Checkbox
+            classNames={{ wrapper: 'before:border-divider' }}
+            onValueChange={(value) => setIsFinished(value)}
+          >
+            Завершенная задача
+          </Checkbox>
         )}
         <AnimatePresence>
           {isFinished && (
