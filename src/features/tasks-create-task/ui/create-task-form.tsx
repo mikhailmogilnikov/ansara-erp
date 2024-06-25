@@ -5,6 +5,7 @@ import { FormEventHandler, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Checkbox } from '@nextui-org/checkbox';
 import { AnimatePresence, m } from 'framer-motion';
+import { DateValue } from '@internationalized/date';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
@@ -87,9 +88,13 @@ export const CreateTaskForm = ({
     setNewTask((prev) => ({ ...prev, endTime: formatTaskTime(e, newTask.endTime) }));
   };
 
-  const changeDate = (date: Date) => {
-    if (getDateWithoutTime(date) <= getDateWithoutTime(new Date())) {
-      const [newStartTime, newEndTime] = formatTaskDate(date, newTask.startTime, newTask.endTime);
+  const changeDate = (date: Date | DateValue) => {
+    if (getDateWithoutTime(date as Date) <= getDateWithoutTime(new Date())) {
+      const [newStartTime, newEndTime] = formatTaskDate(
+        date as Date,
+        newTask.startTime,
+        newTask.endTime,
+      );
 
       setNewTask((prev) => ({ ...prev, endTime: newEndTime, startTime: newStartTime }));
     }

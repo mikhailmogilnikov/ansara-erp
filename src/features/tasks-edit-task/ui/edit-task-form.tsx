@@ -5,6 +5,7 @@ import { Input } from '@nextui-org/input';
 import { useImmer } from 'use-immer';
 import { Button } from '@nextui-org/button';
 import { PiFloppyDiskBold, PiTrashBold } from 'react-icons/pi';
+import { DateValue } from '@internationalized/date';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
@@ -55,9 +56,13 @@ export const EditTaskForm = ({ task }: Props) => {
     });
   };
 
-  const changeDate = (date: Date) => {
-    if (getDateWithoutTime(date) <= getDateWithoutTime(new Date())) {
-      const [newStartTime, newEndTime] = formatTaskDate(date, newTask.startTime, newTask.endTime);
+  const changeDate = (date: Date | DateValue) => {
+    if (getDateWithoutTime(date as Date) <= getDateWithoutTime(new Date())) {
+      const [newStartTime, newEndTime] = formatTaskDate(
+        date as Date,
+        newTask.startTime,
+        newTask.endTime,
+      );
 
       setNewTask((state) => {
         state.endTime = newEndTime;
@@ -99,6 +104,7 @@ export const EditTaskForm = ({ task }: Props) => {
         {task.endTime && (
           <DatePickerInput
             date={newTask.endTime ? new Date(newTask.endTime) : null}
+            size='lg'
             onChange={changeDate}
           />
         )}
