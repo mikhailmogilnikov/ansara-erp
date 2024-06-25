@@ -29,7 +29,6 @@ export const SelectInput = ({
       classNames={{ trigger: '!bg-default' }}
       {...restProps}
       aria-label='select'
-      className='max-w-xs'
       items={variants}
       placeholder={placeholder || 'Выберите из списка'}
       selectedKeys={selectedVariants}
