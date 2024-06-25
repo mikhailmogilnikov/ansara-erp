@@ -1,6 +1,5 @@
 import { TTableTask } from "../model/task.type";
 
-
 export const TableTestTasks: TTableTask[] = [
   { id: 0, name: 'Задача 1', isCompleted: true, order: 0 },
   { id: 1, name: 'Задача 2', isCompleted: true, order: 1 },

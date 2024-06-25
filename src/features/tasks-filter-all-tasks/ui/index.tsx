@@ -1,7 +1,6 @@
 import { Select, SelectItem } from '@nextui-org/select';
 import { useEffect, useState } from 'react';
 import { Button } from '@nextui-org/button';
-import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 
 import { lastMonthsPairs } from '../lib/get-date-filter-data';
 import { AllTasksFiltersI } from '../model/all-tasks-filters.type';
@@ -10,6 +9,7 @@ import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-c
 import { useFilters } from '@/src/shared/ui/local-options/model/filters-store';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
+import { AutocompleteInput } from '@/src/shared/ui/(inputs)/autocompete';
 
 const emptyFilters = {
   projectId: null,
@@ -47,7 +47,7 @@ export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
     setAllTasksFilters(emptyFilters);
   };
 
-  const changeProject = (value: string) => {
+  const changeProject = (value: Key | null) => {
     setAllTasksFilters((prev) => prev && { ...prev, projectId: Number(value) });
   };
   const changeUsers = (value: string[]) => {
@@ -59,23 +59,15 @@ export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
 
   return (
     <Flex className='w-full'>
-      <Autocomplete
-        multiple
-        aria-label='Все проекты'
-        className='w-full'
-        inputProps={{
-          classNames: {
-            inputWrapper: '!bg-default',
-          },
-        }}
+      <AutocompleteInput
         placeholder='Все проекты'
-        selectedKey={allTasksFilters?.projectId ? String(allTasksFilters?.projectId) : ''}
-        onSelectionChange={(value) => changeProject(String(value))}
-      >
-        {TasksProjectsListConst.map((project) => (
-          <AutocompleteItem key={project.id}>{project.name}</AutocompleteItem>
-        ))}
-      </Autocomplete>
+        value={allTasksFilters ? allTasksFilters.projectId : ''}
+        variants={TasksProjectsListConst.map((project) => ({
+          id: project.id,
+          title: project.name,
+        }))}
+        onChange={changeProject}
+      />
       <Select
         multiple
         aria-label='Все исполнители'

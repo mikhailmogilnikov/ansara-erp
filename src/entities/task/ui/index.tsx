@@ -27,7 +27,7 @@ export const Task = ({
       <Flex
         className={isLarge ? 'justify-between' : ''}
         col={!isLarge}
-        gap={0}
+        gap={2}
         width={isLarge ? '60%' : '100%'}
       >
         <Text className='leading-3' size={16}>
@@ -50,9 +50,10 @@ export const Task = ({
       )}
       <Flex
         className={`justify-end
-          ${isLarge ? 'items-center max-w-[180px] gap-6' : 'ml-5'}
+          ${isLarge ? 'items-center max-w-[180px]' : 'ml-5'}
         `}
         col={!isLarge}
+        gap={2}
         width={isLarge ? '100%' : 'auto'}
       >
         {startTime && endTime && (
