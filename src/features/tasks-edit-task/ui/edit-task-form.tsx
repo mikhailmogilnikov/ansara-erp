@@ -4,7 +4,7 @@ import { ChangeEventHandler, FormEvent } from 'react';
 import { Input } from '@nextui-org/input';
 import { useImmer } from 'use-immer';
 import { Button } from '@nextui-org/button';
-import { PiPenBold, PiTrashBold } from 'react-icons/pi';
+import { PiFloppyDiskBold, PiTrashBold } from 'react-icons/pi';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
@@ -102,16 +102,18 @@ export const EditTaskForm = ({ task }: Props) => {
             onChange={changeDate}
           />
         )}
-        <Flex className='items-center' gap={3}>
-          <Button className='font-medium' color='primary' size='lg' type='submit'>
-            <PiPenBold />
-            Редактировать
+        <Flex className='items-center w-full' gap={3}>
+          <Button className='font-medium w-full' color='success' size='lg' type='submit'>
+            <PiFloppyDiskBold size={18} />
+            Сохранить
           </Button>
           <ButtonWithConfirm
             actionFn={handleDelete}
+            className='text-danger  w-full'
             confirmColor='danger'
-            description='Вы точно хотите удалить задачу?'
-            icon={<PiTrashBold />}
+            confirmTitle='Удалить'
+            description='Вы точно хотите удалить задачу? Это действие необратимо.'
+            icon={<PiTrashBold size={18} />}
           >
             Удалить
           </ButtonWithConfirm>

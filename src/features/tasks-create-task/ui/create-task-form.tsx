@@ -142,10 +142,10 @@ export const CreateTaskForm = ({
         <AnimatePresence>
           {isFinished && (
             <m.div
-              animate={{ height: 100 }}
-              className='w-full flex flex-col gap-3 overflow-hidden'
-              exit={{ height: !isFinishedTask ? 0 : 100 }}
-              initial={{ height: !isFinishedTask ? 0 : 100 }}
+              animate={{ height: 120 }}
+              className='w-full flex flex-col gap-5 overflow-hidden'
+              exit={{ height: !isFinishedTask ? 0 : 120 }}
+              initial={{ height: !isFinishedTask ? 0 : 120 }}
             >
               <Flex className='items-center'>
                 <TimeInputField time={newTask.startTime} onChange={changeStartTime} />
@@ -157,13 +157,17 @@ export const CreateTaskForm = ({
                     : ''}
                 </Text>
               </Flex>
-              <DatePickerInput isDisabled={isFinishedTask} onChange={changeDate} />
+              <DatePickerInput
+                date={newTask.endTime ? new Date(newTask.endTime) : new Date()}
+                isDisabled={isFinishedTask}
+                onChange={changeDate}
+              />
             </m.div>
           )}
         </AnimatePresence>
 
         <Button className='font-medium' color='primary' type='submit' variant='shadow'>
-          <PiPlusBold />
+          <PiPlusBold size={16} />
           Создать
         </Button>
       </form>

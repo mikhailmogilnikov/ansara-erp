@@ -69,7 +69,6 @@ export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
         onChange={changeProject}
       />
       <Select
-        multiple
         aria-label='Все исполнители'
         className='w-full'
         classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}

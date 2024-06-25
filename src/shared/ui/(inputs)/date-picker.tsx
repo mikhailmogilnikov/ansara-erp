@@ -15,10 +15,11 @@ export const DatePickerInput = ({
   return (
     <DatePicker
       aria-label='datepicker'
-      className={`max-w-[165px] ${className}`}
+      className={`max-w-[175px] ${className}`}
       dateInputClassNames={{ inputWrapper: '!bg-default' }}
       granularity='day'
       isDisabled={isDisabled}
+      size='lg'
       value={parseAbsoluteToLocal(date ? date.toISOString() : new Date().toISOString())}
       onChange={(e) => {
         onChange(e.toDate());
