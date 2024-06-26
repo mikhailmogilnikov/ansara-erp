@@ -1,6 +1,7 @@
 import { Input } from '@nextui-org/input';
 import { useState } from 'react';
 import { DateValue } from '@internationalized/date';
+import { PiPlusCircleBold } from 'react-icons/pi';
 
 import { PhoneInput } from '@/src/shared/ui/(inputs)/phone-input';
 import { InputLabel } from '@/src/shared/ui/(inputs)/input-label';
@@ -8,6 +9,7 @@ import { CurrencyInput } from '@/src/shared/ui/(inputs)/currency-input';
 import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
 import { PasswordInput } from '@/src/shared/ui/(inputs)/password-input';
 import { DatePickerInput } from '@/src/shared/ui/(inputs)/date-picker';
+import { Button } from '@/src/shared/ui/(buttons)/button';
 
 export const AddProjectForm = () => {
   const [name, setName] = useState('');
@@ -18,7 +20,9 @@ export const AddProjectForm = () => {
   const [accounters, setAccounters] = useState(['1']);
   const [payed, setPayed] = useState(0);
   const [needPay, setNeedPay] = useState(0);
+  const [payDate, setPayDate] = useState<Date | DateValue>(new Date());
   const [startDate, setStartDate] = useState<Date | DateValue>(new Date());
+  const [endDate, setEndDate] = useState<Date | DateValue>(new Date());
 
   return (
     <form autoComplete='off' className='grid grid-cols-2 gap-4 gap-y-6 mt-2'>
@@ -42,11 +46,10 @@ export const AddProjectForm = () => {
       </InputLabel>
 
       <Input
-        autoComplete='off'
+        autoComplete='new-password'
         classNames={{ inputWrapper: '!bg-default' }}
         label='Логин ЛК'
         labelPlacement='outside'
-        name='login123'
         placeholder='Введите логин'
         size='lg'
         type='text'
@@ -55,7 +58,7 @@ export const AddProjectForm = () => {
       />
 
       <PasswordInput
-        autoComplete='off'
+        autoComplete='new-password'
         classNames={{ inputWrapper: '!bg-default' }}
         label='Пароль ЛК'
         labelPlacement='outside'
@@ -99,8 +102,21 @@ export const AddProjectForm = () => {
       </InputLabel>
 
       <InputLabel title='Дата первой оплаты'>
+        <DatePickerInput date={payDate as Date} size='lg' onChange={setPayDate} />
+      </InputLabel>
+
+      <InputLabel title='Дата запуска первой версии'>
         <DatePickerInput date={startDate as Date} size='lg' onChange={setStartDate} />
       </InputLabel>
+
+      <InputLabel title='Дата завершения окна правок'>
+        <DatePickerInput date={endDate as Date} size='lg' onChange={setEndDate} />
+      </InputLabel>
+
+      <Button className='col-span-2 mt-6' color='primary' type='submit'>
+        <PiPlusCircleBold size={20} />
+        Создать проект
+      </Button>
     </form>
   );
 };

@@ -31,7 +31,7 @@ export const TableTask = ({ item }: Props) => {
         onChange={(e) => setValue(e.target.value)}
       />
 
-      <Text opacity={0.5} className='flex-shrink-0'>Пн, 1 апреля</Text>
+      <Text className='flex-shrink-0' opacity={0.5}>Пн, 1 апреля</Text>
       <ButtonWithConfirm
         isIconOnly
         actionFn={() => {}}
