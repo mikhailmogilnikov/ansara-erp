@@ -1,25 +1,23 @@
-import { dateFiltersI } from '../../model/date-filters.type';
-
+import { DateDurationI } from '@/src/features/tasks-filter-all-tasks';
+import { getDateWithoutTime } from '@/src/shared/lib/utils/get-date-without-time';
 import { ITask } from '@/src/shared/model/task.type';
 
-export const filterTasksByDate = (filteredTasks: ITask[], dateFilters: dateFiltersI[]) => {
+export const filterTasksByDate = (filteredTasks: ITask[], dateFilters: DateDurationI) => {
   return filteredTasks.filter((task) => {
-    let isIn = false;
-
-    const taskTime = task.endTime || new Date().getTime();
-
-    dateFilters.forEach((duration) => {
-      if (!duration.startDate) {
-        if (taskTime < duration.endDate) {
-          isIn = true;
-        }
-      } else {
-        if (taskTime < duration.endDate && taskTime > duration.startDate) {
-          isIn = true;
-        }
-      }
-    });
-
-    return isIn;
+    if (!task.endTime) {
+      return (
+        getDateWithoutTime(new Date()).getTime() <=
+          getDateWithoutTime(new Date(dateFilters.end)).getTime() &&
+        getDateWithoutTime(new Date()).getTime() >=
+          getDateWithoutTime(new Date(dateFilters.start)).getTime()
+      );
+    } else {
+      return (
+        getDateWithoutTime(new Date(task.endTime)).getTime() <=
+          getDateWithoutTime(new Date(dateFilters.end)).getTime() &&
+        getDateWithoutTime(new Date(task.endTime)).getTime() >=
+          getDateWithoutTime(new Date(dateFilters.start)).getTime()
+      );
+    }
   });
 };

@@ -1,5 +1,4 @@
-import { ITask } from '../../../shared/model/task.type';
-
+import { ITask } from '@/src/shared/model/task.type';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
 import { formatTime, getDuration } from '@/src/shared/lib/utils/format-time';
