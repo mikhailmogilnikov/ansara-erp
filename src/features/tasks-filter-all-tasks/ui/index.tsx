@@ -87,7 +87,9 @@ export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
         onSelectionChange={changeDateDuration}
       />
 
-      <Button onPress={resetFilters}>Сбросить</Button>
+      <Button className='px-4 flex-shrink-0' onPress={resetFilters}>
+        Сбросить
+      </Button>
     </Flex>
   );
 };

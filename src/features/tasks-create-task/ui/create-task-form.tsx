@@ -7,7 +7,7 @@ import { Checkbox } from '@nextui-org/checkbox';
 import { AnimatePresence, m } from 'framer-motion';
 import { DateValue } from '@internationalized/date';
 
-import { ModalWrapper } from '@/src/shared/ui/modal';
+import { ModalWrapper, useModal } from '@/src/shared/ui/modal';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 import { IEmptyTask } from '@/src/shared/model/task.type';
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
@@ -46,6 +46,7 @@ export const CreateTaskForm = ({
   const [newTask, setNewTask] = useState(emptyTask);
   const [isFinished, setIsFinished] = useState(isFinishedTask);
   const { addNotification } = useNotification();
+  const { setModal } = useModal();
 
   useEffect(() => {
     if (id) {
@@ -71,11 +72,19 @@ export const CreateTaskForm = ({
 
   const handleCreate: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-
     if (newTask.body.length < 3) {
-    }
-
-    if (newTask.projectId && newTask.userId) {
+      addNotification({ text: 'Слишком короткая задача', type: 'danger' });
+    } else if (newTask.body.length > 100) {
+      addNotification({ text: 'Слишком длинная задача', type: 'danger' });
+    } else if (!newTask.projectId) {
+      addNotification({ text: 'Выберите проект', type: 'danger' });
+    } else if (!newTask.userId) {
+      addNotification({ text: 'Выберите исполнителя', type: 'danger' });
+    } else if (newTask.startTime && newTask.endTime && newTask.startTime >= newTask.endTime) {
+      addNotification({ text: 'Некорректное время', type: 'danger' });
+    } else {
+      setModal(null);
+      addNotification({ text: 'Задача создана', type: 'success' });
       handleCreateTask(newTask);
     }
   };
@@ -101,10 +110,14 @@ export const CreateTaskForm = ({
   };
 
   const changeProject = (value: any) => {
-    setNewTask((prev) => ({ ...prev, projectId: Number(value.currentKey) }));
+    const newValue = [...value][0] ? Number([...value][0]) : null;
+
+    setNewTask((prev) => ({ ...prev, projectId: newValue }));
   };
   const changeUser = (value: any) => {
-    setNewTask((prev) => ({ ...prev, userId: Number(value.currentKey) }));
+    const newValue = [...value][0] ? Number([...value][0]) : null;
+
+    setNewTask((prev) => ({ ...prev, userId: newValue }));
   };
 
   return (
@@ -152,11 +165,17 @@ export const CreateTaskForm = ({
         <AnimatePresence>
           {isFinished && (
             <m.div
-              animate={{ height: 120 }}
-              className='w-full flex flex-col gap-5 overflow-hidden'
-              exit={{ height: !isFinishedTask ? 0 : 120 }}
-              initial={{ height: !isFinishedTask ? 0 : 120 }}
+              animate={{ maxHeight: '100%' }}
+              className='w-full flex gap-5 overflow-hidden'
+              exit={{ maxHeight: !isFinishedTask ? 0 : '100%' }}
+              initial={{ maxHeight: !isFinishedTask ? 0 : '100%' }}
+              transition={{ ease: 'linear' }}
             >
+              <DatePickerInput
+                date={newTask.endTime ? new Date(newTask.endTime) : new Date()}
+                isDisabled={isFinishedTask}
+                onChange={changeDate}
+              />
               <Flex className='items-center'>
                 <TimeInputField time={newTask.startTime} onChange={changeStartTime} />
                 -
@@ -167,16 +186,11 @@ export const CreateTaskForm = ({
                     : ''}
                 </Text>
               </Flex>
-              <DatePickerInput
-                date={newTask.endTime ? new Date(newTask.endTime) : new Date()}
-                isDisabled={isFinishedTask}
-                onChange={changeDate}
-              />
             </m.div>
           )}
         </AnimatePresence>
 
-        <Button className='font-medium' color='primary' type='submit' variant='shadow'>
+        <Button className='font-medium mt-2' color='primary' type='submit' variant='shadow'>
           <PiPlusBold size={16} />
           Создать
         </Button>

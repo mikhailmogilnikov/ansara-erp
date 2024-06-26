@@ -25,7 +25,7 @@ export const EditProjectForm = ({ name, usersIds }: ITasksProject) => {
     }
   };
   const changeUser = (value: any) => {
-    setUsers(!!value.currentKey ? value.currentKey.split(',').map(Number) : []);
+    setUsers([...value]);
   };
 
   return (
@@ -46,7 +46,7 @@ export const EditProjectForm = ({ name, usersIds }: ITasksProject) => {
           variants={TasksUsersListConst.map((user) => ({ id: user.id, title: user.name }))}
           onSelectionChange={changeUser}
         />
-        <Button className='font-medium' color='primary' type='submit'>
+        <Button className='font-medium  mt-2' color='primary' type='submit' size='lg'>
           <PiPencilSimpleBold size={18} />
           Редактировать
         </Button>

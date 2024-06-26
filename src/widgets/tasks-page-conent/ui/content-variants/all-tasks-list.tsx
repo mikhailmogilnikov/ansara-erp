@@ -76,7 +76,7 @@ export const AllTasksList = () => {
         <div key={date.date}>
           <Flex className='w-full border-b-1 mt-8 pb-4 border-divider'>
             <Text size={20}>{formatDate(new Date(date.date))} -</Text>
-            <Text className='text-primary' size={20}>
+            <Text className='text-primary -ml-3' size={20}>
               {formatTime(date.time)}
             </Text>
           </Flex>

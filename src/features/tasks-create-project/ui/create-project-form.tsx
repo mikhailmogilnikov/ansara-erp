@@ -24,7 +24,7 @@ export const CreateProjectForm = () => {
     }
   };
   const changeUser = (value: any) => {
-    setUsers(!!value.currentKey ? value.currentKey.split(',').map(Number) : []);
+    setUsers([...value]);
   };
 
   return (
@@ -45,7 +45,7 @@ export const CreateProjectForm = () => {
           variants={TasksUsersListConst.map((user) => ({ id: user.id, title: user.name }))}
           onSelectionChange={changeUser}
         />
-        <Button className='font-medium' color='primary' type='submit'>
+        <Button className='font-medium  mt-2' color='primary' size='lg' type='submit'>
           <PiPlusBold />
           Создать
         </Button>

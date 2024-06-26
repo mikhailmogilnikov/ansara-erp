@@ -11,6 +11,7 @@ import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 import { ITask } from '@/src/shared/model/task.type';
+import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
 
 interface Props {
   handleCreateTask: (newTask: Omit<ITask, 'id'>) => void;
@@ -22,10 +23,18 @@ export const CreationBar = ({ showUsers }: Props) => {
   const router = useRouter();
   const [project, setProject] = useState('');
   const [user, setUser] = useState('');
+  const { addNotification } = useNotification();
 
   const handleAddTask = () => {
-    if (task.length > 3 && project) {
+    if (task.length < 3) {
+      addNotification({ text: 'Слишком короткая заметка', type: 'danger' });
+    } else if (showUsers && !user) {
+      addNotification({ text: 'Выберите исполнителя', type: 'danger' });
+    } else if (!showUsers && !project) {
+      addNotification({ text: 'Выберите проект', type: 'danger' });
+    } else {
       //request
+      addNotification({ text: 'Задача успешно создана', type: 'success' });
       router.refresh();
     }
   };
