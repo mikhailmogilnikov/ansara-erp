@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { TasksProject } from '@/src/entities/tasks-project';
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
-import { AutocompleteInput } from '@/src/shared/ui/(inputs)/autocompete';
+import { AutocompleteInput } from '@/src/shared/ui/(inputs)/autocomplete';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { TasksCreateProject } from '@/src/features/tasks-create-project';
 import { TasksEditProject } from '@/src/features/tasks-edit-project';
@@ -23,12 +23,12 @@ export const ProjectsList = () => {
       <Flex className='pb-4 border-b-1 border-divider items-center'>
         <AutocompleteInput
           placeholder='Поиск проектов'
-          value={projectId}
+          selectedKey={String(projectId)}
           variants={TasksProjectsListConst.map((project) => ({
             id: project.id,
             title: project.name,
           }))}
-          onChange={changeProject}
+          onSelectionChange={changeProject}
         />
         <TasksCreateProject />
       </Flex>

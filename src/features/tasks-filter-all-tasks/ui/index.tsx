@@ -1,4 +1,3 @@
-import { Select, SelectItem } from '@nextui-org/select';
 import { useEffect, useState } from 'react';
 import { Button } from '@nextui-org/button';
 
@@ -9,7 +8,8 @@ import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-c
 import { useFilters } from '@/src/shared/ui/local-options/model/filters-store';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
-import { AutocompleteInput } from '@/src/shared/ui/(inputs)/autocompete';
+import { AutocompleteInput } from '@/src/shared/ui/(inputs)/autocomplete';
+import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
 
 const emptyFilters = {
   projectId: null,
@@ -50,54 +50,46 @@ export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
   const changeProject = (value: Key | null) => {
     setAllTasksFilters((prev) => prev && { ...prev, projectId: Number(value) });
   };
-  const changeUsers = (value: string[]) => {
-    setAllTasksFilters((prev) => prev && { ...prev, users: value[0] ? value : [] });
+  const changeUsers = (value: any) => {
+    setAllTasksFilters((prev) => prev && { ...prev, users: [...value] });
   };
-  const changeDateDuration = (value: string[]) => {
-    setAllTasksFilters((prev) => prev && { ...prev, dateDuration: value[0] ? value : [] });
+  const changeDateDuration = (value: any) => {
+    setAllTasksFilters((prev) => prev && { ...prev, dateDuration: [...value] });
   };
 
   return (
     <Flex className='w-full'>
       <AutocompleteInput
         placeholder='Все проекты'
-        value={allTasksFilters ? allTasksFilters.projectId : ''}
+        selectedKey={String(allTasksFilters?.projectId)}
         variants={TasksProjectsListConst.map((project) => ({
           id: project.id,
           title: project.name,
         }))}
-        onChange={changeProject}
+        onSelectionChange={changeProject}
       />
-      <Select
-        aria-label='Все исполнители'
-        className='w-full'
-        classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
-        placeholder='Все исполнители'
-        selectedKeys={allTasksFilters?.users}
-        selectionMode='multiple'
-        onChange={(e) => changeUsers(e.target.value.split(','))}
-      >
-        {TasksUsersListConst.map((user) => (
-          <SelectItem key={user.id}>{user.name}</SelectItem>
-        ))}
-      </Select>
 
-      <Select
+      <SelectInput
         multiple
-        aria-label='Дата'
-        className='w-full'
-        classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
-        placeholder='Дата'
-        selectedKeys={allTasksFilters?.dateDuration}
-        selectionMode='multiple'
-        onChange={(e) => changeDateDuration(e.target.value.split(','))}
-      >
-        {lastMonthsPairs.map((date) => (
-          <SelectItem key={date.date}>{date.date}</SelectItem>
-        ))}
-      </Select>
+        placeholder='Выберите исполнителей'
+        selectedVariants={allTasksFilters?.users}
+        size='md'
+        variants={TasksUsersListConst.map((user) => ({ id: user.id, title: user.name }))}
+        onSelectionChange={changeUsers}
+      />
 
-      <Button onPress={resetFilters}>Сбросить</Button>
+      <SelectInput
+        multiple
+        placeholder='Выберите даты'
+        selectedVariants={allTasksFilters?.dateDuration}
+        size='md'
+        variants={lastMonthsPairs.map((date) => ({ id: date.date, title: date.date }))}
+        onSelectionChange={changeDateDuration}
+      />
+
+      <Button className='px-4 flex-shrink-0' onPress={resetFilters}>
+        Сбросить
+      </Button>
     </Flex>
   );
 };

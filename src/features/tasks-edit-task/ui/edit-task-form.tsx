@@ -7,7 +7,7 @@ import { Button } from '@nextui-org/button';
 import { PiFloppyDiskBold, PiTrashBold } from 'react-icons/pi';
 import { DateValue } from '@internationalized/date';
 
-import { ModalWrapper } from '@/src/shared/ui/modal';
+import { ModalWrapper, useModal } from '@/src/shared/ui/modal';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { formatTime } from '@/src/shared/lib/utils/format-time';
@@ -19,6 +19,7 @@ import { ITask } from '@/src/shared/model/task.type';
 import { TimeInputField } from '@/src/shared/ui/(inputs)/time-input';
 import { DatePickerInput } from '@/src/shared/ui/(inputs)/date-picker';
 import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
+import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
 
 interface Props {
   task: ITask;
@@ -26,9 +27,23 @@ interface Props {
 
 export const EditTaskForm = ({ task }: Props) => {
   const [newTask, setNewTask] = useImmer(task);
+  const { setModal } = useModal();
+  const { addNotification } = useNotification();
 
   const handleEdit = (e: FormEvent) => {
     e.preventDefault();
+    if (newTask.body.length < 3) {
+      addNotification({ text: 'Слишком короткая задача', type: 'danger' });
+    } else if (newTask.body.length > 100) {
+      addNotification({ text: 'Слишком длинная задача', type: 'danger' });
+    } else if (!newTask.userId) {
+      addNotification({ text: 'Выберите исполнителя', type: 'danger' });
+    } else if (newTask.startTime && newTask.endTime && newTask.startTime >= newTask.endTime) {
+      addNotification({ text: 'Некорректное время', type: 'danger' });
+    } else {
+      setModal(null);
+      addNotification({ text: 'Задача сохранена', type: 'success' });
+    }
   };
   const handleDelete = () => {};
 
@@ -51,9 +66,9 @@ export const EditTaskForm = ({ task }: Props) => {
   };
 
   const changeUser = (value: any) => {
-    setNewTask((state) => {
-      state.userId = Number(value.currentKey);
-    });
+    const newValue = [...value][0] ? Number([...value][0]) : null;
+
+    setNewTask((prev) => ({ ...prev, userId: newValue }));
   };
 
   const changeDate = (date: Date | DateValue) => {
@@ -91,24 +106,27 @@ export const EditTaskForm = ({ task }: Props) => {
           }))}
           onSelectionChange={changeUser}
         />
-        <Flex className='items-center'>
-          <TimeInputField time={newTask.startTime} onChange={changeStartTime} />
-          -
-          <TimeInputField time={newTask.endTime} onChange={changeEndTime} />
-          <Text className='text-primary font-normal' size={16}>
-            {newTask.endTime && newTask.startTime && newTask.endTime > newTask.startTime
-              ? formatTime(newTask.endTime - newTask.startTime)
-              : ''}
-          </Text>
+        <Flex>
+          {task.endTime && (
+            <DatePickerInput
+              date={newTask.endTime ? new Date(newTask.endTime) : null}
+              size='lg'
+              onChange={changeDate}
+            />
+          )}
+          <Flex className='items-center'>
+            <TimeInputField time={newTask.startTime} onChange={changeStartTime} />
+            -
+            <TimeInputField time={newTask.endTime} onChange={changeEndTime} />
+            <Text className='text-primary font-normal' size={16}>
+              {newTask.endTime && newTask.startTime && newTask.endTime > newTask.startTime
+                ? formatTime(newTask.endTime - newTask.startTime)
+                : ''}
+            </Text>
+          </Flex>
         </Flex>
-        {task.endTime && (
-          <DatePickerInput
-            date={newTask.endTime ? new Date(newTask.endTime) : null}
-            size='lg'
-            onChange={changeDate}
-          />
-        )}
-        <Flex className='items-center w-full' gap={3}>
+
+        <Flex className='items-center w-full  mt-2' gap={3}>
           <Button className='font-medium w-full' color='success' size='lg' type='submit'>
             <PiFloppyDiskBold size={18} />
             Сохранить

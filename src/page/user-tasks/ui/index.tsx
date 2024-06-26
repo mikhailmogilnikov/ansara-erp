@@ -5,6 +5,7 @@ import { TasksList } from '@/src/widgets/tasks-list';
 import { BackButton } from '@/src/features/back-button';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 import { TasksCreateTask } from '@/src/features/tasks-create-task';
+import { TasksLoadMore } from '@/src/features/tasks-load-more';
 
 export const UserTasksPage = ({ id }: { id: number }) => {
   const user = TasksUsersListConst.find((user) => user.id == id);
@@ -21,6 +22,9 @@ export const UserTasksPage = ({ id }: { id: number }) => {
         </Flex>
         <TasksCreateTask />
         <TasksList tasks={tasks} />
+        <div className='mt-20'>
+          <TasksLoadMore />
+        </div>
       </div>
     </Flex>
   );

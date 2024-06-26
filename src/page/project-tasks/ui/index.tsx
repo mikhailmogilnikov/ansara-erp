@@ -1,5 +1,6 @@
 import { BackButton } from '@/src/features/back-button';
 import { TasksCreateTask } from '@/src/features/tasks-create-task';
+import { TasksLoadMore } from '@/src/features/tasks-load-more';
 import { TasksListConst } from '@/src/shared/config/tasks-list-const';
 import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-const';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
@@ -25,6 +26,9 @@ export const ProjectTasksPage = ({ id }: Props) => {
         </Flex>
         <TasksCreateTask showUsers />
         <TasksList showUsers tasks={tasks} />
+        <div className='mt-20'>
+          <TasksLoadMore />
+        </div>
       </div>
     </Flex>
   );
