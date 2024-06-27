@@ -9,10 +9,13 @@ import { InputLabel } from '@/src/shared/ui/(inputs)/input-label';
 import { Button } from '@/src/shared/ui/(buttons)/button';
 import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm';
 import { Text } from '@/src/shared/ui/(layout)/text';
+import { FileLoaderList } from '@/src/shared/ui/file-loader-list';
 
 export const Phase = () => {
   const [isEditable, setIsEditable] = useState(false);
+  const [name, setName] = useState('');
   const [date, setDate] = useState<Date | DateValue>(new Date());
+  const [fileList, setFileList] = useState<File[]>([]);
 
   return isEditable ? (
     <Flex col className='border-b-1 border-divider pb-8' gap={6}>
@@ -21,6 +24,8 @@ export const Phase = () => {
           classNames={{ inputWrapper: '!bg-default' }}
           placeholder='Введите название этапа'
           size='lg'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </InputLabel>
 
@@ -30,17 +35,20 @@ export const Phase = () => {
 
       <InputLabel title='Описание'>
         <Textarea
-          classNames={{ inputWrapper: '!bg-default' }}
+          classNames={{ inputWrapper: '!bg-default min-h-24' }}
           placeholder='Введите описание этапа'
           size='lg'
         />
       </InputLabel>
 
       <InputLabel title='Фотографии'>
-        <Button>
-          <PiPlusCircleBold size={20} />
-          Добавить
-        </Button>
+        <FileLoaderList
+          multiple
+          accept='image/*'
+          buttonTitle='Добавить'
+          fileList={fileList}
+          setFileList={setFileList}
+        />
       </InputLabel>
 
       <InputLabel title='Ссылки'>
@@ -88,7 +96,7 @@ export const Phase = () => {
     </Flex>
   ) : (
     <Flex col className='border-b-1 border-divider pb-8'>
-      <Text size={20}>Название этапа</Text>
+      <Text size={20}>{name}</Text>
       <Button onPress={() => setIsEditable(true)}>
         <PiPencilSimpleBold size={20} />
         Редактировать

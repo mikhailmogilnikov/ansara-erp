@@ -1,9 +1,8 @@
-import { PiPlusBold } from 'react-icons/pi';
+import { PiPlusCircleBold } from 'react-icons/pi';
 import { ChangeEventHandler, useRef } from 'react';
 
 import { IFileLoader } from '../model/file-loader-type';
-
-import { Button } from '@/src/shared/ui/(buttons)/button';
+import { Button } from '../../(buttons)/button';
 
 export const FileLoader = ({
   setFileList,
@@ -34,7 +33,7 @@ export const FileLoader = ({
     <>
       <Button
         className='font-medium w-full'
-        icon={<PiPlusBold size={18} />}
+        icon={<PiPlusCircleBold size={20} />}
         size='lg'
         onPress={handleOpenInput}
       >

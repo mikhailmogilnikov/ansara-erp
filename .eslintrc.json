@@ -27,6 +27,7 @@
     }
   },
   "rules": {
+    "react/display-name": "off",
     "@conarti/feature-sliced/layers-slices": "error",
     "@conarti/feature-sliced/absolute-relative": "warn",
     "@conarti/feature-sliced/public-api": "error",
@@ -84,8 +85,8 @@
     ],
     "padding-line-between-statements": [
       "warn",
-      {"blankLine": "always", "prev": "*", "next": "return"},
-      {"blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
       {
         "blankLine": "any",
         "prev": ["const", "let", "var"],
