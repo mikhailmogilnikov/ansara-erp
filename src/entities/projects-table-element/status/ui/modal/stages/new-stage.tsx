@@ -3,7 +3,7 @@ import { PiPlusCircleBold } from 'react-icons/pi';
 import { FormEventHandler, useState } from 'react';
 import { Updater } from 'use-immer';
 
-import { TStagesStates } from '../../model/stage.type';
+import { TStagesStates } from '../../../model/stage.type';
 
 import { Button } from '@/src/shared/ui/(buttons)/button';
 import { Flex } from '@/src/shared/ui/(layout)/flex';

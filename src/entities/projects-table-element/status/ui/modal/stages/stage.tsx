@@ -4,7 +4,7 @@ import { clsx } from 'clsx';
 import { PiXBold } from 'react-icons/pi';
 import { Updater } from 'use-immer';
 
-import { TStagesStates } from '../../model/stage.type';
+import { TStagesStates, TStagesStatuses } from '../../../model/stage.type';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
@@ -12,7 +12,7 @@ import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm
 
 type Props = {
   value: string;
-  status?: 'wait' | 'complete' | 'pending';
+  status?: TStagesStatuses;
   setStagesState?: Updater<TStagesStates>;
 } & Pick<InputHTMLAttributes<HTMLInputElement>, 'onClick'>;
 
@@ -20,12 +20,16 @@ export const ProgressThumb = ({ value, status = 'wait', onClick, setStagesState 
   const states = {
     wait: 0,
     complete: 100,
-    pending: 50,
+    pending25: 25,
+    pending50: 50,
+    pending75: 75,
   };
+
+  const isPending = status === 'pending25' || status === 'pending50' || status === 'pending75';
 
   const textClassnames = clsx('transition-colors text-center', {
     'text-success': status === 'complete',
-    'text-primary': status === 'pending',
+    'text-primary': isPending,
     'text-foreground': status === 'wait',
   });
 
@@ -43,8 +47,8 @@ export const ProgressThumb = ({ value, status = 'wait', onClick, setStagesState 
     <Flex center col gap={3}>
       <Progress
         aria-label={value}
-        className={status === 'pending' ? 'animate-pulse' : ''}
-        color={status === 'pending' ? 'primary' : 'success'}
+        className={isPending ? 'animate-pulse' : ''}
+        color={isPending ? 'primary' : 'success'}
         size='lg'
         value={states[status]}
         onClick={onClick}
