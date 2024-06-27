@@ -1,2 +1,2 @@
 export { FilterAllTasks } from './ui/';
-export type { AllTasksFiltersI } from './model/all-tasks-filters.type';
+export type { AllTasksFiltersI, DateDurationI } from './model/all-tasks-filters.type';

@@ -10,13 +10,7 @@ type Props = Omit<
   'children'
 >;
 
-export const AutocompleteInput = ({
-  className,
-  variants,
-  onChange,
-  placeholder,
-  ...restProps
-}: Props) => {
+export const AutocompleteInput = ({ className, variants, placeholder, ...restProps }: Props) => {
   return (
     <Autocomplete
       aria-label='autocomplete'

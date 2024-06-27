@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 
-import { dateFiltersI } from '../../model/date-filters.type';
-import { formatDateFilters } from '../../lib/utils/format-date-filters';
-import { filterTasksByDate } from '../../lib/utils/filter-tasks-by-date';
 import { countSumTime } from '../../lib/utils/count-sum-time';
 import { getTasksWithDate } from '../../lib/utils/get-tasks-with-date';
 import { ItasksWithDate } from '../../model/tasks-with-date.type';
+import { filterTasksByDate } from '../../lib/utils/filter-tasks-by-date';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { AllTasksFiltersI, FilterAllTasks } from '@/src/features/tasks-filter-all-tasks';
+import {
+  AllTasksFiltersI,
+  DateDurationI,
+  FilterAllTasks,
+} from '@/src/features/tasks-filter-all-tasks';
 import { EStorageKeys } from '@/src/shared/ui/local-options/model/options.enum';
 import { useFilters } from '@/src/shared/ui/local-options/model/filters-store';
 import { TasksListConst } from '@/src/shared/config/tasks-list-const';
@@ -18,11 +20,12 @@ import { formatTime } from '@/src/shared/lib/utils/format-time';
 import { formatDate } from '@/src/shared/lib/utils/format-date';
 import { EditTask } from '@/src/features/tasks-edit-task';
 import { ITask } from '@/src/shared/model/task.type';
+import { ButtonSendFiles } from '@/src/shared/ui/(buttons)/button-send-files';
 
 export const AllTasksList = () => {
   const [projectFilters, setProjectFilters] = useState<number>();
   const [usersFilters, setUsersFilters] = useState<number[]>();
-  const [dateFilters, setDateFilters] = useState<dateFiltersI[]>();
+  const [dateFilters, setDateFilters] = useState<DateDurationI | null>();
   const [sumTime, setSumTime] = useState(0);
   const [filteredTasks, setFilteredTasks] = useState<ITask[]>(TasksListConst);
   const [tasksWithDate, setTasksWithDate] = useState<ItasksWithDate[]>([]);
@@ -35,7 +38,7 @@ export const AllTasksList = () => {
       if (currentFilters) {
         setProjectFilters(Number(currentFilters.projectId));
         setUsersFilters(currentFilters.users.map((userId) => Number(userId)));
-        setDateFilters(formatDateFilters(currentFilters));
+        setDateFilters(currentFilters.dateDuration);
       }
     }
   }, [filters]);
@@ -49,7 +52,7 @@ export const AllTasksList = () => {
     if (usersFilters?.length) {
       filteredTasks = filteredTasks.filter((task) => usersFilters.includes(task.userId));
     }
-    if (dateFilters?.length) {
+    if (dateFilters) {
       filteredTasks = filterTasksByDate(filteredTasks, dateFilters);
     }
     setFilteredTasks(filteredTasks);
@@ -59,7 +62,7 @@ export const AllTasksList = () => {
 
   return (
     <Flex col className='w-full' gap={2}>
-      <Flex className='items-center justify-between'>
+      <Flex className='items-center justify-between min-h-12'>
         <div className='w-full max-w-[70%]'>
           <FilterAllTasks storageKey={EStorageKeys.ALL_TASKS_STATE} />
         </div>
@@ -72,6 +75,7 @@ export const AllTasksList = () => {
           </div>
         )}
       </Flex>
+      <ButtonSendFiles actionFn={() => {}} />
       {tasksWithDate.map((date) => (
         <div key={date.date}>
           <Flex className='w-full border-b-1 mt-8 pb-4 border-divider'>
