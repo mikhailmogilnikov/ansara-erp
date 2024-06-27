@@ -20,6 +20,7 @@ import { formatTime } from '@/src/shared/lib/utils/format-time';
 import { formatDate } from '@/src/shared/lib/utils/format-date';
 import { EditTask } from '@/src/features/tasks-edit-task';
 import { ITask } from '@/src/shared/model/task.type';
+import { ButtonSendFiles } from '@/src/shared/ui/(buttons)/button-send-files';
 
 export const AllTasksList = () => {
   const [projectFilters, setProjectFilters] = useState<number>();
@@ -74,6 +75,7 @@ export const AllTasksList = () => {
           </div>
         )}
       </Flex>
+      <ButtonSendFiles actionFn={() => {}} />
       {tasksWithDate.map((date) => (
         <div key={date.date}>
           <Flex className='w-full border-b-1 mt-8 pb-4 border-divider'>

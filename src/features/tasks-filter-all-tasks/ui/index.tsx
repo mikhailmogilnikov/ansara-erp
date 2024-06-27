@@ -29,13 +29,19 @@ export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
 
   useEffect(() => {
     if (filters) {
-      const initial = filters[storageKey] ? JSON.parse(filters[storageKey]) : emptyFilters;
+      const initial: AllTasksFiltersI = filters[storageKey]
+        ? JSON.parse(filters[storageKey])
+        : emptyFilters;
 
       if (!allTasksFilters) {
-        setAllTasksFilters(initial);
+        if (initial.dateDuration?.end != emptyFilters.dateDuration.end) {
+          setAllTasksFilters(emptyFilters);
+        } else {
+          setAllTasksFilters(initial);
+        }
       }
     }
-  }, [filters]);
+  }, []);
 
   useEffect(() => {
     if (allTasksFilters) {

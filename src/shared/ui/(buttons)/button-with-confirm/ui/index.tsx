@@ -2,9 +2,9 @@ import { Button, ButtonProps } from '@nextui-org/button';
 import { Modal, ModalContent, useDisclosure } from '@nextui-org/modal';
 import { ReactNode } from 'react';
 
-import { ModalVariants } from '../config/animation-variants';
-
 import { ConfirmModalContent } from './modal';
+
+import { ModalVariants } from '@/src/shared/config/animation-variants';
 
 type Props = {
   icon?: ReactNode;
