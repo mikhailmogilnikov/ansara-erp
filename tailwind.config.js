@@ -62,7 +62,7 @@ module.exports = {
               foreground: '#ffffff',
             },
             secondary: {
-              DEFAULT: 'black',
+              DEFAULT: '#11181C',
               foreground: '#ffffff',
             },
             danger: {

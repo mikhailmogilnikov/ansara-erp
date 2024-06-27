@@ -1,8 +1,8 @@
 import { Reorder } from 'framer-motion';
 import { useImmer } from 'use-immer';
 
-import { TestStage } from '../../config/test-stages';
-import { TStagesStates } from '../../model/stage.type';
+import { TestStage } from '../../../config/test-stages';
+import { TStagesStates } from '../../../model/stage.type';
 
 import { ProgressThumb } from './stage';
 import { NewStageForm } from './new-stage';
@@ -18,17 +18,31 @@ export const EditableStages = () => {
     if (item === activeStage) {
       setStagesState((draft) => {
         if (status === 'complete') {
-          draft.status = 'pending';
+          draft.status = 'pending25';
         } else {
+          switch (status) {
+            case 'pending25': {
+              draft.status = 'pending50';
+
+              return;
+            }
+            case 'pending50': {
+              draft.status = 'pending75';
+
+              return;
+            }
+          }
           draft.status = 'complete';
         }
       });
 
       return;
     }
+
     setStagesState((draft) => {
       draft.activeStage = item;
-      draft.status = 'pending';
+
+      draft.status = 'pending25';
     });
   };
 
