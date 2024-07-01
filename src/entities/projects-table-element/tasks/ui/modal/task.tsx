@@ -35,7 +35,7 @@ export const TableTask = ({ item }: Props) => {
       <ButtonWithConfirm
         isIconOnly
         actionFn={() => {}}
-        className='text-danger ml-1'
+        className='text-danger ml-2'
         confirmColor='danger'
         description={`Вы действительно хотите удалить задачу "${name}"? Это действие необратимо.`}
         icon={<PiTrashBold size={18} />}

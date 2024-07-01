@@ -1,7 +1,8 @@
 export interface IFileLoader {
   fileList: File[];
   setFileList: (fileList: File[]) => void;
-  buttonTitle: string;
+  isSingle?: boolean;
+  buttonTitle?: string;
   multiple?: boolean;
   accept?: string;
 }

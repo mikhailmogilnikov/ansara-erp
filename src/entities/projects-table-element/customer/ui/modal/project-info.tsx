@@ -67,7 +67,7 @@ export const NotesProjectInfo = () => {
       />
 
       <NotesActions />
-      <NotesControls />
+     
     </Flex>
   );
 };

@@ -2,12 +2,11 @@ import { PiTrashBold } from 'react-icons/pi';
 import { TbArchive } from 'react-icons/tb';
 
 import { Button } from '@/src/shared/ui/(buttons)/button';
-import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm';
 
 export const NotesControls = () => {
   return (
-    <Flex className='mt-6'>
+    <>
       <Button fullWidth>
         <TbArchive size={22} />
         Перенести в архив
@@ -22,6 +21,6 @@ export const NotesControls = () => {
       >
         Удалить проект
       </ButtonWithConfirm>
-    </Flex>
+    </>
   );
 };

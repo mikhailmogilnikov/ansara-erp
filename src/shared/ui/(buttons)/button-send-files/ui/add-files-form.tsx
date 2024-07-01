@@ -5,7 +5,7 @@ import { Tab, Tabs } from '@nextui-org/tabs';
 
 import { Text } from '../../../(layout)/text';
 import { Flex } from '../../../(layout)/flex';
-import { FileLoaderList } from '../../../file-loader-list';
+import { FileLoaderList } from '../../../file-loader';
 import { useModalStore } from '../../../modal/lib/store/modal-store';
 import { ModalWrapper } from '../../../modal';
 

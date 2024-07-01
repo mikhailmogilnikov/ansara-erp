@@ -2,6 +2,7 @@ import { PiUserCircleBold } from 'react-icons/pi';
 import { AnimatePresence } from 'framer-motion';
 import { useImmer } from 'use-immer';
 import { Divider } from '@nextui-org/divider';
+import { useState } from 'react';
 
 import { InfoBadge } from '../../../customer/ui/info-badge';
 import { TProjectModulesVisibility } from '../../model/modules-visibility.type';
@@ -16,6 +17,7 @@ import { ProjectsStatusPhases } from './phases';
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { Article } from '@/src/shared/ui/(layout)/article';
 import { Fader } from '@/src/shared/ui/(layout)/fader/ui';
+import { FileLoaderList } from '@/src/shared/ui/file-loader';
 
 export const ProjectTasksStatusModal = () => {
   const [modulesVisibility, setModulesVisibility] = useImmer<TProjectModulesVisibility>({
@@ -25,6 +27,8 @@ export const ProjectTasksStatusModal = () => {
     timegates: false,
     phases: true,
   });
+
+  const [rateImg, setRateImg] = useState<File[]>([]);
 
   return (
     <ModalWrapper title='Редактор личного кабинета'>
@@ -36,6 +40,16 @@ export const ProjectTasksStatusModal = () => {
         <ProjectStatusMainControls
           modulesVisibility={modulesVisibility}
           setModulesVisibility={setModulesVisibility}
+        />
+      </Article>
+
+      <Article title='Тарифы'>
+        <FileLoaderList
+          isSingle
+          accept='image/*'
+          buttonTitle='Прикрепить изображение тарифов'
+          fileList={rateImg}
+          setFileList={setRateImg}
         />
       </Article>
 

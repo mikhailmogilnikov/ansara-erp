@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import { Flex } from '../../(layout)/flex';
 import { Text } from '../../(layout)/text';
+import { Button } from '../../(buttons)/button';
+import { useLightbox } from '../../lightbox/model/lightbox-store';
 
 import { DeleteButton } from './delete-button';
 
@@ -17,12 +19,17 @@ interface Props {
 export const FileCard = ({ file, index, setFileList, fileList }: Props) => {
   const [isHover, setIsHover] = useState<boolean>(false);
   const [imgUrl] = useState(URL.createObjectURL(file));
+  const { setGallery } = useLightbox();
 
   const handleDeleteFile = () => {
     const updatedFileList = [...fileList];
 
     updatedFileList.splice(index, 1);
     setFileList(updatedFileList);
+  };
+
+  const handleOpen = () => {
+    setGallery(imgUrl, { width: 100, height: 100 });
   };
 
   return (
@@ -47,6 +54,9 @@ export const FileCard = ({ file, index, setFileList, fileList }: Props) => {
           )}
           <DeleteButton handleDeleteFile={handleDeleteFile} isHover={isHover} />
         </div>
+
+        <Button onPress={handleOpen}>ds</Button>
+
         <Text
           className='flex-shrink break-words line-clamp-2 -mt-3 text-center max-w-full px-1'
           opacity={0.5}
