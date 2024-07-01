@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { PiFileBold } from 'react-icons/pi';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Flex } from '../../(layout)/flex';
 import { Text } from '../../(layout)/text';
@@ -17,6 +17,8 @@ interface Props {
 }
 
 export const FileCard = ({ file, index, setFileList, fileList }: Props) => {
+  const imgSize = useRef<{ width: number; height: number } | null>(null);
+
   const [isHover, setIsHover] = useState<boolean>(false);
   const [imgUrl] = useState(URL.createObjectURL(file));
   const { setGallery } = useLightbox();
@@ -29,7 +31,9 @@ export const FileCard = ({ file, index, setFileList, fileList }: Props) => {
   };
 
   const handleOpen = () => {
-    setGallery(imgUrl, { width: 100, height: 100 });
+    if (imgSize.current) {
+      setGallery(imgUrl, imgSize.current);
+    }
   };
 
   return (
@@ -48,6 +52,9 @@ export const FileCard = ({ file, index, setFileList, fileList }: Props) => {
               alt={file.name}
               className='snap-start flex-shrink-0 object-cover h-full z-10'
               src={imgUrl}
+              onLoad={(e: any) =>
+                (imgSize.current = { width: e.target.naturalWidth, height: e.target.naturalHeight })
+              }
             />
           ) : (
             <PiFileBold className='opacity-50' size={30} />
