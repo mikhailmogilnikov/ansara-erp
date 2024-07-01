@@ -2,6 +2,7 @@ import './globals.css';
 
 import { Metadata, Viewport } from 'next';
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 
 import { Providers } from './providers';
 
@@ -29,6 +30,10 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
+const DynamicLightbox = dynamic(() =>
+  import('@/src/shared/ui/lightbox').then((mod) => mod.Lightbox),
+);
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html suppressHydrationWarning lang='ru'>
@@ -40,11 +45,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className='relative flex flex-col h-dvh'>
             <Navigation />
+
             <main className='w-full h-full bg-background dark:bg-default-50 overflow-y-scroll'>
               {children}
             </main>
+
             <Notifications />
             <Modal />
+            <DynamicLightbox />
           </div>
         </Providers>
       </body>

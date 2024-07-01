@@ -5,7 +5,10 @@ import { AnimatePresence, LayoutGroup, m } from 'framer-motion';
 import { Input } from '@nextui-org/input';
 
 import { Text } from '../../../(layout)/text';
-import { FileLoaderList } from '../../../file-loader-list';
+
+import { Flex } from '../../../(layout)/flex';
+import { FileLoaderList } from '../../../file-loader';
+
 import { useModalStore } from '../../../modal/lib/store/modal-store';
 import { ModalWrapper } from '../../../modal';
 import { useNotification } from '../../../notification/model/notification-store';

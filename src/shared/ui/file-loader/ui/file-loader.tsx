@@ -7,6 +7,7 @@ import { Button } from '../../(buttons)/button';
 export const FileLoader = ({
   setFileList,
   fileList,
+  isSingle,
   buttonTitle,
   multiple,
   accept,
@@ -34,10 +35,11 @@ export const FileLoader = ({
       <Button
         className='font-medium w-full'
         icon={<PiPlusCircleBold size={20} />}
+        isDisabled={isSingle && fileList.length > 0}
         size='lg'
         onPress={handleOpenInput}
       >
-        {buttonTitle}
+        {buttonTitle || 'Добавить'}
       </Button>
 
       <input

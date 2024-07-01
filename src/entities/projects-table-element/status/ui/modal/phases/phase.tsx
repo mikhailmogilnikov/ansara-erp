@@ -9,7 +9,7 @@ import { InputLabel } from '@/src/shared/ui/(inputs)/input-label';
 import { Button } from '@/src/shared/ui/(buttons)/button';
 import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm';
 import { Text } from '@/src/shared/ui/(layout)/text';
-import { FileLoaderList } from '@/src/shared/ui/file-loader-list';
+import { FileLoaderList } from '@/src/shared/ui/file-loader';
 
 export const Phase = () => {
   const [isEditable, setIsEditable] = useState(false);
@@ -96,7 +96,14 @@ export const Phase = () => {
     </Flex>
   ) : (
     <Flex col className='border-b-1 border-divider pb-8'>
-      <Text size={20}>{name}</Text>
+      {name ? (
+        <Text size={20}>{name}</Text>
+      ) : (
+        <Text opacity={0.5} size={20}>
+          Введите название этапа
+        </Text>
+      )}
+
       <Button onPress={() => setIsEditable(true)}>
         <PiPencilSimpleBold size={20} />
         Редактировать

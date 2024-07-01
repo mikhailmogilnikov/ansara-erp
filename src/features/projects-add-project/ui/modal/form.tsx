@@ -113,10 +113,7 @@ export const AddProjectForm = () => {
         <DatePickerInput date={endDate as Date} size='lg' onChange={setEndDate} />
       </InputLabel>
 
-      <Button className='col-span-2 mt-6' color='primary' type='submit'>
-        <PiPlusCircleBold size={20} />
-        Создать проект
-      </Button>
+    
     </form>
   );
 };
