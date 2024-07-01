@@ -23,7 +23,7 @@ export const EmployeesTable = ({ employees, setEmployees }: Props) => {
       <Reorder.Group axis='y' className='w-full' values={employees} onReorder={setEmployees}>
         {employees.map((employee) => (
           <Reorder.Item key={employee.order} className='w-full' value={employee}>
-            <Employee {...employee} />
+            <Employee {...employee} employees={employees} setEmployees={setEmployees} />
           </Reorder.Item>
         ))}
       </Reorder.Group>

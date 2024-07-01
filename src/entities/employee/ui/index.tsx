@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PiTrashBold } from 'react-icons/pi';
 
 import { IEmployee } from '../model/employee.type';
@@ -6,10 +6,22 @@ import { IEmployee } from '../model/employee.type';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm';
 
-export const Employee = ({ name, login, password }: IEmployee) => {
+interface Props extends IEmployee {
+  setEmployees: React.Dispatch<React.SetStateAction<IEmployee[]>>;
+  employees: IEmployee[];
+}
+
+export const Employee = ({ name, login, password, order, setEmployees, employees }: Props) => {
   const [newName, setNewName] = useState(name);
   const [newLogin, setNewLogin] = useState(login);
   const [newPassword, setNewPassword] = useState(password);
+
+  useEffect(() => {
+    const newEmployees = employees;
+
+    newEmployees[order] = { name: newName, login: newLogin, password: newPassword, order };
+    setEmployees(newEmployees);
+  }, [newName, newLogin, newPassword]);
 
   return (
     <div className='flex items-center w-full py-4 border-b-1 border-divider relative'>
