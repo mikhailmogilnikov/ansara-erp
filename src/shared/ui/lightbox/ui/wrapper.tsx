@@ -70,7 +70,7 @@ export const LightboxWrapper = ({ children }: Props) => {
         className='max-w-[92vw] max-h-[92vh] rounded-2xl bg-default z-20 cursor-grab shadow-base relative  overflow-clip border-1 border-divider'
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.7}
-        exit={{ scale: 0.3, opacity: 0 }}
+        exit={{ scale: 0.3, opacity: 0, transition: { type: 'spring', damping: 24, stiffness: 300 } }}
         initial={{ scale: 0.3, opacity: 0 }}
         style={{
           aspectRatio: imageAspectStr,

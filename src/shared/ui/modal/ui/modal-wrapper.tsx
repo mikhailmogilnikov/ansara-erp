@@ -29,7 +29,7 @@ export const ModalWrapper = ({ title, children, actionButtons }: Props) => {
       >
         <PiXBold className='w-1/2 h-1/2' />
       </Button>
-      <ScrollShadow className='flex flex-col gap-8 scrollbar-hide -my-6 py-6 min-h-[calc(100dvh-172px)]'>
+      <ScrollShadow className='flex flex-col gap-8 scrollbar-hide -my-6 py-6 min-h-[calc(100dvh-164px)]'>
         {children}
       </ScrollShadow>
       <Flex>{actionButtons}</Flex>

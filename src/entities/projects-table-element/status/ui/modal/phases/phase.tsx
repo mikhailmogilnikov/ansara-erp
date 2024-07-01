@@ -1,7 +1,9 @@
 import { Input, Textarea } from '@nextui-org/input';
 import { useState } from 'react';
 import { DateValue } from '@internationalized/date';
-import { PiCaretUpBold, PiPencilSimpleBold, PiPlusCircleBold, PiTrashBold } from 'react-icons/pi';
+import { PiCaretUpBold, PiPencilSimpleBold, PiTrashBold } from 'react-icons/pi';
+
+import { ProjectsStatusPhasesLinks } from './links';
 
 import { DatePickerInput } from '@/src/shared/ui/(inputs)/date-picker';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
@@ -51,31 +53,7 @@ export const Phase = () => {
         />
       </InputLabel>
 
-      <InputLabel title='Ссылки'>
-        <Flex col>
-          <Flex>
-            <Input classNames={{ inputWrapper: '!bg-default' }} placeholder='URL-адрес' size='lg' />
-            <Input
-              classNames={{ inputWrapper: '!bg-default' }}
-              placeholder='Название ссылки'
-              size='lg'
-            />
-            <ButtonWithConfirm
-              isIconOnly
-              actionFn={() => {}}
-              className='text-danger'
-              confirmColor='danger'
-              confirmTitle='Удалить'
-              description='Вы действительно хотите удалить эту ссылку? Это действие нельзя отменить.'
-              icon={<PiTrashBold size={20} />}
-            />
-          </Flex>
-          <Button>
-            <PiPlusCircleBold size={20} />
-            Добавить
-          </Button>
-        </Flex>
-      </InputLabel>
+      <ProjectsStatusPhasesLinks />
 
       <Flex>
         <Button onPress={() => setIsEditable(false)}>
