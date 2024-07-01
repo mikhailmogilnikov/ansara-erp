@@ -17,8 +17,15 @@ export const EditEmployeesForm = () => {
   const [tasksEmployees, setTasksEmployees] = useState<IEmployee[]>(EmployeesData);
 
   return (
-    <ModalWrapper title='Сотрудники'>
-      <Flex col gap={20}>
+    <ModalWrapper
+      actionButtons={
+        <Button fullWidth className='-mt-10' color='success' variant={'shadow'}>
+          Сохранить изменения
+        </Button>
+      }
+      title='Сотрудники'
+    >
+      <Flex col className='mb-10' gap={20}>
         <TableContainer employees={accEmployees} setEmployees={setAccEmployees} title='Аккаунтинг'>
           <EmployeesTable employees={accEmployees} setEmployees={setAccEmployees} />
         </TableContainer>
@@ -29,9 +36,6 @@ export const EditEmployeesForm = () => {
         >
           <EmployeesTable employees={tasksEmployees} setEmployees={setTasksEmployees} />
         </TableContainer>
-        <Button className='-mt-10' color='success'>
-          Сохранить изменения
-        </Button>
       </Flex>
     </ModalWrapper>
   );

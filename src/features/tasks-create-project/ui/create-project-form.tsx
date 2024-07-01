@@ -1,20 +1,24 @@
-import { Button } from '@nextui-org/button';
-import { PiPlusBold } from 'react-icons/pi';
 import { Input } from '@nextui-org/input';
 import { FormEventHandler, useState } from 'react';
+import { PiPlusBold } from 'react-icons/pi';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
 import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
+import { Button } from '@/src/shared/ui/(buttons)/button';
 
 export const CreateProjectForm = () => {
   const [taskName, setTaskName] = useState('');
   const [users, setUsers] = useState<number[]>([]);
   const { addNotification } = useNotification();
 
-  const handleCreate: FormEventHandler<HTMLFormElement> = (e) => {
+  const formEvent: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    handleCreate();
+  };
+
+  const handleCreate = () => {
     if (taskName.length < 3) {
       addNotification({ text: 'Слишком короткое название проекта', type: 'danger' });
     } else if (!users.length) {
@@ -28,11 +32,19 @@ export const CreateProjectForm = () => {
   };
 
   return (
-    <ModalWrapper title='Создать проект'>
-      <form action='submit' className='flex flex-col gap-5' onSubmit={handleCreate}>
+    <ModalWrapper
+      actionButtons={
+        <Button fullWidth color='primary' type='submit' variant='shadow' onPress={handleCreate}>
+          <PiPlusBold />
+          Создать
+        </Button>
+      }
+      title='Создать проект'
+    >
+      <form action='submit' className='flex flex-col gap-5' onSubmit={formEvent}>
         <Input
           classNames={{ inputWrapper: '!bg-default' }}
-          placeholder='Введите задачу'
+          placeholder='Название проекта'
           size='lg'
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
@@ -45,10 +57,6 @@ export const CreateProjectForm = () => {
           variants={TasksUsersListConst.map((user) => ({ id: user.id, title: user.name }))}
           onSelectionChange={changeUser}
         />
-        <Button className='font-medium  mt-2' color='primary' size='lg' type='submit'>
-          <PiPlusBold />
-          Создать
-        </Button>
       </form>
     </ModalWrapper>
   );

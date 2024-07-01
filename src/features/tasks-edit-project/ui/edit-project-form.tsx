@@ -1,36 +1,50 @@
 import { FormEventHandler, useState } from 'react';
 import { Input } from '@nextui-org/input';
-import { Button } from '@nextui-org/button';
 import { PiPencilSimpleBold } from 'react-icons/pi';
 
-import { ModalWrapper } from '@/src/shared/ui/modal';
+import { ModalWrapper, useModal } from '@/src/shared/ui/modal';
 import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
 import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 import { ITasksProject } from '@/src/entities/tasks-project';
+import { Button } from '@/src/shared/ui/(buttons)/button';
 
 export const EditProjectForm = ({ name, usersIds }: ITasksProject) => {
+  const { setModal } = useModal();
   const [taskName, setTaskName] = useState(name);
   const [users, setUsers] = useState<number[]>(usersIds);
   const { addNotification } = useNotification();
 
-  const handleCreate: FormEventHandler<HTMLFormElement> = (e) => {
+  const formEvent: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    handleEdit();
+  };
+  const changeUser = (value: any) => {
+    setUsers([...value]);
+  };
+
+  const handleEdit = () => {
     if (taskName.length < 3) {
       addNotification({ text: 'Слишком короткое название проекта', type: 'danger' });
     } else if (!users.length) {
       addNotification({ text: 'Добавьте хотя бы одного исполнителя', type: 'danger' });
     } else {
       addNotification({ text: 'Проект успешно отредактирован', type: 'success' });
+      setModal(null);
     }
-  };
-  const changeUser = (value: any) => {
-    setUsers([...value]);
   };
 
   return (
-    <ModalWrapper title='Создать проект'>
-      <form action='submit' className='flex flex-col gap-5' onSubmit={handleCreate}>
+    <ModalWrapper
+      actionButtons={
+        <Button fullWidth color='primary' type='submit' variant='shadow' onPress={handleEdit}>
+          <PiPencilSimpleBold size={18} />
+          Редактировать
+        </Button>
+      }
+      title='Редактировать проект'
+    >
+      <form action='submit' className='flex flex-col gap-5' onSubmit={formEvent}>
         <Input
           classNames={{ inputWrapper: '!bg-default' }}
           placeholder='Введите задачу'
@@ -46,10 +60,6 @@ export const EditProjectForm = ({ name, usersIds }: ITasksProject) => {
           variants={TasksUsersListConst.map((user) => ({ id: user.id, title: user.name }))}
           onSelectionChange={changeUser}
         />
-        <Button className='font-medium  mt-2' color='primary' type='submit' size='lg'>
-          <PiPencilSimpleBold size={18} />
-          Редактировать
-        </Button>
       </form>
     </ModalWrapper>
   );

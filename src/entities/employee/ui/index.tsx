@@ -5,6 +5,7 @@ import { IEmployee } from '../model/employee.type';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm';
+import { PasswordInput } from '@/src/shared/ui/(inputs)/password-input';
 
 interface Props extends IEmployee {
   setEmployees: React.Dispatch<React.SetStateAction<IEmployee[]>>;
@@ -17,17 +18,21 @@ export const Employee = ({ name, login, password, order, setEmployees, employees
   const [newPassword, setNewPassword] = useState(password);
 
   useEffect(() => {
-    const newEmployees = employees;
+    const newEmployees = [...employees];
 
     newEmployees[order] = { name: newName, login: newLogin, password: newPassword, order };
     setEmployees(newEmployees);
   }, [newName, newLogin, newPassword]);
 
+  const handleDelete = () => {
+    setEmployees((prev) => prev.filter((employee) => employee.order !== order));
+  };
+
   return (
     <div className='flex items-center w-full py-4 border-b-1 border-divider relative'>
       <Flex className='grow'>
         <input
-          className='bg-inherit focus: outline-none'
+          className='bg-transparent outline-none'
           placeholder='Имя'
           type='text'
           value={newName}
@@ -36,7 +41,7 @@ export const Employee = ({ name, login, password, order, setEmployees, employees
       </Flex>
       <Flex className='grow'>
         <input
-          className='bg-inherit focus: outline-none'
+          className='bg-transparent outline-none'
           placeholder='Логин'
           type='text'
           value={newLogin}
@@ -44,17 +49,18 @@ export const Employee = ({ name, login, password, order, setEmployees, employees
         />
       </Flex>
       <Flex className='grow'>
-        <input
-          className='bg-inherit focus: outline-none'
+        <PasswordInput
+          className=' outline-none mr-10'
+          classNames={{ inputWrapper: 'bg-transparent shadow-none' }}
           placeholder='Пароль'
-          type='text'
+          size='sm'
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />
       </Flex>
       <ButtonWithConfirm
         isIconOnly
-        actionFn={() => {}}
+        actionFn={handleDelete}
         className='text-danger absolute right-0'
         confirmColor='danger'
         confirmTitle='Удалить'

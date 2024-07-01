@@ -1,9 +1,8 @@
 'use client';
 
-import { ChangeEventHandler, FormEvent } from 'react';
+import { ChangeEventHandler, FormEventHandler } from 'react';
 import { Input } from '@nextui-org/input';
 import { useImmer } from 'use-immer';
-import { Button } from '@nextui-org/button';
 import { PiFloppyDiskBold, PiTrashBold } from 'react-icons/pi';
 import { DateValue } from '@internationalized/date';
 
@@ -20,6 +19,7 @@ import { TimeInputField } from '@/src/shared/ui/(inputs)/time-input';
 import { DatePickerInput } from '@/src/shared/ui/(inputs)/date-picker';
 import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
 import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
+import { Button } from '@/src/shared/ui/(buttons)/button';
 
 interface Props {
   task: ITask;
@@ -30,8 +30,12 @@ export const EditTaskForm = ({ task }: Props) => {
   const { setModal } = useModal();
   const { addNotification } = useNotification();
 
-  const handleEdit = (e: FormEvent) => {
+  const formEvent: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    handleEdit();
+  };
+
+  const handleEdit = () => {
     if (newTask.body.length < 3) {
       addNotification({ text: 'Слишком короткая задача', type: 'danger' });
     } else if (newTask.body.length > 100) {
@@ -87,8 +91,28 @@ export const EditTaskForm = ({ task }: Props) => {
   };
 
   return (
-    <ModalWrapper title='Редактировать задачу'>
-      <form action='submit' className='flex flex-col gap-5' onSubmit={handleEdit}>
+    <ModalWrapper
+      actionButtons={
+        <Flex className='items-center w-full' gap={3}>
+          <Button fullWidth color='primary' type='submit' variant='shadow' onPress={handleEdit}>
+            <PiFloppyDiskBold size={18} />
+            Сохранить
+          </Button>
+          <ButtonWithConfirm
+            actionFn={handleDelete}
+            className='text-danger  w-full'
+            confirmColor='danger'
+            confirmTitle='Удалить'
+            description='Вы точно хотите удалить задачу? Это действие необратимо.'
+            icon={<PiTrashBold size={18} />}
+          >
+            Удалить
+          </ButtonWithConfirm>
+        </Flex>
+      }
+      title='Редактировать задачу'
+    >
+      <form action='submit' className='flex flex-col gap-5' onSubmit={formEvent}>
         <Input
           classNames={{ inputWrapper: '!bg-default' }}
           placeholder='Введите задачу'
@@ -124,23 +148,6 @@ export const EditTaskForm = ({ task }: Props) => {
                 : ''}
             </Text>
           </Flex>
-        </Flex>
-
-        <Flex className='items-center w-full  mt-2' gap={3}>
-          <Button className='font-medium w-full' color='success' size='lg' type='submit'>
-            <PiFloppyDiskBold size={18} />
-            Сохранить
-          </Button>
-          <ButtonWithConfirm
-            actionFn={handleDelete}
-            className='text-danger  w-full'
-            confirmColor='danger'
-            confirmTitle='Удалить'
-            description='Вы точно хотите удалить задачу? Это действие необратимо.'
-            icon={<PiTrashBold size={18} />}
-          >
-            Удалить
-          </ButtonWithConfirm>
         </Flex>
       </form>
     </ModalWrapper>

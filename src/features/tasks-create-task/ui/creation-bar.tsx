@@ -3,8 +3,6 @@
 import { Input } from '@nextui-org/input';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Select, SelectItem } from '@nextui-org/select';
-import { Button } from '@nextui-org/button';
 import { PiPlusBold } from 'react-icons/pi';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
@@ -12,6 +10,9 @@ import { TasksProjectsListConst } from '@/src/shared/config/tasks-project-list-c
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
 import { ITask } from '@/src/shared/model/task.type';
 import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
+import { AutocompleteInput } from '@/src/shared/ui/(inputs)/autocomplete';
+import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
+import { Button } from '@/src/shared/ui/(buttons)/button';
 
 interface Props {
   handleCreateTask: (newTask: Omit<ITask, 'id'>) => void;
@@ -21,8 +22,8 @@ interface Props {
 export const CreationBar = ({ showUsers }: Props) => {
   const [task, setTask] = useState('');
   const router = useRouter();
-  const [project, setProject] = useState('');
-  const [user, setUser] = useState('');
+  const [project, setProject] = useState<Key | null>(null);
+  const [user, setUser] = useState<number | null>(null);
   const { addNotification } = useNotification();
 
   const handleAddTask = () => {
@@ -39,6 +40,12 @@ export const CreationBar = ({ showUsers }: Props) => {
     }
   };
 
+  const changeUser = (value: any) => {
+    const newValue = [...value][0] ? Number([...value][0]) : null;
+
+    setUser(newValue);
+  };
+
   return (
     <Flex col className='w-full pb-5 border-b-1 border-divider'>
       <Input
@@ -46,6 +53,7 @@ export const CreationBar = ({ showUsers }: Props) => {
           inputWrapper: `!bg-default`,
         }}
         placeholder='Введите задачу'
+        size='lg'
         value={task}
         onChange={(e) => {
           setTask(e.target.value);
@@ -53,37 +61,29 @@ export const CreationBar = ({ showUsers }: Props) => {
       />
       <Flex className='items-center justify-between'>
         {showUsers ? (
-          <Select
-            aria-label='Выберете исполнителя'
-            className='w-full'
-            classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
+          <SelectInput
+            className='max-w-full'
             placeholder='Выберите исполнителя'
-            onChange={(e) => setUser(e.target.value)}
-          >
-            {TasksUsersListConst.map((user) => (
-              <SelectItem key={user.id}>{user.name}</SelectItem>
-            ))}
-          </Select>
+            selectedVariants={null}
+            variants={TasksUsersListConst.map((project) => ({
+              id: project.id,
+              title: project.name,
+            }))}
+            onSelectionChange={changeUser}
+          />
         ) : (
-          <Select
-            aria-label='Выберете проект'
-            className='w-full'
-            classNames={{ innerWrapper: 'py-0', trigger: '!bg-default' }}
+          <AutocompleteInput
+            className='max-w-full'
             placeholder='Выберите проект'
-            onChange={(e) => setProject(e.target.value)}
-          >
-            {TasksProjectsListConst.map((project) => (
-              <SelectItem key={project.id}>{project.name}</SelectItem>
-            ))}
-          </Select>
+            size='lg'
+            variants={TasksProjectsListConst.map((project) => ({
+              id: project.id,
+              title: project.name,
+            }))}
+            onSelectionChange={(value) => setProject(value)}
+          />
         )}
-        <Button
-          className='flex-shrink-0'
-          color='primary'
-          size='md'
-          variant='shadow'
-          onPress={handleAddTask}
-        >
+        <Button className='flex-shrink-0' color='primary' variant='shadow' onPress={handleAddTask}>
           <PiPlusBold size={14} />
           Создать задачу
         </Button>
