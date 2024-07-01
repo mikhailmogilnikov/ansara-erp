@@ -89,7 +89,8 @@ export const FilterAllTasks = ({ storageKey }: { storageKey: string }) => {
 
       <SelectInput
         multiple
-        classNames={{ mainWrapper: 'w-72', trigger: '!bg-default' }}
+        className='w-full'
+        classNames={{ mainWrapper: 'w-full', trigger: '!bg-default' }}
         placeholder='Выберите исполнителей'
         selectedVariants={allTasksFilters?.users}
         size='md'

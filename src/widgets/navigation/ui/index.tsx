@@ -1,5 +1,6 @@
 import { NavPoints } from '../config/nav-points';
 
+import { ProfileFeatures } from '@/src/features/profile-features';
 import { Profile } from '@/src/entities/profile';
 import { AnsaraLogo } from '@/src/shared/assets/ansara-logo';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
@@ -14,7 +15,7 @@ export const Navigation = () => {
         </div>
       </Flex>
       <RouteTabs items={NavPoints} />
-      <Profile />
+      <Profile profileFeatures={ProfileFeatures} />
     </nav>
   );
 };
