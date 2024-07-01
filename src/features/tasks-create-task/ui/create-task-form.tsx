@@ -1,11 +1,10 @@
-import { Button } from '@nextui-org/button';
-import { PiPlusBold } from 'react-icons/pi';
 import { Input } from '@nextui-org/input';
 import { FormEventHandler, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Checkbox } from '@nextui-org/checkbox';
 import { AnimatePresence, m } from 'framer-motion';
 import { DateValue } from '@internationalized/date';
+import { PiPlusBold } from 'react-icons/pi';
 
 import { ModalWrapper, useModal } from '@/src/shared/ui/modal';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
@@ -20,6 +19,8 @@ import { Text } from '@/src/shared/ui/(layout)/text';
 import { formatTime } from '@/src/shared/lib/utils/format-time';
 import { DatePickerInput } from '@/src/shared/ui/(inputs)/date-picker';
 import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
+import { AutocompleteInput } from '@/src/shared/ui/(inputs)/autocomplete';
+import { Button } from '@/src/shared/ui/(buttons)/button';
 
 interface Props {
   handleCreateTask: (newTask: IEmptyTask) => void;
@@ -62,16 +63,25 @@ export const CreateTaskForm = ({
     if (!isFinished) {
       setNewTask((prev) => ({ ...prev, startTime: null, endTime: null }));
     } else {
+      const current = new Date();
+
+      current.setSeconds(0);
+      current.setMilliseconds(0);
+
       setNewTask((prev) => ({
         ...prev,
-        startTime: new Date().getTime(),
-        endTime: new Date().getTime(),
+        startTime: current.getTime(),
+        endTime: current.getTime(),
       }));
     }
   }, [isFinished]);
 
-  const handleCreate: FormEventHandler<HTMLFormElement> = (e) => {
+  const formEvent: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    handleCreate();
+  };
+
+  const handleCreate = () => {
     if (newTask.body.length < 3) {
       addNotification({ text: 'Слишком короткая задача', type: 'danger' });
     } else if (newTask.body.length > 100) {
@@ -110,9 +120,7 @@ export const CreateTaskForm = ({
   };
 
   const changeProject = (value: any) => {
-    const newValue = [...value][0] ? Number([...value][0]) : null;
-
-    setNewTask((prev) => ({ ...prev, projectId: newValue }));
+    setNewTask((prev) => ({ ...prev, projectId: value }));
   };
   const changeUser = (value: any) => {
     const newValue = [...value][0] ? Number([...value][0]) : null;
@@ -121,8 +129,16 @@ export const CreateTaskForm = ({
   };
 
   return (
-    <ModalWrapper title='Создать задачу'>
-      <form action='submit' className='flex flex-col gap-5' onSubmit={handleCreate}>
+    <ModalWrapper
+      actionButtons={
+        <Button fullWidth color='primary' type='submit' variant='shadow' onPress={handleCreate}>
+          <PiPlusBold size={16} />
+          Создать
+        </Button>
+      }
+      title='Создать задачу'
+    >
+      <form action='submit' className='flex flex-col gap-5' onSubmit={formEvent}>
         <Input
           classNames={{ inputWrapper: '!bg-default' }}
           placeholder='Введите задачу'
@@ -131,10 +147,10 @@ export const CreateTaskForm = ({
           onChange={(e) => setNewTask((prev) => ({ ...prev, body: e.target.value }))}
         />
         {showProjects && (
-          <SelectInput
+          <AutocompleteInput
             className='max-w-full'
             placeholder='Выберите проект'
-            selectedVariants={null}
+            size='lg'
             variants={TasksProjectsListConst.map((project) => ({
               id: project.id,
               title: project.name,
@@ -189,11 +205,6 @@ export const CreateTaskForm = ({
             </m.div>
           )}
         </AnimatePresence>
-
-        <Button className='font-medium mt-2' color='primary' type='submit' variant='shadow'>
-          <PiPlusBold size={16} />
-          Создать
-        </Button>
       </form>
     </ModalWrapper>
   );
