@@ -9,7 +9,11 @@ import { ProfileModal } from './profile-modal';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 
-export const Profile = () => {
+interface Props {
+  profileFeatures: (closeModal: VoidFunction) => React.ReactNode;
+}
+
+export const Profile = ({ profileFeatures }: Props) => {
   const [isOpened, setIsOpened] = useState(false);
 
   const closeModal = () => {
@@ -25,7 +29,7 @@ export const Profile = () => {
       />
 
       <AnimatePresence>
-        {isOpened && <ProfileModal onClose={closeModal} />}
+        {isOpened && <ProfileModal profileFeatures={profileFeatures} onClose={closeModal} />}
       </AnimatePresence>
     </Flex>
   );
