@@ -1,14 +1,11 @@
-import { Button } from '@nextui-org/button';
-import { PiArrowCircleRightBold } from 'react-icons/pi';
 import { FormEventHandler, useState } from 'react';
 import { AnimatePresence, LayoutGroup, m } from 'framer-motion';
 import { Input } from '@nextui-org/input';
+import { Button } from '@nextui-org/button';
+import { PiArrowCircleRightBold } from 'react-icons/pi';
 
 import { Text } from '../../../(layout)/text';
-
-import { Flex } from '../../../(layout)/flex';
 import { FileLoaderList } from '../../../file-loader';
-
 import { useModalStore } from '../../../modal/lib/store/modal-store';
 import { ModalWrapper } from '../../../modal';
 import { useNotification } from '../../../notification/model/notification-store';
@@ -49,7 +46,21 @@ export const SendFilesModalContent = ({ actionFn }: Props) => {
   };
 
   return (
-    <ModalWrapper title='Отправить материалы'>
+    <ModalWrapper
+      actionButtons={
+        <Button
+          className='w-full font-medium'
+          color='primary'
+          size='lg'
+          startContent={<PiArrowCircleRightBold size={18} />}
+          type='submit'
+          variant='shadow'
+        >
+          Отправить
+        </Button>
+      }
+      title='Отправить материалы'
+    >
       <Text className='py-1' opacity={0.5} weight={500}>
         Если вы хотите отправить много файлов большого объёма, загрузите их на Яндекс Диск или
         Google Диск, а затем вставьте ссылку на облако.
@@ -92,18 +103,6 @@ export const SendFilesModalContent = ({ actionFn }: Props) => {
               </m.div>
             )}
           </AnimatePresence>
-          <m.div layout>
-            <Button
-              className='w-full font-medium mt-8'
-              color='primary'
-              size='lg'
-              startContent={<PiArrowCircleRightBold size={18} />}
-              type='submit'
-              variant='shadow'
-            >
-              Отправить
-            </Button>
-          </m.div>
         </LayoutGroup>
       </form>
     </ModalWrapper>
