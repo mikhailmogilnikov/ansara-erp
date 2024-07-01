@@ -1,3 +1,7 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+
 import { NavPoints } from '../config/nav-points';
 
 import { ProfileFeatures } from '@/src/features/profile-features';
@@ -7,6 +11,12 @@ import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { RouteTabs } from '@/src/shared/ui/route-tabs';
 
 export const Navigation = () => {
+  const pathname = usePathname();
+
+  if (pathname === '/login') {
+    return null;
+  }
+
   return (
     <nav className='w-full h-16 flex-shrink-0 flex justify-between items-center gap-4 relative px-6 bg-black'>
       <Flex col className='!w-min'>
