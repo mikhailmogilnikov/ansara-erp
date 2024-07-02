@@ -28,7 +28,7 @@ export const CreationBar = ({ showUsers }: Props) => {
 
   const handleAddTask = () => {
     if (task.length < 3) {
-      addNotification({ text: 'Слишком короткая заметка', type: 'danger' });
+      addNotification({ text: 'Слишком короткая задача', type: 'danger' });
     } else if (showUsers && !user) {
       addNotification({ text: 'Выберите исполнителя', type: 'danger' });
     } else if (!showUsers && !project) {

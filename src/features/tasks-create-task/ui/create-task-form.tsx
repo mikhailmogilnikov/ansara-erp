@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { Checkbox } from '@nextui-org/checkbox';
 import { AnimatePresence, m } from 'framer-motion';
 import { DateValue } from '@internationalized/date';
-import { PiPlusBold } from 'react-icons/pi';
+import { PiFloppyDiskBold } from 'react-icons/pi';
 
 import { ModalWrapper, useModal } from '@/src/shared/ui/modal';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
@@ -131,9 +131,9 @@ export const CreateTaskForm = ({
   return (
     <ModalWrapper
       actionButtons={
-        <Button fullWidth color='primary' type='submit' variant='shadow' onPress={handleCreate}>
-          <PiPlusBold size={16} />
-          Создать
+        <Button fullWidth color='success' type='submit' variant='shadow' onPress={handleCreate}>
+          <PiFloppyDiskBold size={18} />
+          Сохранить
         </Button>
       }
       title='Создать задачу'

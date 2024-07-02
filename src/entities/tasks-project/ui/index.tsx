@@ -22,12 +22,12 @@ export const TasksProject = ({ id, name, editButton, usersIds }: Props) => {
 
   return (
     <Flex className=' border-b-1 border-divider py-4'>
-      <button className='w-full items-center flex gap-10' onClick={handleNavigate}>
+      <button className='w-full items-center justify-between flex gap-10' onClick={handleNavigate}>
         <Text className='font-semibold ' size={20}>
           {name}
         </Text>
         <Text className='font-medium' opacity={0.5}>
-          Количество пользователей {usersIds.length}
+          Количество исполнителей - {usersIds.length}
         </Text>
       </button>
       {editButton}
