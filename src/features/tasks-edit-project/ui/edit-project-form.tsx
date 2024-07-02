@@ -1,6 +1,6 @@
 import { FormEventHandler, useState } from 'react';
 import { Input } from '@nextui-org/input';
-import { PiPencilSimpleBold } from 'react-icons/pi';
+import { PiFloppyDiskBold } from 'react-icons/pi';
 
 import { ModalWrapper, useModal } from '@/src/shared/ui/modal';
 import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
@@ -37,9 +37,9 @@ export const EditProjectForm = ({ name, usersIds }: ITasksProject) => {
   return (
     <ModalWrapper
       actionButtons={
-        <Button fullWidth color='primary' type='submit' variant='shadow' onPress={handleEdit}>
-          <PiPencilSimpleBold size={18} />
-          Редактировать
+        <Button fullWidth color='success' type='submit' variant='shadow' onPress={handleEdit}>
+          <PiFloppyDiskBold size={18} />
+          Сохранить
         </Button>
       }
       title='Редактировать проект'

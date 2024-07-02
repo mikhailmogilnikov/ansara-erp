@@ -94,10 +94,6 @@ export const EditTaskForm = ({ task }: Props) => {
     <ModalWrapper
       actionButtons={
         <Flex className='items-center w-full' gap={3}>
-          <Button fullWidth color='primary' type='submit' variant='shadow' onPress={handleEdit}>
-            <PiFloppyDiskBold size={18} />
-            Сохранить
-          </Button>
           <ButtonWithConfirm
             actionFn={handleDelete}
             className='text-danger  w-full'
@@ -108,6 +104,10 @@ export const EditTaskForm = ({ task }: Props) => {
           >
             Удалить
           </ButtonWithConfirm>
+          <Button fullWidth color='success' type='submit' variant='shadow' onPress={handleEdit}>
+            <PiFloppyDiskBold size={18} />
+            Сохранить
+          </Button>
         </Flex>
       }
       title='Редактировать задачу'
