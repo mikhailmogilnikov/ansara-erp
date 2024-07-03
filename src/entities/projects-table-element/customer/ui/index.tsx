@@ -1,15 +1,23 @@
-import { Progress } from '@nextui-org/progress';
+import { MouseEventHandler, useState } from 'react';
+
+import { TStages } from '../model/stages.type';
 
 import { ProjectNotesModal } from './modal';
+import { ProgeressBar } from './progress-bar';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { useModal } from '@/src/shared/ui/modal';
 
-export const Customer = () => {
+type Props = {
+  stagesList: TStages[];
+};
+
+export const Customer = ({ stagesList }: Props) => {
+  const [stages, setStages] = useState(stagesList);
   const { setModal } = useModal();
 
-  const handleClick = () => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
     setModal(<ProjectNotesModal />);
   };
 
@@ -20,17 +28,15 @@ export const Customer = () => {
           Семён Рубин Авто
         </Text>
         <Flex gap={2}>
-          <Progress
-            aria-label='Прогресс стадии'
-            classNames={{ base: 'w-10' }}
-            color='success'
-            value={100}
-          />
-          <Progress
-            aria-label='Прогресс стадии'
-            classNames={{ base: 'w-10', indicator: 'rounded-sm' }}
-            value={50}
-          />
+          {stages.map((stage, index) => (
+            <ProgeressBar
+              key={stage.id}
+              index={index}
+              setStages={setStages}
+              stage={stage}
+              stages={stages}
+            />
+          ))}
         </Flex>
       </Flex>
     </button>
