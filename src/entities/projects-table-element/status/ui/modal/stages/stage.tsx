@@ -2,9 +2,9 @@ import { Progress } from '@nextui-org/progress';
 import { InputHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
 import { PiXBold } from 'react-icons/pi';
-import { Updater } from 'use-immer';
 
-import { TStagesStates, TStagesStatuses } from '../../../model/stage.type';
+import { TStagesStatuses } from '../../../model/stage.type';
+import { useProjectStatus } from '../../../model/status-store';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { Text } from '@/src/shared/ui/(layout)/text';
@@ -13,17 +13,19 @@ import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm
 type Props = {
   value: string;
   status?: TStagesStatuses;
-  setStagesState?: Updater<TStagesStates>;
 } & Pick<InputHTMLAttributes<HTMLInputElement>, 'onClick'>;
 
-export const ProgressThumb = ({ value, status = 'wait', onClick, setStagesState }: Props) => {
+export const ProgressThumb = ({ value, status = 'wait', onClick }: Props) => {
+  const { data, setStages: setStage } = useProjectStatus();
+  const { stages } = data.stages;
+
   const states = {
     wait: 0,
     complete: 100,
     pending25: 25,
     pending50: 50,
     pending75: 75,
-  };
+  } as const;
 
   const isPending = status === 'pending25' || status === 'pending50' || status === 'pending75';
 
@@ -34,13 +36,12 @@ export const ProgressThumb = ({ value, status = 'wait', onClick, setStagesState 
   });
 
   const handleDelete = () => {
-    if (setStagesState) {
-      setStagesState((draft) => {
-        const index = draft.stages.indexOf(value);
+    const index = stages.indexOf(value);
+    const copyStages = [...stages];
 
-        draft.stages.splice(index, 1);
-      });
-    }
+    copyStages.splice(index, 1);
+
+    setStage('stages', copyStages);
   };
 
   return (

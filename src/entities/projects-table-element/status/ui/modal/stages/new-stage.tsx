@@ -1,27 +1,24 @@
 import { Input } from '@nextui-org/input';
 import { PiPlusCircleBold } from 'react-icons/pi';
 import { FormEventHandler, useState } from 'react';
-import { Updater } from 'use-immer';
 
-import { TStagesStates } from '../../../model/stage.type';
+import { useProjectStatus } from '../../../model/status-store';
 
 import { Button } from '@/src/shared/ui/(buttons)/button';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 import { useNotification } from '@/src/shared/ui/notification/model/notification-store';
 
-type Props = {
-  stagesState: TStagesStates;
-  setStagesState: Updater<TStagesStates>;
-};
+export const NewStageForm = () => {
+  const { data, setStages: setStage } = useProjectStatus();
+  const { stages } = data.stages;
 
-export const NewStageForm = ({ stagesState, setStagesState }: Props) => {
   const [newStage, setNewStage] = useState('');
   const { addNotification } = useNotification();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    if (stagesState.stages.length > 4) {
+    if (stages.length > 4) {
       addNotification({ text: 'Слишком много стадий', type: 'danger' });
 
       return;
@@ -39,9 +36,9 @@ export const NewStageForm = ({ stagesState, setStagesState }: Props) => {
       return;
     }
 
-    setStagesState((draft) => {
-      draft.stages.push(newStage);
-    });
+    const newStagesList = [...stages, newStage];
+
+    setStage('stages', newStagesList);
 
     setNewStage('');
   };

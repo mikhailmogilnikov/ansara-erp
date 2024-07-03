@@ -1,11 +1,10 @@
 import { PiUserCircleBold } from 'react-icons/pi';
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
-import { useImmer } from 'use-immer';
 import { Divider } from '@nextui-org/divider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { InfoBadge } from '../../../customer/ui/info-badge';
-import { TProjectModulesVisibility } from '../../model/modules-visibility.type';
+import { useProjectStatus } from '../../model/status-store';
 
 import { EditableStages } from './stages/editable-stages';
 import { TableStatus } from './status';
@@ -21,15 +20,16 @@ import { Fader } from '@/src/shared/ui/(layout)/fader';
 import { FileLoaderList } from '@/src/shared/ui/file-loader';
 
 export const ProjectTasksStatusModal = () => {
-  const [modulesVisibility, setModulesVisibility] = useImmer<TProjectModulesVisibility>({
-    stages: false,
-    status: false,
-    editgates: false,
-    timegates: false,
-    phases: true,
-  });
+  const { data, reset } = useProjectStatus();
 
   const [rateImg, setRateImg] = useState<File[]>([]);
+  const { modulesVisibility } = data;
+
+  useEffect(() => {
+    return () => {
+      reset();
+    };
+  }, []);
 
   return (
     <ModalWrapper actionButtons={<ProjectsStatusSaveChanges />} title='Редактор личного кабинета'>
@@ -38,10 +38,7 @@ export const ProjectTasksStatusModal = () => {
       </InfoBadge>
 
       <Article className='mb-2' title='Видимость модулей'>
-        <ProjectStatusMainControls
-          modulesVisibility={modulesVisibility}
-          setModulesVisibility={setModulesVisibility}
-        />
+        <ProjectStatusMainControls />
       </Article>
 
       <Article title='Тарифы'>

@@ -1,23 +1,17 @@
-import { Updater } from 'use-immer';
-
-import { TProjectModulesVisibility } from '../../model/modules-visibility.type';
 import { EProjectModulesVisibility } from '../../model/modules.enum';
 import { ProjectModulesNames } from '../../config/modules-names';
+import { useProjectStatus } from '../../model/status-store';
 
 import { Button } from '@/src/shared/ui/(buttons)/button';
 
-type Props = {
-  modulesVisibility: TProjectModulesVisibility;
-  setModulesVisibility: Updater<TProjectModulesVisibility>;
-};
+export const ProjectStatusMainControls = () => {
+  const { data, setVisibility } = useProjectStatus();
+  const { modulesVisibility } = data;
 
-export const ProjectStatusMainControls = ({ modulesVisibility, setModulesVisibility }: Props) => {
   const handlePress = (e: any) => {
     const { id } = e.target;
 
-    setModulesVisibility((draft) => {
-      draft[id as 'stages'] = !draft[id as 'stages'];
-    });
+    setVisibility(id);
   };
 
   return (
