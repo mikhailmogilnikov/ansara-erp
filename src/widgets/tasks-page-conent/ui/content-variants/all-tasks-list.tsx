@@ -61,12 +61,12 @@ export const AllTasksList = () => {
 
   return (
     <Flex col className='w-full' gap={2}>
-      <Flex className='items-center justify-between min-h-12'>
+      <Flex className='items-center justify-between'>
         <div className='w-full max-w-[70%]'>
           <FilterAllTasks storageKey={EStorageKeys.ALL_TASKS_STATE} />
         </div>
         {!!sumTime && (
-          <div className='text-right '>
+          <div className='text-right h-10'>
             <Text className='text-nowrap' opacity={0.5} size={14}>
               Суммарное время
             </Text>

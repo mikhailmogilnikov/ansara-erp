@@ -2,7 +2,7 @@ import { PiPlusCircleBold } from 'react-icons/pi';
 
 import { Button } from '@/src/shared/ui/(buttons)/button';
 
-interface Props {
+type Props  = {
   actionFunc: (obj: Object) => void;
 }
 

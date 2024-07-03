@@ -17,7 +17,7 @@ const initialState = {
   endDate: new Date(),
 };
 
-export interface ProjectI {
+export type TProject = {
   name: string;
   phone: string;
   login: string;
@@ -29,10 +29,10 @@ export interface ProjectI {
   payDate: Date | DateValue;
   startDate: Date | DateValue;
   endDate: Date | DateValue;
-}
+};
 
-interface AddProjectStateI {
-  project: ProjectI;
+type TAddProjectState = {
+  project: TProject;
   setName: (name: string) => void;
   setLogin: (login: string) => void;
   setPassword: (password: string) => void;
@@ -45,9 +45,9 @@ interface AddProjectStateI {
   setStartDate: (date: Date | DateValue) => void;
   setEndDate: (date: Date | DateValue) => void;
   reset: VoidFunction;
-}
+};
 
-const useAddProjectStore = create<AddProjectStateI>()(
+const useAddProjectStore = create<TAddProjectState>()(
   devtools(
     immer((set) => ({
       project: initialState,

@@ -35,10 +35,7 @@ export const FileCard = ({ file, index, setFileList, fileList }: Props) => {
   };
 
   return (
-    <div
-      key={`${file.name}_${Math.random()}`}
-      className='relative gap-4 flex items-center flex-col'
-    >
+    <div className='relative gap-4 flex items-center flex-col'>
       <Flex center col className='justify-start text-start flex-shrink ' gap={6}>
         <div className='flex items-center w-full aspect-square rounded-xl bg-default overflow-clip relative justify-center flex-shrink-0 shadow-base'>
           {file.type.split('/')[0] === 'image' ? (
