@@ -1,5 +1,5 @@
 import { Input } from '@nextui-org/input';
-import { FormEventHandler } from 'react';
+import UseKey from 'react-use/lib/component/UseKey';
 
 import { useAddProject } from '../../model/add-project-store';
 
@@ -10,9 +10,9 @@ import { SelectInput } from '@/src/shared/ui/(inputs)/select-input';
 import { PasswordInput } from '@/src/shared/ui/(inputs)/password-input';
 import { DatePickerInput } from '@/src/shared/ui/(inputs)/date-picker';
 
-interface Props {
-  actionFunc: FormEventHandler<HTMLFormElement>;
-}
+type Props = {
+  actionFunc: VoidFunction;
+};
 
 export const AddProjectForm = ({ actionFunc }: Props) => {
   const {
@@ -31,17 +31,13 @@ export const AddProjectForm = ({ actionFunc }: Props) => {
   } = useAddProject();
 
   return (
-    <form
-      action='submit'
-      autoComplete='off'
-      className='grid grid-cols-2 gap-4 gap-y-6 mt-2'
-      onSubmit={actionFunc}
-    >
+    <form autoComplete='off' className='grid grid-cols-2 gap-4 gap-y-6 mt-2'>
+      <UseKey filter='Enter' fn={actionFunc} />
       <Input
         classNames={{ inputWrapper: '!bg-default' }}
         label='Заказчик'
         labelPlacement='outside'
-        placeholder='Имя Ниша'
+        placeholder='Имя/Ниша'
         size='lg'
         type='text'
         value={project.name}

@@ -1,4 +1,4 @@
-import { FormEventHandler, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useAddProject } from '../../model/add-project-store';
 import { validateProject } from '../../lib/validate-project';
@@ -24,20 +24,17 @@ export const AddProjectModal = () => {
   };
 
   useEffect(() => {
-    reset();
+    return () => {
+      reset();
+    };
   }, []);
-
-  const formEvent: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    handleSave();
-  };
 
   return (
     <ModalWrapper
       actionButtons={<ProjectsAddProjectButton actionFunc={handleSave} />}
       title='Добавить проект'
     >
-      <AddProjectForm actionFunc={formEvent} />
+      <AddProjectForm actionFunc={handleSave} />
     </ModalWrapper>
   );
 };

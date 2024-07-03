@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const ValidateProjectSchema = Yup.object().shape({
+export const ValidatorSchemas = {
   password: Yup.string()
     .required('Введите пароль')
     .min(6, 'Слишком короткий пароль')
@@ -16,4 +16,4 @@ export const ValidateProjectSchema = Yup.object().shape({
     .required('Введите имя')
     .min(3, 'Слишком короткое имя')
     .max(16, 'Слишком длинное имя'),
-});
+};

@@ -1,16 +1,17 @@
 import * as Yup from 'yup';
 
-import { ProjectI } from '../model/add-project-store';
+import { ValidateAddProjectSchema } from '../model/schemas/validate-add-project-schema';
+import { TProject } from '../model/add-project-store';
 
-import { ValidateProjectSchema } from '@/src/shared/model/schemas/validate-project-schemas';
-
-export const validateProject = async (project: ProjectI) => {
+export const validateProject = async (project: TProject) => {
   try {
-    await ValidateProjectSchema.validate(project);
+    await ValidateAddProjectSchema.validate(project);
     if (!project.stages) return 'Выберите количество этапов';
     if (!project.accounters) return 'Выберите аккаунтера';
     if (project.startDate < project.payDate)
-      return 'Дата первой старта проекта не может быть раньше даты первой оплаты';
+      return 'Дата запуска первой версии не может быть раньше даты первой оплаты';
+    if (project.endDate < project.startDate)
+      return 'Дата завершения окна правок не может быть раньше дата запуска первой версии';
 
     return null;
   } catch (error) {
