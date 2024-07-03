@@ -1,6 +1,22 @@
-import { IUserProfile } from '../model/user-profile.type';
+import { IUserProfile, TProjectPhase } from '../model/user-profile.type';
 
-export const TestLkData: IUserProfile = {
+export const InitialPhaseData: TProjectPhase = {
+  id: 2,
+  name: 'Этап 2',
+  date: new Date().toISOString().slice(0, 10),
+  description: 'Test',
+  urlImages: [],
+  fileImages: [],
+  links: [
+    {
+      id: 0,
+      url: '',
+      name: 'Test link',
+    },
+  ],
+};
+
+export const InitialStatusData: IUserProfile = {
   modulesVisibility: {
     stages: false,
     status: false,
@@ -27,9 +43,10 @@ export const TestLkData: IUserProfile = {
     {
       id: 1,
       name: 'Этап 1',
-      date: '',
+      date: new Date().toISOString().slice(0, 10),
       description: 'Test',
-      images: [],
+      urlImages: [],
+      fileImages: [],
       links: [
         {
           id: 0,

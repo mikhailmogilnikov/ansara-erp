@@ -1,7 +1,10 @@
 import { Input, Textarea } from '@nextui-org/input';
-import { useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { DateValue } from '@internationalized/date';
 import { PiCaretUpBold, PiPencilSimpleBold, PiTrashBold } from 'react-icons/pi';
+
+import { TProjectStatusStore, useProjectStatusStore } from '../../../model/status-store';
+import { IUserProfile, TProjectPhase } from '../../../model/user-profile.type';
 
 import { ProjectsStatusPhasesLinks } from './links';
 
@@ -13,11 +16,28 @@ import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { FileLoaderList } from '@/src/shared/ui/file-loader';
 
-export const Phase = () => {
+type Props = {
+  phase: TProjectPhase;
+  index: number;
+};
+
+export const Phase = memo(({ phase, index }: Props) => {
+  const editPhase = useProjectStatusStore((state: TProjectStatusStore) => state.editPhase);
+
+  const { name, date, description, fileImages, id } = phase;
+
   const [isEditable, setIsEditable] = useState(false);
-  const [name, setName] = useState('');
-  const [date, setDate] = useState<Date | DateValue>(new Date());
-  const [fileList, setFileList] = useState<File[]>([]);
+  const [dateInput, setDateInput] = useState<Date | DateValue>(new Date(date));
+
+  useEffect(() => {
+    if (dateInput) {
+      editPhase(id, 'date', dateInput.toString());
+    }
+  }, [dateInput]);
+
+  const handleSetFilelist = (filelist: File[]) => {
+    editPhase(id, 'fileImages', filelist);
+  };
 
   return isEditable ? (
     <Flex col className='border-b-1 border-divider pb-8' gap={6}>
@@ -27,12 +47,12 @@ export const Phase = () => {
           placeholder='Введите название этапа'
           size='lg'
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => editPhase(id, 'name', e.target.value)}
         />
       </InputLabel>
 
       <InputLabel title='Дата'>
-        <DatePickerInput date={date as Date} onChange={setDate} />
+        <DatePickerInput date={dateInput as Date} onChange={setDateInput} />
       </InputLabel>
 
       <InputLabel title='Описание'>
@@ -40,6 +60,8 @@ export const Phase = () => {
           classNames={{ inputWrapper: '!bg-default min-h-24' }}
           placeholder='Введите описание этапа'
           size='lg'
+          value={description}
+          onChange={(e) => editPhase(id, 'description', e.target.value)}
         />
       </InputLabel>
 
@@ -48,8 +70,8 @@ export const Phase = () => {
           multiple
           accept='image/*'
           buttonTitle='Добавить'
-          fileList={fileList}
-          setFileList={setFileList}
+          fileList={fileImages}
+          setFileList={handleSetFilelist}
         />
       </InputLabel>
 
@@ -88,4 +110,4 @@ export const Phase = () => {
       </Button>
     </Flex>
   );
-};
+});
