@@ -2,7 +2,6 @@ import { Input, Textarea } from '@nextui-org/input';
 import { memo, useEffect, useState } from 'react';
 import { DateValue } from '@internationalized/date';
 import { PiCaretUpBold, PiPencilSimpleBold, PiTrashBold } from 'react-icons/pi';
-import { m } from 'framer-motion';
 
 import { TProjectStatusStore, useProjectStatusStore } from '../../../model/status-store';
 import { TProjectPhase } from '../../../model/user-profile.type';
@@ -26,13 +25,8 @@ type Props = {
 export const Phase = memo(({ phase }: Props) => {
   const editPhase = useProjectStatusStore((state: TProjectStatusStore) => state.editPhase);
   const deletePhase = useProjectStatusStore((state: TProjectStatusStore) => state.deletePhase);
-  const [imageLinks, setImageLinks] = useState([
-    'https://i.pinimg.com/236x/5b/6e/ca/5b6eca63605bea0eeb48db43f77fa0ce.jpg',
-    'https://i.pinimg.com/236x/2a/f5/3d/2af53d8f1be483dd0e05b7b18142c33c.jpg',
-    'https://i.pinimg.com/236x/24/15/21/24152197af38deb718eb730992d441d0.jpg',
-  ]);
 
-  const { name, date, description, fileImages, id } = phase;
+  const { name, date, description, fileImages, urlImages, id, links } = phase;
 
   const [isEditable, setIsEditable] = useState(false);
   const [dateInput, setDateInput] = useState<Date | DateValue>(new Date(date));
@@ -79,22 +73,22 @@ export const Phase = memo(({ phase }: Props) => {
         </InputLabel>
       </Fader>
 
-      <InputLabel title='Фотографии'>
-        <Fader>
+      <Fader>
+        <InputLabel title='Фотографии'>
           <FileLoaderList
             multiple
             accept='image/*'
             buttonTitle='Добавить'
             fileList={fileImages}
-            imageLinks={imageLinks}
+            imageLinks={urlImages}
             setFileList={handleSetFilelist}
-            setImageLinks={setImageLinks}
+            setImageLinks={(links) => editPhase(id, 'urlImages', links)}
           />
-        </Fader>
-      </InputLabel>
+        </InputLabel>
+      </Fader>
 
       <Fader>
-        <ProjectsStatusPhasesLinks />
+        <ProjectsStatusPhasesLinks links={links} phaseId={id} />
       </Fader>
 
       <Fader>
@@ -108,7 +102,7 @@ export const Phase = memo(({ phase }: Props) => {
             className='text-danger'
             confirmColor='danger'
             confirmTitle='Удалить'
-            description='Вы действительно хотите удалить этот этап? Это действие нельзя отменить.'
+            description={`Вы действительно хотите удалить этап "${name}"? Это действие нельзя отменить.`}
             icon={<PiTrashBold size={20} />}
           >
             Удалить этап

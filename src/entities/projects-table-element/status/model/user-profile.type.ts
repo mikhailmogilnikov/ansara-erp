@@ -20,7 +20,7 @@ export type TProjectPhase = {
 
 export interface IUserProfile {
   modulesVisibility: TProjectModulesVisibility;
-  ratesUrl: string | null | File;
+  ratesUrl: string[] | null | File[];
   stages: TStagesStates;
   status: string;
   editgate: {
