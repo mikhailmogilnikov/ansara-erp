@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'ansaratracker.store',
+        hostname: 'i.pinimg',
         port: '',
         pathname: '**',
       },

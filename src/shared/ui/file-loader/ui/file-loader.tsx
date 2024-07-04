@@ -11,6 +11,7 @@ export const FileLoader = ({
   buttonTitle,
   multiple,
   accept,
+  imageLinks,
 }: IFileLoader) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -35,7 +36,7 @@ export const FileLoader = ({
       <Button
         className='font-medium w-full'
         icon={<PiPlusCircleBold size={20} />}
-        isDisabled={isSingle && fileList.length > 0}
+        isDisabled={isSingle && (fileList.length > 0 || (imageLinks && imageLinks.length > 0))}
         size='lg'
         onPress={handleOpenInput}
       >

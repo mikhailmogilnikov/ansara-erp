@@ -26,6 +26,11 @@ type Props = {
 export const Phase = memo(({ phase }: Props) => {
   const editPhase = useProjectStatusStore((state: TProjectStatusStore) => state.editPhase);
   const deletePhase = useProjectStatusStore((state: TProjectStatusStore) => state.deletePhase);
+  const [imageLinks, setImageLinks] = useState([
+    'https://i.pinimg.com/236x/5b/6e/ca/5b6eca63605bea0eeb48db43f77fa0ce.jpg',
+    'https://i.pinimg.com/236x/2a/f5/3d/2af53d8f1be483dd0e05b7b18142c33c.jpg',
+    'https://i.pinimg.com/236x/24/15/21/24152197af38deb718eb730992d441d0.jpg',
+  ]);
 
   const { name, date, description, fileImages, id } = phase;
 
@@ -81,7 +86,9 @@ export const Phase = memo(({ phase }: Props) => {
             accept='image/*'
             buttonTitle='Добавить'
             fileList={fileImages}
+            imageLinks={imageLinks}
             setFileList={handleSetFilelist}
+            setImageLinks={setImageLinks}
           />
         </Fader>
       </InputLabel>

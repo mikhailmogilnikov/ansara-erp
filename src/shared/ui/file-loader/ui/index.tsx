@@ -10,16 +10,11 @@ import { ImageByLink } from './image-by-link';
 
 import { Flex } from '@/src/shared/ui/(layout)/flex';
 
-type Props = {
-  imageLinks?: string[];
-  setImageLinks?: (links: string[]) => void;
-} & IFileLoader;
-
-export const FileLoaderList = memo((props: Props) => {
+export const FileLoaderList = memo((props: IFileLoader) => {
   return (
     <Flex col gap={8}>
       <FileLoader {...props} />
-      {props.fileList.length > 0 && (
+      {props.fileList.length > 0 || (props.imageLinks && props.imageLinks.length) ? (
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2'>
           {props.imageLinks &&
             props.setImageLinks &&
@@ -36,7 +31,7 @@ export const FileLoaderList = memo((props: Props) => {
             <FileCard key={`${file.name}_${Math.random()}`} file={file} index={index} {...props} />
           ))}
         </div>
-      )}
+      ) : null}
     </Flex>
   );
 });
