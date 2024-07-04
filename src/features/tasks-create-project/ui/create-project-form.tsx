@@ -1,6 +1,6 @@
 import { Input } from '@nextui-org/input';
 import { FormEventHandler, useState } from 'react';
-import { PiFloppyDiskBold } from 'react-icons/pi';
+import { PiPlusBold } from 'react-icons/pi';
 
 import { ModalWrapper } from '@/src/shared/ui/modal';
 import { TasksUsersListConst } from '@/src/shared/config/tasks-users-list-const';
@@ -34,9 +34,9 @@ export const CreateProjectForm = () => {
   return (
     <ModalWrapper
       actionButtons={
-        <Button fullWidth color='success' type='submit' variant='shadow' onPress={handleCreate}>
-          <PiFloppyDiskBold size={18} />
-          Сохранить
+        <Button fullWidth color='primary' type='submit' variant='shadow' onPress={handleCreate}>
+          <PiPlusBold size={18} />
+          Создать
         </Button>
       }
       title='Создать проект'

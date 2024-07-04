@@ -1,7 +1,7 @@
 'use client';
 
 import { Tabs as NativeTabs, Tab } from '@nextui-org/tabs';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Key, useEffect, useState } from 'react';
 
 type Props = {
@@ -9,17 +9,23 @@ type Props = {
 };
 
 export const RouteTabs = ({ items }: Props) => {
-  const pathname = usePathname() as string;
   const router = useRouter();
-  const [selectedKey, setSelectedKey] = useState(pathname);
+
+  const [selectedKey, setSelectedKey] = useState(items[0].href);
 
   useEffect(() => {
+    const lastTab = localStorage.getItem('navigate');
+
+    if (lastTab) {
+      setSelectedKey(lastTab);
+    }
     items.forEach(({ href }) => {
       router.prefetch(href);
     });
   }, []);
 
   const handleChange = (value: Key) => {
+    localStorage.setItem('navigate', value as string);
     setSelectedKey(value as string);
     router.replace(value as string);
   };
