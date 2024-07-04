@@ -93,14 +93,9 @@ export const ProjectTasksStatusModal = () => {
             </Fader>
           )}
         </AnimatePresence>
-
-        <AnimatePresence>
-          {modulesVisibility.phases && (
-            <Fader>
-              <ProjectsStatusPhases />
-            </Fader>
-          )}
-        </AnimatePresence>
+        
+        <AnimatePresence>{modulesVisibility.phases && <ProjectsStatusPhases />}</AnimatePresence>
+        
       </LayoutGroup>
     </ModalWrapper>
   );

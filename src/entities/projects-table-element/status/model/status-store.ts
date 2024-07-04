@@ -53,9 +53,8 @@ export const useProjectStatusStore = create<TProjectStatusStore>()(
         set((state) => {
           const currentPhaseIndex = state.data.phases.findIndex((item) => item.id === id);
 
-          state.data.phases.splice(currentPhaseIndex, 0);
+          state.data.phases.splice(currentPhaseIndex, 1);
         }),
-
       reset: () =>
         set((state) => {
           state.data = InitialStatusData;
