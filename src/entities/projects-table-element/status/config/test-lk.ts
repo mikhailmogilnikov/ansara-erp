@@ -1,20 +1,4 @@
-import { IUserProfile, TProjectPhase } from '../model/user-profile.type';
-
-export const InitialPhaseData: TProjectPhase = {
-  id: 2,
-  name: 'Этап 2',
-  date: new Date().toISOString().slice(0, 10),
-  description: 'Test',
-  urlImages: [],
-  fileImages: [],
-  links: [
-    {
-      id: 0,
-      url: '',
-      name: 'Test link',
-    },
-  ],
-};
+import { IUserProfile } from '../model/user-profile.type';
 
 export const InitialStatusData: IUserProfile = {
   modulesVisibility: {
