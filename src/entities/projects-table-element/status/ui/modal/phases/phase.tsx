@@ -4,7 +4,7 @@ import { DateValue } from '@internationalized/date';
 import { PiCaretUpBold, PiPencilSimpleBold, PiTrashBold } from 'react-icons/pi';
 
 import { TProjectStatusStore, useProjectStatusStore } from '../../../model/status-store';
-import { IUserProfile, TProjectPhase } from '../../../model/user-profile.type';
+import { TProjectPhase } from '../../../model/user-profile.type';
 
 import { ProjectsStatusPhasesLinks } from './links';
 
@@ -21,8 +21,9 @@ type Props = {
   index: number;
 };
 
-export const Phase = memo(({ phase, index }: Props) => {
+export const Phase = memo(({ phase }: Props) => {
   const editPhase = useProjectStatusStore((state: TProjectStatusStore) => state.editPhase);
+  const deletePhase = useProjectStatusStore((state: TProjectStatusStore) => state.deletePhase);
 
   const { name, date, description, fileImages, id } = phase;
 
@@ -83,7 +84,7 @@ export const Phase = memo(({ phase, index }: Props) => {
           Свернуть
         </Button>
         <ButtonWithConfirm
-          actionFn={() => {}}
+          actionFn={() => deletePhase(phase.id)}
           className='text-danger'
           confirmColor='danger'
           confirmTitle='Удалить'

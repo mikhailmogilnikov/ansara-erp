@@ -41,7 +41,7 @@ export const ProjectTasksStatusModal = () => {
         <ProjectStatusMainControls />
       </Article>
 
-      <Article title='Тарифы'>
+      <Article className='!text-medium' title='Тарифы'>
         <FileLoaderList
           isSingle
           accept='image/*'
@@ -93,10 +93,8 @@ export const ProjectTasksStatusModal = () => {
         <AnimatePresence>
           {modulesVisibility.phases && (
             <Fader>
-              <Article className='my-2 text-xl !font-semibold !opacity-100' title='Этапы'>
-                <Divider className=' mb-4' />
-                <ProjectsStatusPhases />
-              </Article>
+             
+              <ProjectsStatusPhases />
             </Fader>
           )}
         </AnimatePresence>

@@ -15,6 +15,7 @@ export type TProjectStatusStore = {
   setTimegates: (key: keyof IUserProfile['timegatesHours'], value: number) => void;
   setPhases: (phases: TProjectPhase[]) => void;
   editPhase: <K extends keyof TProjectPhase>(id: Key, key: K, value: TProjectPhase[K]) => void;
+  deletePhase: (id: Key) => void;
   reset: () => void;
 };
 
@@ -48,6 +49,13 @@ export const useProjectStatusStore = create<TProjectStatusStore>()(
 
           state.data.phases[currentPhaseIndex][key] = value;
         }),
+      deletePhase: (id: Key) =>
+        set((state) => {
+          const currentPhaseIndex = state.data.phases.findIndex((item) => item.id === id);
+
+          state.data.phases.splice(currentPhaseIndex, 0);
+        }),
+
       reset: () =>
         set((state) => {
           state.data = InitialStatusData;
