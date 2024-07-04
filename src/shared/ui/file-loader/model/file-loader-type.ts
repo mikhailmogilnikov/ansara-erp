@@ -5,4 +5,6 @@ export interface IFileLoader {
   buttonTitle?: string;
   multiple?: boolean;
   accept?: string;
+  imageLinks?: string[];
+  setImageLinks?: (links: string[]) => void;
 }

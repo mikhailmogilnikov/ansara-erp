@@ -1,6 +1,5 @@
 import { PiUserCircleBold } from 'react-icons/pi';
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
-import { Divider } from '@nextui-org/divider';
 import { useEffect, useState } from 'react';
 
 import { InfoBadge } from '../../../customer/ui/info-badge';
@@ -23,6 +22,9 @@ export const ProjectTasksStatusModal = () => {
   const { data, reset } = useProjectStatus();
 
   const [rateImg, setRateImg] = useState<File[]>([]);
+  const [imageLinks, setImageLinks] = useState([
+    'https://i.pinimg.com/236x/5b/6e/ca/5b6eca63605bea0eeb48db43f77fa0ce.jpg',
+  ]);
   const { modulesVisibility } = data;
 
   useEffect(() => {
@@ -47,7 +49,9 @@ export const ProjectTasksStatusModal = () => {
           accept='image/*'
           buttonTitle='Прикрепить изображение тарифов'
           fileList={rateImg}
+          imageLinks={imageLinks}
           setFileList={setRateImg}
+          setImageLinks={setImageLinks}
         />
       </Article>
 
@@ -93,7 +97,6 @@ export const ProjectTasksStatusModal = () => {
         <AnimatePresence>
           {modulesVisibility.phases && (
             <Fader>
-             
               <ProjectsStatusPhases />
             </Fader>
           )}
