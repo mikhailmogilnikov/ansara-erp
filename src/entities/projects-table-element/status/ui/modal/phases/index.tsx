@@ -26,7 +26,7 @@ export const ProjectsStatusPhases = memo(() => {
   };
 
   return (
-    <Flex col>
+    <Flex col className='mt-8'>
       <m.div layout className='flex flex-col gap-4'>
         <Flex center>
           <Text size={24} weight={600}>
@@ -39,15 +39,28 @@ export const ProjectsStatusPhases = memo(() => {
         <Divider className='mb-2' />
       </m.div>
 
-      <Reorder.Group axis='y' className='flex flex-col gap-8' values={phases} onReorder={setPhases}>
-        {phases.map((phase, index) => {
-          return (
-            <Reorder.Item key={phase.id} className='w-full h-fit' value={phase}>
-              <Phase index={index} phase={phase} />
-            </Reorder.Item>
-          );
-        })}
-      </Reorder.Group>
+      {phases.length > 0 ? (
+        <Reorder.Group
+          axis='y'
+          className='flex flex-col gap-8'
+          values={phases}
+          onReorder={setPhases}
+        >
+          {phases.map((phase, index) => {
+            return (
+              <Reorder.Item key={phase.id} className='w-full h-fit' value={phase}>
+                <Phase index={index} phase={phase} />
+              </Reorder.Item>
+            );
+          })}
+        </Reorder.Group>
+      ) : (
+        <Flex>
+          <Text opacity={0.5} weight={600}>
+            Этапы отсутствуют.
+          </Text>
+        </Flex>
+      )}
     </Flex>
   );
 });

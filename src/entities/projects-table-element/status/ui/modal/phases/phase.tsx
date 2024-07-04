@@ -2,6 +2,7 @@ import { Input, Textarea } from '@nextui-org/input';
 import { memo, useEffect, useState } from 'react';
 import { DateValue } from '@internationalized/date';
 import { PiCaretUpBold, PiPencilSimpleBold, PiTrashBold } from 'react-icons/pi';
+import { m } from 'framer-motion';
 
 import { TProjectStatusStore, useProjectStatusStore } from '../../../model/status-store';
 import { TProjectPhase } from '../../../model/user-profile.type';
@@ -15,6 +16,7 @@ import { Button } from '@/src/shared/ui/(buttons)/button';
 import { ButtonWithConfirm } from '@/src/shared/ui/(buttons)/button-with-confirm';
 import { Text } from '@/src/shared/ui/(layout)/text';
 import { FileLoaderList } from '@/src/shared/ui/file-loader';
+import { Fader } from '@/src/shared/ui/(layout)/fader';
 
 type Props = {
   phase: TProjectPhase;
@@ -42,58 +44,70 @@ export const Phase = memo(({ phase }: Props) => {
 
   return isEditable ? (
     <Flex col className='border-b-1 border-divider pb-8' gap={6}>
-      <InputLabel title='Заголовок'>
-        <Input
-          classNames={{ inputWrapper: '!bg-default' }}
-          placeholder='Введите название этапа'
-          size='lg'
-          value={name}
-          onChange={(e) => editPhase(id, 'name', e.target.value)}
-        />
-      </InputLabel>
+      <Fader>
+        <InputLabel title='Заголовок'>
+          <Input
+            classNames={{ inputWrapper: '!bg-default' }}
+            placeholder='Введите название этапа'
+            size='lg'
+            value={name}
+            onChange={(e) => editPhase(id, 'name', e.target.value)}
+          />
+        </InputLabel>
+      </Fader>
 
-      <InputLabel title='Дата'>
-        <DatePickerInput date={dateInput as Date} onChange={setDateInput} />
-      </InputLabel>
+      <Fader>
+        <InputLabel title='Дата'>
+          <DatePickerInput date={dateInput as Date} onChange={setDateInput} />
+        </InputLabel>
+      </Fader>
 
-      <InputLabel title='Описание'>
-        <Textarea
-          classNames={{ inputWrapper: '!bg-default min-h-24' }}
-          placeholder='Введите описание этапа'
-          size='lg'
-          value={description}
-          onChange={(e) => editPhase(id, 'description', e.target.value)}
-        />
-      </InputLabel>
+      <Fader>
+        <InputLabel title='Описание'>
+          <Textarea
+            classNames={{ inputWrapper: '!bg-default min-h-24' }}
+            placeholder='Введите описание этапа'
+            size='lg'
+            value={description}
+            onChange={(e) => editPhase(id, 'description', e.target.value)}
+          />
+        </InputLabel>
+      </Fader>
 
       <InputLabel title='Фотографии'>
-        <FileLoaderList
-          multiple
-          accept='image/*'
-          buttonTitle='Добавить'
-          fileList={fileImages}
-          setFileList={handleSetFilelist}
-        />
+        <Fader>
+          <FileLoaderList
+            multiple
+            accept='image/*'
+            buttonTitle='Добавить'
+            fileList={fileImages}
+            setFileList={handleSetFilelist}
+          />
+        </Fader>
       </InputLabel>
 
-      <ProjectsStatusPhasesLinks />
+      <Fader>
+        <ProjectsStatusPhasesLinks />
+      </Fader>
 
-      <Flex>
-        <Button onPress={() => setIsEditable(false)}>
-          <PiCaretUpBold size={20} />
-          Свернуть
-        </Button>
-        <ButtonWithConfirm
-          actionFn={() => deletePhase(phase.id)}
-          className='text-danger'
-          confirmColor='danger'
-          confirmTitle='Удалить'
-          description='Вы действительно хотите удалить этот этап? Это действие нельзя отменить.'
-          icon={<PiTrashBold size={20} />}
-        >
-          Удалить этап
-        </ButtonWithConfirm>
-      </Flex>
+      <Fader>
+        <Flex>
+          <Button onPress={() => setIsEditable(false)}>
+            <PiCaretUpBold size={20} />
+            Свернуть
+          </Button>
+          <ButtonWithConfirm
+            actionFn={() => deletePhase(phase.id)}
+            className='text-danger'
+            confirmColor='danger'
+            confirmTitle='Удалить'
+            description='Вы действительно хотите удалить этот этап? Это действие нельзя отменить.'
+            icon={<PiTrashBold size={20} />}
+          >
+            Удалить этап
+          </ButtonWithConfirm>
+        </Flex>
+      </Fader>
     </Flex>
   ) : (
     <Flex col className='border-b-1 border-divider pb-8'>

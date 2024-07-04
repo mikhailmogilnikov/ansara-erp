@@ -1,6 +1,5 @@
 import { PiUserCircleBold } from 'react-icons/pi';
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
-import { Divider } from '@nextui-org/divider';
 import { useEffect, useState } from 'react';
 
 import { InfoBadge } from '../../../customer/ui/info-badge';
@@ -90,14 +89,7 @@ export const ProjectTasksStatusModal = () => {
           )}
         </AnimatePresence>
 
-        <AnimatePresence>
-          {modulesVisibility.phases && (
-            <Fader>
-             
-              <ProjectsStatusPhases />
-            </Fader>
-          )}
-        </AnimatePresence>
+        <AnimatePresence>{modulesVisibility.phases && <ProjectsStatusPhases />}</AnimatePresence>
       </LayoutGroup>
     </ModalWrapper>
   );
