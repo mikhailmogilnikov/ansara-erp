@@ -1,3 +1,5 @@
+import { TLink } from '@/src/shared/model/index.type';
+
 export const createPhase = (prevId: number) => {
   const newId = prevId + 1;
 
@@ -15,5 +17,15 @@ export const createPhase = (prevId: number) => {
         name: '',
       },
     ],
+  };
+};
+
+export const createLink = (prevId: number): TLink => {
+  const newId = prevId + 1;
+
+  return {
+    id: newId,
+    url: '',
+    name: '',
   };
 };

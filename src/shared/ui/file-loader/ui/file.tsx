@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import { PiFileBold } from 'react-icons/pi';
 import { useRef, useState } from 'react';
+import { m } from 'framer-motion';
 
 import { Flex } from '../../(layout)/flex';
 import { Text } from '../../(layout)/text';
 import { useLightbox } from '../../lightbox/model/lightbox-store';
 
 import { DeleteButton } from './delete-button';
+
 
 interface Props {
   file: File;
@@ -35,8 +37,8 @@ export const FileCard = ({ file, index, setFileList, fileList }: Props) => {
   };
 
   return (
-    <div className='relative gap-4 flex items-center flex-col'>
-      <Flex center col className='justify-start text-start flex-shrink ' gap={6}>
+    <m.div layout className='relative gap-4 flex items-center flex-col'>
+      <Flex center col className='justify-start text-start flex-shrink' gap={6}>
         <div className='flex items-center w-full aspect-square rounded-xl bg-default overflow-clip relative justify-center flex-shrink-0 shadow-base'>
           {file.type.split('/')[0] === 'image' ? (
             <Image
@@ -64,6 +66,6 @@ export const FileCard = ({ file, index, setFileList, fileList }: Props) => {
           {file.name}
         </Text>
       </Flex>
-    </div>
+    </m.div>
   );
 };

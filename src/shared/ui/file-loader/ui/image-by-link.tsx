@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useRef } from 'react';
+import { m } from 'framer-motion';
 
 import { Flex } from '../../(layout)/flex';
 import { useLightbox } from '../../lightbox/model/lightbox-store';
@@ -30,7 +31,7 @@ export const ImageByLink = ({ link, index, setImageLinks, imageLinks }: Props) =
   };
 
   return (
-    <div className='relative gap-4 flex items-center flex-col'>
+    <m.div layout className='relative gap-4 flex items-center flex-col'>
       <Flex center col className='justify-start text-start flex-shrink ' gap={6}>
         <div className='flex items-center w-full aspect-square rounded-xl bg-default overflow-clip relative justify-center flex-shrink-0 shadow-base'>
           <Image
@@ -38,6 +39,7 @@ export const ImageByLink = ({ link, index, setImageLinks, imageLinks }: Props) =
             unoptimized
             alt={link}
             className='snap-start flex-shrink-0 object-cover h-full z-10 cursor-pointer'
+            draggable={false}
             src={link}
             onClick={handleOpen}
             onLoad={(e: any) =>
@@ -47,6 +49,6 @@ export const ImageByLink = ({ link, index, setImageLinks, imageLinks }: Props) =
           <DeleteButton handleDeleteFile={handleDeleteImage} />
         </div>
       </Flex>
-    </div>
+    </m.div>
   );
 };

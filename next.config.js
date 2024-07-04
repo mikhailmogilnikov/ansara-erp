@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'i.pinimg',
+        hostname: 'i.pinimg.com',
         port: '',
         pathname: '**',
       },
