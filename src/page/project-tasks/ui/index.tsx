@@ -12,8 +12,8 @@ interface Props {
 }
 
 export const ProjectTasksPage = ({ id }: Props) => {
-  const project = TasksProjectsListConst.find((project) => project.id == id);
-  const tasks = TasksListConst.filter((task) => task.projectId == id);
+  const project = TasksProjectsListConst.find((project) => project.id === id);
+  const tasks = TasksListConst.filter((task) => task.projectId === id);
 
   return (
     <Flex className='py-3 px-4 mt-8 justify-center items-center'>
