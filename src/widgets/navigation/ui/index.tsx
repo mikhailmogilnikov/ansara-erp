@@ -8,7 +8,7 @@ import { ProfileFeatures } from '@/src/features/profile-features';
 import { Profile } from '@/src/entities/profile';
 import { AnsaraLogo } from '@/src/shared/assets/ansara-logo';
 import { Flex } from '@/src/shared/ui/(layout)/flex';
-import { RouteTabs } from '@/src/shared/ui/route-tabs';
+import { NavigationTabs } from '@/src/shared/ui/route-tabs';
 
 export const Navigation = () => {
   const pathname = usePathname();
@@ -24,7 +24,7 @@ export const Navigation = () => {
           <AnsaraLogo />
         </div>
       </Flex>
-      <RouteTabs items={NavPoints} />
+      <NavigationTabs items={NavPoints} />
       <Profile profileFeatures={ProfileFeatures} />
     </nav>
   );

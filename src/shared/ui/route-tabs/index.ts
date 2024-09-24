@@ -1,1 +1,1 @@
-export { RouteTabs } from './ui';
+export { NavigationTabs } from './ui';
