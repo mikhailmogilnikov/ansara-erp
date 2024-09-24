@@ -13,7 +13,7 @@ export const LoginPage = () => {
         <Text weight={600}>Вход в аккаунт</Text>
         <LoginForm />
       </Flex>
-      <Flex className='absolute right-0 bottom-2 justify-end' width={'80%'}>
+      <Flex className='absolute top-8 left-8' width={'160px'}>
         <AnsaraTitle />
       </Flex>
     </>
