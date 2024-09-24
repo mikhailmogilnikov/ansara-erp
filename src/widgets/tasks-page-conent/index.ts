@@ -1,1 +1,1 @@
-export { TasksPageContent } from './ui/';
+export { TasksPageContent } from './ui';

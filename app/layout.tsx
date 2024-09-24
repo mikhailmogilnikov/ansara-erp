@@ -40,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta content='#000000' name='theme-color' />
         <meta content='telephone=no' name='format-detection' />
+        <meta content='noindex, nofollow' name='robots' />
       </head>
       <body className={clsx('min-h-screen bg-black font-sans antialiased', fontSans.variable)}>
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
